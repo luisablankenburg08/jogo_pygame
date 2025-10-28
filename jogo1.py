@@ -18,7 +18,7 @@ pygame.display.set_caption("Musicalizando no Céu")
 clock = pygame.time.Clock()
 FONT = pygame.font.SysFont("Arial", 28)
 fonte_menu = pygame.font.SysFont(None, 48)
-fonte_intro = pygame.font.SysFont(None, 72 )
+fonte_intro = pygame.font.SysFont(None, 96 )
 inicio_modo = 0
 
 # == BARRA PROGRESSÃO === 
@@ -125,7 +125,7 @@ quadro_explicativo2_rect, surf_quadro2, txt_quadro2, txt_quadro2_rect = quadro_e
 
 quadro_explicativo_p2_rect, surf_quadro_p2, txt_quadro_p2, txt_quadro_p2_rect = quadro_explicativo("Clique nos botões correspondetes aos instrumentos que você escutou ", largura_tela//2-600, 100, 1200,100)
 
-quadro_explicativo3_rect, surf_quadro3, txt_quadro3, txt_quadro3_rect = quadro_explicativo("Escute as melodias", largura_tela//2-300, 100, 400,100)
+quadro_explicativo3_rect, surf_quadro3, txt_quadro3, txt_quadro3_rect = quadro_explicativo("Escute as melodias", largura_tela//2-200, 100, 400,100)
 
 quadro_explicativo_p3_rect, surf_quadro_p3, txt_quadro_p3, txt_quadro_p3_rect = quadro_explicativo("Clique no botão que corresponde a melodia que você acabou de escutar", largura_tela//2-600, 100, 1200,100)
 
@@ -143,14 +143,21 @@ texto_som2_rect = texto_som2_surface.get_rect()
 texto_som2_rect.center = ((1050, 350))
 
 texto_som3_surface = FONT.render("MÚSICA 1", True, preto)
-texto_som3_rect = texto_som2_surface.get_rect()
+texto_som3_rect = texto_som3_surface.get_rect()
 texto_som3_rect.center = ((largura_tela//2-20, 350))
 
-"""texto_intro1 = "FASE 1"
-linhas_texto_intro1 = texto_intro1.split('\n')
-superficies_texto_intro1 = [fonte_intro.render(linha, True, preto) for linha in linhas_texto_intro1]
-velocidade_rolagem_intro1 = 0.09
-posicao_x = largura_tela """
+texto_intro1_surf = fonte_intro.render("FASE 1", True, azul)
+texto_intro1_rect = texto_intro1_surf.get_rect()
+texto_intro1_rect.center = ((largura_tela//2, altura_tela//2))
+
+texto_intro2_surf = fonte_intro.render("FASE 2", True, azul)
+texto_intro2_rect = texto_intro2_surf.get_rect()
+texto_intro2_rect.center = ((largura_tela//2, altura_tela//2))
+
+texto_intro3_surf = fonte_intro.render("FASE 3", True, azul)
+texto_intro3_rect = texto_intro3_surf.get_rect()
+texto_intro3_rect.center = ((largura_tela//2, altura_tela//2))
+
 
 # === AJUDA ===
 texto_ajuda = (
@@ -243,12 +250,6 @@ while rodando:
                     mode = "introducao_fase1"
                     inicio_modo = pygame.time.get_ticks()
                  
-            elif mode == "introducao_fase1":
-                tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
-                if tempo_decorrido > 2000: 
-                    mode = "fase1_1"
-                    inicio_modo = pygame.time.get_ticks()  # reinicia o contador se quiser usar de novo
-
             # === FASE 1 ===
             elif mode == "fase1_1":
 
@@ -298,12 +299,7 @@ while rodando:
                 if botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu"
                 elif botao_nuvem2_rect.collidepoint(event.pos):click_sound.play(); mode = "introducao_fase2"
                 elif botao_fase1_rect.collidepoint(event.pos):click_sound.play(); mode = "introducao_fase1"
-
-            elif mode == "introducao_fase2":
-                tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
-                if tempo_decorrido > 2000: 
-                    mode = "fase2_1"
-                    inicio_modo = pygame.time.get_ticks()  # reinicia o contador se quiser usar de novo
+                inicio_modo = pygame.time.get_ticks()
 
             # === FASE 2 ===
             elif mode == "fase2_1":
@@ -333,12 +329,7 @@ while rodando:
                 elif botao_nuvem3_rect.collidepoint(event.pos):click_sound.play(); mode = "introducao_fase3"
                 elif botao_nuvem2_rect.collidepoint(event.pos):click_sound.play(); mode = "introducao_fase2"
                 elif botao_fase1_rect.collidepoint(event.pos):click_sound.play(); mode = "introducao_fase1"
-
-            elif mode == "introducao_fase3":
-                tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
-                if tempo_decorrido > 2000: 
-                    mode = "fase3_1"
-                    inicio_modo = pygame.time.get_ticks()  # reinicia o contador se quiser usar de novo
+                inicio_modo = pygame.time.get_ticks()
 
             # === FASE 3 ===
             elif mode == "fase3_1":
@@ -362,9 +353,28 @@ while rodando:
             elif mode == "pergunta_fase3_3":
                 if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "parabens" 
             #=== FIM DA FASE 3 ===
+             #elif mode == "parabens":
 
-            #elif mode == "parabens":
-                
+        tempo_decorrido = pygame.time.get_ticks()
+        if mode == "introducao_fase1":
+            tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
+            if tempo_decorrido > 1000: 
+                mode = "fase1_1"
+                inicio_modo = pygame.time.get_ticks() 
+                    # reinicia o contador se quiser usar de novo
+        elif mode == "introducao_fase2":
+            tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
+            if tempo_decorrido > 1000: 
+                mode = "fase2_1"
+                inicio_modo = pygame.time.get_ticks() # reinicia o contador se quiser usar de novo
+
+        elif mode == "introducao_fase3":
+            tempo_decorrido = pygame.time.get_ticks() - inicio_modo  # em milissegundos
+            if tempo_decorrido > 1000: 
+                mode = "fase3_1"
+                inicio_modo = pygame.time.get_ticks()  # reinicia o contador se quiser usar de novo
+        
+
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE: mode = "menu"
             elif mode == "fase0":
@@ -456,16 +466,8 @@ while rodando:
 
     # === INTRODUÇÃO FASE 1 ===
     elif mode == "introducao_fase1":
-        tela.blit(background_fase0, (0, 0))
-         # posicao_atual_intro1 = posicao_x 
-          #for superficie in superficies_texto_intro1:
-           #   rect_texto_intro1 = superficie.get_rect(center=(altura_tela//2, posicao_atual_intro1))
-            #  tela.blit(superficie, rect_texto_intro1)
-            #  posicao_atual_intro1 += 20
-
-         # posicao_x -= velocidade_rolagem_intro1
-         # if posicao_atual_intro1 < 0:
-           #   posicao_x = largura_tela
+        tela.blit(fundo_fases, (0, 0))
+        tela.blit(texto_intro1_surf, texto_intro1_rect)
 
     # === FASE 1_1 ===
     elif mode == "fase1_1":
@@ -671,7 +673,8 @@ while rodando:
 
     # === INTRODUÇÃO FASE 2 ===
     elif mode == "introducao_fase2":
-        tela.blit(background_fase0, (0, 0))
+        tela.blit(fundo_fases, (0, 0))
+        tela.blit(texto_intro2_surf, texto_intro2_rect)
 
     # === FASE 2_1 ===
     elif mode == "fase2_1":
@@ -843,7 +846,8 @@ while rodando:
 
     # === INTRODUÇÃO FASE 3 ===
     elif mode == "introducao_fase3":
-        tela.blit(background_fase0, (0, 0))
+        tela.blit(fundo_fases, (0, 0))
+        tela.blit(texto_intro3_surf, texto_intro3_rect)
 
     # === FASE 3_1 ===
     elif mode == "fase3_1":
