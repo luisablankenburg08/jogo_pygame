@@ -81,20 +81,20 @@ def quadro_explicativo(texto, x, y, w=300, h=40, cor=amarelo, cor_texto=preto, b
     return rect_quadro, surf_quadro, texto_render_quadro, texto_rect_quadro
 
 # === IMAGENS ===
-background = pygame.transform.scale(pygame.image.load("fundo_menu.png"), (largura_tela, altura_tela))
-quadro_menu = pygame.transform.scale(pygame.image.load("quadro_menu.png"), (largura_tela//3, altura_tela//2 + 50))
-background_fase0 = pygame.transform.scale(pygame.image.load("fundo.png"), (largura_tela, altura_tela))
-quadro_fase0 = pygame.transform.scale(pygame.image.load("quadro_fase0.png"), (largura_tela//3, altura_tela//2 + 50))
-fundo_fases = pygame.transform.scale(pygame.image.load("fundo_fases.png"), (largura_tela, altura_tela))
-nuvem = pygame.transform.scale(pygame.image.load("nuvem.png"), (300,110))
-cadeado = pygame.transform.scale(pygame.image.load("cadeado.png"), (50,75))
-bichinho1 = pygame.transform.scale(pygame.image.load("bichinho1.png"), (200,180))
-bichinho2 = pygame.transform.scale(pygame.image.load("bichinho2.png"), (200,180))
-cadeadoaberto = pygame.transform.scale(pygame.image.load("cadeadoaberto.png"), (50,75))
-bandeira = pygame.transform.scale(pygame.image.load("bandeira.png"), (120,110))
-som = pygame.transform.scale(pygame.image.load("som.png"), (300,300))
-botao_rasp_amarelo = pygame.transform.scale(pygame.image.load("botao_rasp_amarelo.png"), (200,200))
-botao_rasp_azul = pygame.transform.scale(pygame.image.load("botao_rasp_azul.png"), (200,200))
+background = pygame.transform.scale(pygame.image.load("images/fundo_menu.png"), (largura_tela, altura_tela))
+quadro_menu = pygame.transform.scale(pygame.image.load("images/quadro_menu.png"), (largura_tela//3, altura_tela//2 + 50))
+background_fase0 = pygame.transform.scale(pygame.image.load("images/fundo.png"), (largura_tela, altura_tela))
+quadro_fase0 = pygame.transform.scale(pygame.image.load("images/quadro_fase0.png"), (largura_tela//3, altura_tela//2 + 50))
+fundo_fases = pygame.transform.scale(pygame.image.load("images/fundo_fases.png"), (largura_tela, altura_tela))
+nuvem = pygame.transform.scale(pygame.image.load("images/nuvem.png"), (300,110))
+cadeado = pygame.transform.scale(pygame.image.load("images/cadeado.png"), (50,75))
+bichinho1 = pygame.transform.scale(pygame.image.load("images/bichinho1.png"), (200,180))
+bichinho2 = pygame.transform.scale(pygame.image.load("images/bichinho2.png"), (200,180))
+cadeadoaberto = pygame.transform.scale(pygame.image.load("images/cadeadoaberto.png"), (50,75))
+bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (120,110))
+som = pygame.transform.scale(pygame.image.load("images/som.png"), (300,300))
+botao_rasp_amarelo = pygame.transform.scale(pygame.image.load("images/botao_rasp_amarelo.png"), (200,200))
+botao_rasp_azul = pygame.transform.scale(pygame.image.load("images/botao_rasp_azul.png"), (200,200))
 
 # === BOTÕES ===
 botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", largura_tela//2-150, altura_tela//2+150)
@@ -198,10 +198,10 @@ player_name, player_school, player_serie = "", "", ""
 active_field, error_msg, mode = None, "", "menu"
 
 # === SONS ===
-click_sound = pygame.mixer.Sound("botao1.mp3")
-som_start = pygame.mixer.Sound("botao2.mp3")
-som_agudo1_fase1 = pygame.mixer.Sound("agudo1.mp3")
-som_grave1_fase1 = pygame.mixer.Sound("grave1.mp3")
+click_sound = pygame.mixer.Sound("sons/botao1.mp3")
+som_start = pygame.mixer.Sound("sons/botao2.mp3")
+som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
+som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
 
 
 # === LOOP PRINCIPAL ===
