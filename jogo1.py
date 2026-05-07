@@ -351,9 +351,10 @@ while rodando:
                 elif botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase3"
 
             elif mode == "pergunta_fase3_3":
-                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "parabens" 
+                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "relatorio" 
             #=== FIM DA FASE 3 ===
-             #elif mode == "parabens":
+            
+             #elif mode == "relatorio":
 
         tempo_decorrido = pygame.time.get_ticks()
         if mode == "introducao_fase1":
@@ -961,7 +962,7 @@ while rodando:
         tela.blit(txt_quadro3, txt_quadro3_rect)
 
 
-    # === PERGUNTA FASE 2_3 ===
+    # === PERGUNTA FASE 3_3 ===
     elif mode == "pergunta_fase3_3":
         #fundo
         tela.blit(fundo_fases, (0,0))
