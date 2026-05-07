@@ -6,10 +6,17 @@ import textwrap
 pygame.init()
 
 # === CORES ===
-preto, cinza, branco = (0,0,0), (128,128,128), (255,255,255)
-vermelho, verde, azul = (255,0,0), (0,255,0), (0,0,255)
-amarelo, ciano, magenta = (255,255,0), (0,255,255), (255,0,255)
-
+CORES = {
+    "preto": (0,0,0),
+    "cinza": (128,128,128),
+    "branco": (255,255,255),
+    "vermelho": (255,0,0),
+    "verde": (0,255,0),
+    "azul": (0,0,255),
+    "amarelo": (255,255,0),
+    "ciano": (0,255,255),
+    "magenta": (255,0,255)
+}
 # === TELA ===
 largura_tela, altura_tela = 1400,800
 tela = pygame.display.set_mode((largura_tela, altura_tela))
@@ -27,16 +34,16 @@ def desenhar_barra_azul():
     largura_barra = largura_tela
     altura_barra = 20
     x, y = 0, 0 
-    pygame.draw.rect(tela, ciano, (x, y, largura_barra, altura_barra))
+    pygame.draw.rect(tela, CORES["ciano"], (x, y, largura_barra, altura_barra))
 
 def desenhar_barra_amarela():
     largura_barra = tamanho
     altura_barra = 20
     x, y = 0, 0 
-    pygame.draw.rect(tela, amarelo, (x, y, largura_barra, altura_barra))
+    pygame.draw.rect(tela, CORES["amarelo"], (x, y, largura_barra, altura_barra))
 
 # === FUNÇÕES AUXILIARES ===
-def criar_botao(texto, x, y, w=300, h=40, cor=ciano, cor_texto=preto):
+def criar_botao(texto, x, y, w=300, h=40, cor=CORES["ciano"], cor_texto=CORES["preto"]):
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)
@@ -45,9 +52,39 @@ def criar_botao(texto, x, y, w=300, h=40, cor=ciano, cor_texto=preto):
     return rect, surf, texto_render, texto_rect
 
 def desenhar_campo(label, rect, valor, ativo=False):
-    tela.blit(FONT.render(label, True, preto), (rect.x, rect.y - 30))
-    pygame.draw.rect(tela, ciano if not ativo else amarelo, rect, 0)
-    tela.blit(FONT.render(valor, True,preto), (rect.x+5, rect.y+5))
+    tela.blit(FONT.render(label, True, CORES["preto"]), (rect.x, rect.y - 30))
+    pygame.draw.rect(tela, CORES["ciano"] if not ativo else CORES["amarelo"], rect, 0)
+    tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x+5, rect.y+5))
+
+def desenhar_botao(rect, texto, cor=CORES["ciano"]):
+    pygame.draw.rect(tela, cor, rect)
+    render = FONT.render(texto, True, CORES["preto"])
+    tela.blit(render, render.get_rect(center=rect.center))
+
+# ====== FUNÇÃO REGISTRAR RESPOSTA ========
+respostas_fase2 = []
+resposta_fase3 = ""
+
+def registrar_resposta(fase, pergunta, resposta, correta):
+
+    try:
+        with open("dados.json", "r", encoding="utf-8") as f:
+            dados = json.load(f)
+
+        jogador = dados[-1]
+
+        jogador[fase].append({
+            "pergunta": pergunta,
+            "resposta": resposta,
+            "correta": correta
+        })
+
+        with open("dados.json", "w", encoding="utf-8") as f:
+            json.dump(dados, f, indent=4, ensure_ascii=False)
+
+    except:
+        print("Erro ao registrar resposta")
+
 
 def salvar_dados(nome, escola, serie):
     dados_novos = {"nome": nome, "escola": escola, "serie": serie}
@@ -63,7 +100,7 @@ def salvar_dados(nome, escola, serie):
     with open("dados.json", "w", encoding="utf-8") as f:
         json.dump(dados_existentes, f, indent=4, ensure_ascii=False)
 
-def criar_nuvem(texto, x, y, w=200, h=20, cor=branco, cor_texto=ciano):
+def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["ciano"]):
     rect_nuvem = pygame.Rect(x, y, w, h)
     surf_nuvem = pygame.Surface((w, h))
     surf_nuvem.fill(cor)
@@ -72,7 +109,7 @@ def criar_nuvem(texto, x, y, w=200, h=20, cor=branco, cor_texto=ciano):
     return rect_nuvem, surf_nuvem, texto_nuvem_render, texto_nuvem_rect
 
 
-def quadro_explicativo(texto, x, y, w=300, h=40, cor=amarelo, cor_texto=preto, border_radius=20):
+def quadro_explicativo(texto, x, y, w=300, h=40, cor=CORES["amarelo"], cor_texto=CORES["preto"], border_radius=20):
     rect_quadro = pygame.Rect(x, y, w, h)
     surf_quadro = pygame.Surface((w, h))
     surf_quadro.fill(cor)
@@ -115,6 +152,20 @@ som3_rect = som.get_rect(topleft=(largura_tela//2-150, 300))
 
 rasp_amarelo_rect = botao_rasp_amarelo.get_rect(topleft=(350,400))
 rasp_azul_rect = botao_rasp_azul.get_rect(topleft=(950,400))
+# === BOTÕES FASE 2 ===
+
+botao_piano = pygame.Rect(120, 350, 220, 80)
+botao_flauta = pygame.Rect(420, 350, 220, 80)
+botao_violao = pygame.Rect(720, 350, 220, 80)
+botao_tambor = pygame.Rect(1020, 350, 220, 80)
+
+botao_xilofone = pygame.Rect(570, 500, 220, 80)
+
+# === BOTÕES FASE 3 ===
+
+botao_iguais = pygame.Rect(300, 400, 300, 120)
+botao_diferentes = pygame.Rect(800, 400, 300, 120)
+
 
 # === QUADROS EXPLICATIVOS ===
 quadro_explicativo1_rect, surf_quadro1, txt_quadro1, txt_quadro1_rect = quadro_explicativo("Escute os sons, um de cada vez.", largura_tela//2-300, 100, 600,100)
@@ -130,31 +181,31 @@ quadro_explicativo3_rect, surf_quadro3, txt_quadro3, txt_quadro3_rect = quadro_e
 quadro_explicativo_p3_rect, surf_quadro_p3, txt_quadro_p3, txt_quadro_p3_rect = quadro_explicativo("Clique no botão que corresponde a melodia que você acabou de escutar", largura_tela//2-600, 100, 1200,100)
 
 # === TEXTOS ===
-texto_aqui_surface = FONT.render("Você está aqui!", True, preto)
+texto_aqui_surface = FONT.render("Você está aqui!", True, CORES["preto"])
 texto_aqui_rect = texto_aqui_surface.get_rect()
 texto_aqui_rect.center = ((largura_tela-1200, altura_tela-100))
 
-texto_som1_surface = FONT.render("SOM 1", True, preto)
+texto_som1_surface = FONT.render("SOM 1", True, CORES["preto"])
 texto_som1_rect = texto_som1_surface.get_rect()
 texto_som1_rect.center = ((450, 350))
 
-texto_som2_surface = FONT.render("SOM 2", True, preto)
+texto_som2_surface = FONT.render("SOM 2", True, CORES["preto"])
 texto_som2_rect = texto_som2_surface.get_rect()
 texto_som2_rect.center = ((1050, 350))
 
-texto_som3_surface = FONT.render("MÚSICA 1", True, preto)
+texto_som3_surface = FONT.render("MÚSICA 1", True, CORES["preto"])
 texto_som3_rect = texto_som3_surface.get_rect()
 texto_som3_rect.center = ((largura_tela//2-20, 350))
 
-texto_intro1_surf = fonte_intro.render("FASE 1", True, azul)
+texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["azul"])
 texto_intro1_rect = texto_intro1_surf.get_rect()
 texto_intro1_rect.center = ((largura_tela//2, altura_tela//2))
 
-texto_intro2_surf = fonte_intro.render("FASE 2", True, azul)
+texto_intro2_surf = fonte_intro.render("FASE 2", True, CORES["azul"])
 texto_intro2_rect = texto_intro2_surf.get_rect()
 texto_intro2_rect.center = ((largura_tela//2, altura_tela//2))
 
-texto_intro3_surf = fonte_intro.render("FASE 3", True, azul)
+texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["azul"])
 texto_intro3_rect = texto_intro3_surf.get_rect()
 texto_intro3_rect.center = ((largura_tela//2, altura_tela//2))
 
@@ -180,7 +231,7 @@ texto_ajuda = (
     "Instituição: Instituto Federal de Santa Catarina - Câmpus Garopaba")
 
 linhas_texto_ajuda = texto_ajuda.split('\n')
-superficies_texto_ajuda = [FONT.render(linha, True, preto) for linha in linhas_texto_ajuda]
+superficies_texto_ajuda = [FONT.render(linha, True, CORES["preto"]) for linha in linhas_texto_ajuda]
 velocidade_rolagem_ajuda = 1.2
 posicao_y = altura_tela
 
@@ -202,7 +253,17 @@ click_sound = pygame.mixer.Sound("sons/botao1.mp3")
 som_start = pygame.mixer.Sound("sons/botao2.mp3")
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
 som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
+# === FASE 2 ===
 
+musica_fase2_1 = pygame.mixer.Sound("sons/botao1.mp3")
+musica_fase2_2 = pygame.mixer.Sound("sons/botao1.mp3")
+musica_fase2_3 = pygame.mixer.Sound("sons/botao1.mp3")
+
+# === FASE 3 ===
+
+melodia_fase3_1 = pygame.mixer.Sound("sons/botao1.mp3")
+melodia_fase3_2 = pygame.mixer.Sound("sons/botao1.mp3")
+melodia_fase3_3 = pygame.mixer.Sound("sons/botao1.mp3")
 
 # === LOOP PRINCIPAL ===
 rodando = True
@@ -303,25 +364,138 @@ while rodando:
 
             # === FASE 2 ===
             elif mode == "fase2_1":
-                if botao_voltar_rect.collidepoint(event.pos): click_sound.play(); mode = "menu_fase2"
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase2_1"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase2"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase2_1"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    musica_fase2_1.stop()
+                    musica_fase2_1.play()
 
             elif mode == "pergunta_fase2_1":
-                 if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "fase2_2"
+
+                if botao_piano.collidepoint(event.pos):
+
+                    if "piano" not in respostas_fase2:
+                        respostas_fase2.append("piano")
+
+                elif botao_flauta.collidepoint(event.pos):
+
+                    if "flauta" not in respostas_fase2:
+                        respostas_fase2.append("flauta")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+
+                    correta = set(respostas_fase2) == set(["piano", "flauta"])
+
+                    registrar_resposta(
+                        "fase2",
+                        "fase2_1",
+                        respostas_fase2,
+                        correta
+                    )
+
+                    respostas_fase2 = []
+
+                    click_sound.play()
+                    mode = "fase2_2"
 
             elif mode == "fase2_2":
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase2_2"
-                elif botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase2"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase2"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase2_2"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    musica_fase2_2.stop()
+                    musica_fase2_2.play()
              
             elif mode == "pergunta_fase2_2":
-                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "fase2_3"
+
+                if botao_violao.collidepoint(event.pos):
+
+                    if "violao" not in respostas_fase2:
+                        respostas_fase2.append("violao")
+
+                elif botao_tambor.collidepoint(event.pos):
+
+                    if "tambor" not in respostas_fase2:
+                        respostas_fase2.append("tambor")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+
+                    correta = set(respostas_fase2) == set(["violao", "tambor"])
+
+                    registrar_resposta(
+                        "fase2",
+                        "fase2_2",
+                        respostas_fase2,
+                        correta
+                    )
+
+                    respostas_fase2 = []
+
+                    click_sound.play()
+                    mode = "fase2_3"
 
             elif mode == "fase2_3":
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase2_3"
-                elif botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase2"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase2"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase2_3"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    musica_fase2_3.stop()
+                    musica_fase2_3.play()
 
             elif mode == "pergunta_fase2_3":
-                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase3" 
+
+                if botao_piano.collidepoint(event.pos):
+
+                    if "piano" not in respostas_fase2:
+                        respostas_fase2.append("piano")
+
+                elif botao_xilofone.collidepoint(event.pos):
+
+                    if "xilofone" not in respostas_fase2:
+                        respostas_fase2.append("xilofone")
+
+                elif botao_flauta.collidepoint(event.pos):
+
+                    if "flauta" not in respostas_fase2:
+                        respostas_fase2.append("flauta")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+
+                    correta = set(respostas_fase2) == set(["piano", "xilofone", "flauta"])
+
+                    registrar_resposta(
+                        "fase2",
+                        "fase2_3",
+                        respostas_fase2,
+                        correta
+                    )
+
+                    respostas_fase2 = []
+
+                    click_sound.play()
+                    mode = "menu_fase3"
             #=== FIM DA FASE 2 ===
 
             elif mode == "menu_fase3":
@@ -333,25 +507,127 @@ while rodando:
 
             # === FASE 3 ===
             elif mode == "fase3_1":
-                if botao_voltar_rect.collidepoint(event.pos): click_sound.play(); mode = "menu_fase3"
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase3_1"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase3"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase3_1"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    melodia_fase3_1.stop()
+                    melodia_fase3_1.play()
 
             elif mode == "pergunta_fase3_1":
-                 if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "fase3_2"
+
+                if botao_iguais.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_1",
+                        "iguais",
+                        True
+                    )
+
+                    click_sound.play()
+                    mode = "fase3_2"
+
+                elif botao_diferentes.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_1",
+                        "diferentes",
+                        False
+                    )
+
+                    click_sound.play()
+                    mode = "fase3_2"
 
             elif mode == "fase3_2":
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase3_2"
-                elif botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase3"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase3"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase3_2"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    melodia_fase3_2.stop()
+                    melodia_fase3_2.play()
              
             elif mode == "pergunta_fase3_2":
-                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "fase3_3"
+
+                if botao_iguais.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_2",
+                        "iguais",
+                        False
+                    )
+
+                    click_sound.play()
+                    mode = "fase3_3"
+
+                elif botao_diferentes.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_2",
+                        "diferentes",
+                        True
+                    )
+
+                    click_sound.play()
+                    mode = "fase3_3"
 
             elif mode == "fase3_3":
-                if botao_avancar_rect.collidepoint(event.pos): click_sound.play(); mode = "pergunta_fase3_3"
-                elif botao_voltar_rect.collidepoint(event.pos):click_sound.play(); mode = "menu_fase3"
+
+                if botao_voltar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "menu_fase3"
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    click_sound.play()
+                    mode = "pergunta_fase3_3"
+
+                elif som3_rect.collidepoint(event.pos):
+
+                    melodia_fase3_3.stop()
+                    melodia_fase3_3.play()
 
             elif mode == "pergunta_fase3_3":
-                if botao_avancar_rect.collidepoint(event.pos):click_sound.play(); mode = "relatorio" 
+
+                if botao_iguais.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_3",
+                        "iguais",
+                        True
+                    )
+
+                    click_sound.play()
+                    mode = "relatorio"
+
+                elif botao_diferentes.collidepoint(event.pos):
+
+                    registrar_resposta(
+                        "fase3",
+                        "fase3_3",
+                        "diferentes",
+                        False
+                    )
+
+                    click_sound.play()
+                    mode = "relatorio"
             #=== FIM DA FASE 3 ===
             
              #elif mode == "relatorio":
@@ -402,8 +678,7 @@ while rodando:
     elif mode == "ajuda":
 
         tela.blit(fundo_fases, (0, 0))
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
         
         posicao_atual_ajuda = posicao_y 
         for superficie in superficies_texto_ajuda:
@@ -428,15 +703,15 @@ while rodando:
         if dropdown_aberto:
             for i, opcao in enumerate(opcoes_serie):
                 opt_rect = pygame.Rect(serie_rect.x, serie_rect.y + (i+1)*40, serie_rect.width, 40)
-                pygame.draw.rect(tela, amarelo, opt_rect)
-                tela.blit(FONT.render(opcao, True, preto), (opt_rect.x+5, opt_rect.y+5))
+                pygame.draw.rect(tela, CORES["amarelo"], opt_rect)
+                tela.blit(FONT.render(opcao, True, CORES["preto"]), (opt_rect.x+5, opt_rect.y+5))
 
-        pygame.draw.rect(tela, ciano, botao_comecar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_comecar_rect)
         tela.blit(txt_comecar, txt_comecar_rect)
 
-        if error_msg: tela.blit(FONT.render(error_msg, True, vermelho), (nome_rect.x, botao_comecar_rect.y+60))
+        if error_msg: tela.blit(FONT.render(error_msg, True, CORES["vermelho"]), (nome_rect.x, botao_comecar_rect.y+60))
 
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
     # === MENU FASES - 1 ===
@@ -444,24 +719,23 @@ while rodando:
         tela.blit(fundo_fases, (0,0))
 
         tela.blit(nuvem, (largura_tela//4-50, altura_tela//2+50))
-        pygame.draw.rect(tela, branco, botao_fase1_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_fase1_rect)
         tela.blit(txt_fase1, txt_fase1_rect)
             
         tela.blit(nuvem, (largura_tela//2-50, altura_tela//2-50))
-        pygame.draw.rect(tela, branco, botao_nuvem2_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem2_rect)
         tela.blit(txt_nuvem2, txt_nuvem2_rect)
         tela.blit(cadeado, (largura_tela//2-50, altura_tela//2-50))
 
         tela.blit(nuvem, (largura_tela//2+250, altura_tela//2-170))
-        pygame.draw.rect(tela, branco, botao_nuvem3_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem3_rect)
         tela.blit(txt_nuvem3, txt_nuvem3_rect)
         tela.blit(cadeado, (largura_tela//2+250, altura_tela//2-170))    
 
         tela.blit(bichinho1, ((largura_tela//15), altura_tela//2+100))
         tela.blit(texto_aqui_surface, texto_aqui_rect)
 
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         tela.blit(bandeira, (largura_tela-110,0))
 
@@ -480,16 +754,15 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
+
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro1, txt_quadro1_rect)
 
         #botões de som
@@ -510,12 +783,11 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p1, txt_quadro_p1_rect)
 
         #botões raspberry de opção
@@ -536,16 +808,14 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro1, txt_quadro1_rect)
         
         #botões de som
@@ -566,12 +836,11 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p1, txt_quadro_p1_rect)
 
         #botões raspberry de opção
@@ -593,16 +862,14 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-300 + 5, 100 + 5, 600 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro1, txt_quadro1_rect)
 
         #botões de som
@@ -623,12 +890,11 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p1_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p1_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-350 + 5, 100 + 5, 700 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p1, txt_quadro_p1_rect)
 
         #botões raspberry de opção
@@ -645,18 +911,18 @@ while rodando:
 
         #nuvem fase 1
         tela.blit(nuvem, (largura_tela//4-50, altura_tela//2+50))
-        pygame.draw.rect(tela, branco, botao_fase1_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_fase1_rect)
         tela.blit(txt_fase1, txt_fase1_rect)
 
         #nuvem fase 2 
         tela.blit(nuvem, (largura_tela//2-50, altura_tela//2-50))
-        pygame.draw.rect(tela, branco, botao_nuvem2_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem2_rect)
         tela.blit(txt_nuvem2, txt_nuvem2_rect)
         tela.blit(cadeadoaberto, (largura_tela//2-50, altura_tela//2-70))
 
         #nuvem fase 3 
         tela.blit(nuvem, (largura_tela//2+250, altura_tela//2-170))
-        pygame.draw.rect(tela, branco, botao_nuvem3_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem3_rect)
         tela.blit(txt_nuvem3, txt_nuvem3_rect)
 
         #cadeado fase 3
@@ -666,8 +932,7 @@ while rodando:
         tela.blit(bichinho2, (largura_tela//4-20, altura_tela//2-(90)))
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         #bandeira de chegada
         tela.blit(bandeira, (largura_tela-110,0))
@@ -688,21 +953,21 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
-        tela.blit(txt_voltar, txt_voltar_rect)
+        desenhar_botao(botao_voltar_rect, "Voltar")
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
-        tela.blit(txt_avancar, txt_avancar_rect)
+        desenhar_botao(botao_avancar_rect, "Avançar")
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro2, txt_quadro2_rect)
 
         #botão de som
         tela.blit(som, som3_rect)
         tela.blit(texto_som3_surface, texto_som3_rect)
+
+        
 
     # === PERGUNTA FASE 2_1 ===
     elif mode == "pergunta_fase2_1":
@@ -715,15 +980,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p2, txt_quadro_p2_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_piano)
+        pygame.draw.rect(tela, CORES["amarelo"], botao_flauta)
+
+        txt_piano = FONT.render("PIANO", True, CORES["preto"])
+        txt_flauta = FONT.render("FLAUTA", True, CORES["preto"])
+
+        tela.blit(txt_piano, (170, 375))
+        tela.blit(txt_flauta, (470, 375))
 
     # === FASE 2_2 ===
     elif mode == "fase2_2":
@@ -736,16 +1008,16 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro2, txt_quadro2_rect)
 
         #botão de som
@@ -763,15 +1035,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p2, txt_quadro_p2_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_violao)
+        pygame.draw.rect(tela, CORES["amarelo"], botao_tambor)
+
+        txt_violao = FONT.render("VIOLÃO", True, CORES["preto"])
+        txt_tambor = FONT.render("TAMBOR", True, CORES["preto"] )
+
+        tela.blit(txt_violao, (760, 375))
+        tela.blit(txt_tambor, (1050, 375))
 
     # === FASE 2_3 ===
     elif mode == "fase2_3":
@@ -784,16 +1063,16 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro2, txt_quadro2_rect)
 
         #botão de som
@@ -811,36 +1090,46 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p2_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p2_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p2, txt_quadro_p2_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_piano)
+        pygame.draw.rect(tela, CORES["amarelo"], botao_flauta)
+        pygame.draw.rect(tela, CORES["amarelo"], botao_xilofone)
+
+        txt_piano = FONT.render("PIANO", True, CORES["preto"])
+        txt_flauta = FONT.render("FLAUTA", True, CORES["preto"])
+        txt_xilo = FONT.render("XILOFONE", True, CORES["preto"])
+
+        tela.blit(txt_piano, (170, 375))
+        tela.blit(txt_flauta, (470, 375))
+        tela.blit(txt_xilo, (610, 525))
 
     # === MENU FASES - 3 ===
     elif mode == "menu_fase3":
         tela.blit(fundo_fases, (0,0))
 
         tela.blit(nuvem, (largura_tela//4-50, altura_tela//2+50))
-        pygame.draw.rect(tela, branco, botao_fase1_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_fase1_rect)
         tela.blit(txt_fase1, txt_fase1_rect)
             
         tela.blit(nuvem, (largura_tela//2-50, altura_tela//2-50))
-        pygame.draw.rect(tela, branco, botao_nuvem2_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem2_rect)
         tela.blit(txt_nuvem2, txt_nuvem2_rect)
 
         tela.blit(nuvem, (largura_tela//2+250, altura_tela//2-170))
-        pygame.draw.rect(tela, branco, botao_nuvem3_rect)
+        pygame.draw.rect(tela, CORES["branco"], botao_nuvem3_rect)
         tela.blit(txt_nuvem3, txt_nuvem3_rect)
         tela.blit(cadeadoaberto, (950, 200))   
 
         tela.blit(bichinho2, (700, 200))
 
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         tela.blit(bandeira, (largura_tela-110,0))
@@ -861,17 +1150,21 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro3, txt_quadro3_rect)
+
+        #botão de som
+        tela.blit(som, som3_rect)
+        tela.blit(texto_som3_surface, texto_som3_rect)
 
     # === PERGUNTA FASE 3_1 ===
     elif mode == "pergunta_fase3_1":
@@ -884,15 +1177,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p3, txt_quadro_p3_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_iguais)
+        pygame.draw.rect(tela, CORES["azul"], botao_diferentes)
+
+        txt_iguais = FONT.render("IGUAIS", True, CORES["preto"])
+        txt_diferentes = FONT.render("DIFERENTES", True, CORES["preto"])
+
+        tela.blit(txt_iguais, (390, 450))
+        tela.blit(txt_diferentes, (840, 450))
 
     # === FASE 3_2 ===
     elif mode == "fase3_2":
@@ -905,17 +1205,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro3, txt_quadro3_rect)
+
+        #botão de som
+        tela.blit(som, som3_rect)
+        tela.blit(texto_som3_surface, texto_som3_rect)
+
 
     # === PERGUNTA FASE 3_2 ===
     elif mode == "pergunta_fase3_2":
@@ -928,15 +1233,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p3, txt_quadro_p3_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_iguais)
+        pygame.draw.rect(tela, CORES["azul"], botao_diferentes)
+
+        txt_iguais = FONT.render("IGUAIS", True, CORES["preto"])
+        txt_diferentes = FONT.render("DIFERENTES", True, CORES["preto"])
+
+        tela.blit(txt_iguais, (390, 450))
+        tela.blit(txt_diferentes, (840, 450))
 
 
     # === FASE 3_3 ===
@@ -949,18 +1261,21 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão voltar
-        pygame.draw.rect(tela, ciano, botao_voltar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_voltar_rect)
         tela.blit(txt_voltar, txt_voltar_rect)
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-200 + 5, 100 + 5, 400 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro3, txt_quadro3_rect)
 
+        #botão de som
+        tela.blit(som, som3_rect)
+        tela.blit(texto_som3_surface, texto_som3_rect)
 
     # === PERGUNTA FASE 3_3 ===
     elif mode == "pergunta_fase3_3":
@@ -972,15 +1287,22 @@ while rodando:
         desenhar_barra_amarela()
 
         #botão avançar
-        pygame.draw.rect(tela, ciano, botao_avancar_rect)
+        pygame.draw.rect(tela, CORES["ciano"], botao_avancar_rect)
         tela.blit(txt_avancar, txt_avancar_rect)
 
         #quadro explicativo
-        pygame.draw.rect(tela, preto, quadro_explicativo_p3_rect)
-        pygame.draw.rect(tela, amarelo, (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
+        pygame.draw.rect(tela, CORES["preto"], quadro_explicativo_p3_rect)
+        pygame.draw.rect(tela, CORES["amarelo"], (largura_tela//2-600 + 5, 100 + 5, 1200 - 2 * 5, 100 - 2 * 5))
         tela.blit(txt_quadro_p3, txt_quadro_p3_rect)
 
-        #botões raspberry de opção
+        pygame.draw.rect(tela, CORES["amarelo"], botao_iguais)
+        pygame.draw.rect(tela, CORES["azul"], botao_diferentes)
+
+        txt_iguais = FONT.render("IGUAIS", True, CORES["preto"])
+        txt_diferentes = FONT.render("DIFERENTES", True, CORES["preto"])
+
+        tela.blit(txt_iguais, (390, 450))
+        tela.blit(txt_diferentes, (840, 450))
 
     # === RELATORIO ===
     #elif mode == "relatorio"

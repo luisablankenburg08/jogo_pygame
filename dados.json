@@ -1,11 +1,12 @@
 [
-    {},
     {
-        "nome": "df",
-        "escola": "sdfvs",
-        "serie": "1º ano",
-        "fase1": [],
-        "fase2": [],
-        "fase3": []
+        "nome": "DF",
+        "escola": "DSF",
+        "serie": "1º ano"
+    },
+    {
+        "nome": "FE",
+        "escola": "DSF",
+        "serie": "2º ano"
     }
 ]
