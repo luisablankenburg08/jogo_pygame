@@ -60,6 +60,7 @@ def salvar_dados(nome, escola, serie):
 
 # REGISTRAR RESPOSTAS
 
+respostas_fase1 = []
 respostas_fase2 = []
 respostas_fase3 = ""
 
@@ -364,21 +365,109 @@ while rodando:
                     som_grave1_fase1.play()
             
             elif mode == "pergunta_fase1_1":
-                if botao_avancar_rect.collidepoint(event.pos):trocar_modo("fase1_2")
+
+                if botao_rasp_amarelo.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
+
+                elif botao_rasp_azul.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase1) == set(["azul"])
+                    registrar_resposta(
+                        "fase1",
+                        "fase1_1",
+                        respostas_fase1,
+                        correta)
+                    respostas_fase1 = []
+
+                    trocar_modo("fase1_2")
 
             elif mode == "fase1_2":
-                if botao_avancar_rect.collidepoint(event.pos): trocar_modo("pergunta_fase1_2")
-                elif botao_voltar_rect.collidepoint(event.pos): trocar_modo("menu_fase1")
+                if botao_voltar_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0 or som_grave1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                        som_grave1_fase1.stop(); 
+                    else:
+                        trocar_modo("menu_fase1")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0 or som_grave1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                        som_grave1_fase1.stop(); 
+                    else:
+                        trocar_modo("pergunta_fase1_2")
+
+                elif som1_rect.collidepoint(event.pos):
+                    if som_grave1_fase1.get_num_channels() > 0:  
+                        som_grave1_fase1.stop()
+                    som_agudo1_fase1.play()
+
+                elif som2_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                    som_grave1_fase1.play()
              
             elif mode == "pergunta_fase1_2":
-                if botao_avancar_rect.collidepoint(event.pos): trocar_modo("fase1_3")
+                if botao_rasp_amarelo.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
+
+                elif botao_rasp_azul.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase1) == set(["amarelo"])
+                    registrar_resposta(
+                        "fase1",
+                        "fase1_2",
+                        respostas_fase1,
+                        correta)
+                    respostas_fase1 = []
+
+                    trocar_modo("fase1_3")
 
             elif mode == "fase1_3":
-                if botao_avancar_rect.collidepoint(event.pos): trocar_modo("pergunta_fase1_3")
-                elif botao_voltar_rect.collidepoint(event.pos): trocar_modo("menu_fase1")
+                if botao_voltar_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0 or som_grave1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                        som_grave1_fase1.stop(); 
+                    else:
+                        trocar_modo("menu_fase1")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0 or som_grave1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                        som_grave1_fase1.stop(); 
+                    else:
+                        trocar_modo("pergunta_fase1_3")
+
+                elif som1_rect.collidepoint(event.pos):
+                    if som_grave1_fase1.get_num_channels() > 0:  
+                        som_grave1_fase1.stop()
+                    som_agudo1_fase1.play()
+
+                elif som2_rect.collidepoint(event.pos):
+                    if som_agudo1_fase1.get_num_channels() > 0:  
+                        som_agudo1_fase1.stop()
+                    som_grave1_fase1.play()
 
             elif mode == "pergunta_fase1_3":
-                if botao_avancar_rect.collidepoint(event.pos): trocar_modo("menu_fase2")
+                if botao_rasp_amarelo.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
+
+                elif botao_rasp_azul.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+
+                elif botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase1) == set(["amarelo"])
+                    registrar_resposta(
+                        "fase1",
+                        "fase1_3",
+                        respostas_fase1,
+                        correta)
+                    respostas_fase1 = []
+
+                    trocar_modo("menu_fase2")
             #=== FIM DA FASE 1 ===
             
             elif mode == "menu_fase2":
