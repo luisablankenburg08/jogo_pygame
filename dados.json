@@ -13,5 +13,163 @@
         "nome": "dwed",
         "escola": "de",
         "serie": "1º ano"
+    },
+    {
+        "nome": "rgreg",
+        "escola": "gfs",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "nome": "jtyh",
+        "escola": "hfh",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "nome": "j",
+        "escola": "jty",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": [],
+                "correta": false
+            }
+        ],
+        "fase3": []
+    },
+    {
+        "nome": "g",
+        "escola": "g",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": [],
+                "correta": false
+            }
+        ],
+        "fase3": []
+    },
+    {
+        "nome": "gfh",
+        "escola": "hgh",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": [],
+                "correta": false
+            }
+        ],
+        "fase3": []
+    },
+    {
+        "nome": "j",
+        "escola": "j",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": [],
+                "correta": false
+            }
+        ],
+        "fase3": [
+            {
+                "pergunta": "fase3_1",
+                "resposta": "diferentes",
+                "correta": false
+            },
+            {
+                "pergunta": "fase3_2",
+                "resposta": "diferentes",
+                "correta": true
+            },
+            {
+                "pergunta": "fase3_3",
+                "resposta": "diferentes",
+                "correta": false
+            }
+        ]
+    },
+    {
+        "nome": "grre",
+        "escola": "gg",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": [],
+                "correta": false
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": [],
+                "correta": false
+            }
+        ],
+        "fase3": [
+            {
+                "pergunta": "fase3_1",
+                "resposta": "diferentes",
+                "correta": false
+            },
+            {
+                "pergunta": "fase3_2",
+                "resposta": "iguais",
+                "correta": false
+            },
+            {
+                "pergunta": "fase3_3",
+                "resposta": "diferentes",
+                "correta": false
+            }
+        ]
     }
 ]
