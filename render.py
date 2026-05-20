@@ -1,0 +1,168 @@
+import pygame
+import assets
+from utils import desenhar_barra_azul, desenhar_barra_amarela, desenhar_campo
+
+pygame.init()
+
+# =========================
+# 🎨 FUNÇÃO PRINCIPAL
+# =========================
+def desenhar():
+
+    tela = assets.tela
+
+    # ================= MENU =================
+    if assets.mode == "menu":
+        tela.blit(assets.background, (0, 0))
+        tela.blit(
+            assets.quadro_menu,
+            ((assets.largura_tela - assets.quadro_menu.get_width()) // 2,
+             (assets.altura_tela - assets.quadro_menu.get_height()) // 2)
+        )
+
+        for surf, rect, txt, txt_rect in [
+            (assets.surf_sair, assets.botao_sair_rect, assets.txt_sair, assets.txt_sair_rect),
+            (assets.surf_ajuda, assets.botao_ajuda_rect, assets.txt_ajuda, assets.txt_ajuda_rect),
+            (assets.surf_jogar, assets.botao_jogar_rect, assets.txt_jogar, assets.txt_jogar_rect),
+        ]:
+            tela.blit(surf, rect.topleft)
+            tela.blit(txt, txt_rect)
+
+    # ================= AJUDA =================
+    elif assets.mode == "ajuda":
+        tela.blit(assets.fundo_fases, (0, 0))
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
+
+        pos_y = assets.posicao_y
+
+        for superficie in assets.superficies_texto_ajuda:
+            rect = superficie.get_rect(center=(assets.largura_tela // 2, pos_y))
+            tela.blit(superficie, rect)
+            pos_y += 40
+
+        assets.posicao_y -= assets.velocidade_rolagem_ajuda
+        if pos_y < 0:
+            assets.posicao_y = assets.altura_tela
+
+    # ================= FASE 0 =================
+    elif assets.mode == "fase0":
+        tela.blit(assets.background_fase0, (0, 0))
+        tela.blit(
+            assets.quadro_fase0,
+            ((assets.largura_tela - assets.quadro_fase0.get_width()) // 2,
+             (assets.altura_tela - assets.quadro_fase0.get_height()) // 2)
+        )
+
+        # ✅ CORREÇÃO: passar tela, fonte e cores
+        desenhar_campo(tela, assets.FONT, assets.CORES, "Nome:", assets.nome_rect, assets.player_name, assets.active_field == "nome")
+        desenhar_campo(tela, assets.FONT, assets.CORES, "Escola:", assets.escola_rect, assets.player_school, assets.active_field == "escola")
+        desenhar_campo(tela, assets.FONT, assets.CORES, "Série:", assets.serie_rect, assets.player_serie)
+
+        if assets.dropdown_aberto:
+            for i, opcao in enumerate(assets.opcoes_serie):
+                rect = pygame.Rect(
+                    assets.serie_rect.x,
+                    assets.serie_rect.y + (i+1)*40,
+                    assets.serie_rect.width,
+                    40
+                )
+                pygame.draw.rect(tela, assets.CORES["amarelo"], rect)
+                tela.blit(assets.FONT.render(opcao, True, assets.CORES["preto"]), (rect.x+5, rect.y+5))
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_comecar_rect)
+        tela.blit(assets.txt_comecar, assets.txt_comecar_rect)
+
+        if assets.error_msg:
+            tela.blit(
+                assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]),
+                (assets.nome_rect.x, assets.botao_comecar_rect.y + 60)
+            )
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
+
+    # ================= MENUS DE FASE =================
+    elif assets.mode in ["menu_fase1", "menu_fase2", "menu_fase3"]:
+        tela.blit(assets.fundo_fases, (0, 0))
+
+        tela.blit(assets.nuvem, (assets.largura_tela//4-50, assets.altura_tela//2+50))
+        tela.blit(assets.nuvem, (assets.largura_tela//2-50, assets.altura_tela//2-50))
+        tela.blit(assets.nuvem, (assets.largura_tela//2+250, assets.altura_tela//2-170))
+
+        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_fase1_rect)
+        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem2_rect)
+        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem3_rect)
+
+        tela.blit(assets.txt_fase1, assets.txt_fase1_rect)
+        tela.blit(assets.txt_nuvem2, assets.txt_nuvem2_rect)
+        tela.blit(assets.txt_nuvem3, assets.txt_nuvem3_rect)
+
+        if assets.mode == "menu_fase1":
+            tela.blit(assets.cadeado, (assets.largura_tela//2-50, assets.altura_tela//2-50))
+            tela.blit(assets.cadeado, (assets.largura_tela//2+250, assets.altura_tela//2-170))
+
+        elif assets.mode == "menu_fase2":
+            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2-50, assets.altura_tela//2-70))
+            tela.blit(assets.cadeado, (assets.largura_tela//2+250, assets.altura_tela//2-170))
+
+        elif assets.mode == "menu_fase3":
+            tela.blit(assets.cadeadoaberto, (950, 200))
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
+
+    # ================= INTRODUÇÕES =================
+    elif assets.mode == "introducao_fase1":
+        tela.blit(assets.fundo_fases, (0, 0))
+        tela.blit(assets.texto_intro1_surf, assets.texto_intro1_rect)
+
+    elif assets.mode == "introducao_fase2":
+        tela.blit(assets.fundo_fases, (0, 0))
+        tela.blit(assets.texto_intro2_surf, assets.texto_intro2_rect)
+
+    elif assets.mode == "introducao_fase3":
+        tela.blit(assets.fundo_fases, (0, 0))
+        tela.blit(assets.texto_intro3_surf, assets.texto_intro3_rect)
+
+    # ================= FASES =================
+    elif "fase" in assets.mode or "pergunta" in assets.mode:
+
+        tela.blit(assets.fundo_fases, (0, 0))
+
+        # ✅ CORREÇÃO: passar parâmetros
+        desenhar_barra_azul(tela, assets.CORES, assets.largura_tela)
+        desenhar_barra_amarela(tela, assets.CORES, 300)
+
+        if "fase" in assets.mode:
+            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+            tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_avancar_rect)
+        tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
+
+        tela.blit(assets.som, assets.som1_rect)
+        tela.blit(assets.som, assets.som2_rect)
+
+        if "pergunta_fase1" in assets.mode:
+            # ✅ CORREÇÃO: nomes corretos das imagens
+            tela.blit(assets.botao_rasp_amarelo_img, (350, 400))
+            tela.blit(assets.botao_rasp_azul_img, (950, 400))
+
+        elif "pergunta_fase2" in assets.mode:
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_piano)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_flauta)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_violao)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_tambor)
+
+        elif "pergunta_fase3" in assets.mode:
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_iguais)
+            pygame.draw.rect(tela, assets.CORES["azul"], assets.botao_diferentes)
+
+    # ================= RELATÓRIO =================
+    elif assets.mode == "relatorio":
+        tela.blit(assets.fundo_fases, (0, 0))
+
+        texto = assets.fonte_menu.render("Relatório Final", True, assets.CORES["preto"])
+        tela.blit(texto, (assets.largura_tela//2 - 150, 100))
