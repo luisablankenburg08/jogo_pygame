@@ -55,7 +55,6 @@ def desenhar():
              (assets.altura_tela - assets.quadro_fase0.get_height()) // 2)
         )
 
-        # ✅ CORREÇÃO: passar tela, fonte e cores
         desenhar_campo(tela, assets.FONT, assets.CORES, "Nome:", assets.nome_rect, assets.player_name, assets.active_field == "nome")
         desenhar_campo(tela, assets.FONT, assets.CORES, "Escola:", assets.escola_rect, assets.player_school, assets.active_field == "escola")
         desenhar_campo(tela, assets.FONT, assets.CORES, "Série:", assets.serie_rect, assets.player_serie)
@@ -131,9 +130,16 @@ def desenhar():
 
         tela.blit(assets.fundo_fases, (0, 0))
 
-        # ✅ CORREÇÃO: passar parâmetros
         desenhar_barra_azul(tela, assets.CORES, assets.largura_tela)
-        desenhar_barra_amarela(tela, assets.CORES, 300)
+
+        if "fase1" in assets.mode or "pergunta_fase1" in assets.mode:
+            desenhar_barra_amarela(tela, assets.CORES, (assets.largura_tela)//3)
+        
+        if "fase2" in assets.mode or "pergunta_fase2" in assets.mode:
+            desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//3)*2)
+        
+        if "fase3" in assets.mode or "pergunta_fase3" in assets.mode:
+            desenhar_barra_amarela(tela, assets.CORES, (assets.largura_tela))
 
         if "fase" in assets.mode:
             pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
@@ -146,7 +152,7 @@ def desenhar():
         tela.blit(assets.som, assets.som2_rect)
 
         if "pergunta_fase1" in assets.mode:
-            # ✅ CORREÇÃO: nomes corretos das imagens
+        
             tela.blit(assets.botao_rasp_amarelo_img, (350, 400))
             tela.blit(assets.botao_rasp_azul_img, (950, 400))
 

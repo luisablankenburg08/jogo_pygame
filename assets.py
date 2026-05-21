@@ -19,7 +19,8 @@ CORES = {
 }
 
 # === TELA ===
-largura_tela, altura_tela = 1400, 800
+largura_tela = 1400
+altura_tela = 800
 tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Musicalizando no Céu")
 
@@ -76,14 +77,14 @@ rasp_azul_rect = botao_rasp_azul_img.get_rect(topleft=(950, 400))
 
 # === BOTÕES FASE 2 ===
 botao_piano = pygame.Rect(120, 350, 220, 80)
-botao_flauta = pygame.Rect(420, 350, 220, 80)
-botao_violao = pygame.Rect(720, 350, 220, 80)
-botao_tambor = pygame.Rect(1020, 350, 220, 80)
-botao_xilofone = pygame.Rect(570, 500, 220, 80)
+botao_flauta = pygame.Rect(420, 350, 300, 50)
+botao_violao = pygame.Rect(720, 350, 300, 50)
+botao_tambor = pygame.Rect(1020, 350, 300, 50)
+botao_xilofone = pygame.Rect(570, 500, 300, 50)
 
 # === BOTÕES FASE 3 ===
-botao_iguais = pygame.Rect(300, 400, 300, 120)
-botao_diferentes = pygame.Rect(800, 400, 300, 120)
+botao_iguais = pygame.Rect(300, 400, 300, 200)
+botao_diferentes = pygame.Rect(800, 400, 300, 200)
 
 # === CAMPOS DE TEXTO ===
 nome_rect = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
