@@ -133,10 +133,6 @@ def quadro_explicativo(texto, x, y, w=300, h=40, cor=CORES["amarelo"], cor_texto
 
 
 # === TROCAR MODO ===
-def trocar_modo(novo_modo, som=True):
+def trocar_modo(novo_modo):
     import assets
-
-    if som and hasattr(assets, "click_sound"):
-        assets.click_sound.play()
-
     assets.mode = novo_modo

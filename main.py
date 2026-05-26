@@ -9,10 +9,11 @@ pygame.init()
 
 clock = pygame.time.Clock()
 inicio_modo = 0
-
+musica_relatorio = 0
 rodando = True
-while rodando:
 
+while rodando:
+    assets.background_sound.play()
     for event in pygame.event.get():
 
         # ================= SAIR =================
@@ -290,6 +291,7 @@ while rodando:
                     registrar_resposta("fase3","fase3_3","diferentes",False)
                     trocar_modo("relatorio")
 
+
         # ================= TECLADO =================
         elif event.type == pygame.KEYDOWN:
 
@@ -321,6 +323,16 @@ while rodando:
     elif assets.mode == "introducao_fase3":
         if pygame.time.get_ticks() - inicio_modo > 1000:
             trocar_modo("fase3_1")
+
+
+    # ================= RELATORIO =================
+    if assets.mode == "relatorio":
+        while musica_relatorio == 0:
+            assets.level_complete.play()
+            musica_relatorio += 1
+        if pygame.time.get_ticks() - inicio_modo > 1000:
+            trocar_modo("menu")
+
 
     desenhar()
 

@@ -25,7 +25,7 @@ tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Musicalizando no Céu")
 
 # === FONTES ===
-FONT = pygame.font.SysFont("Arial", 28)
+FONT = pygame.font.SysFont("Arial", 28, bold=True)
 fonte_menu = pygame.font.SysFont(None, 48)
 fonte_intro = pygame.font.SysFont(None, 96)
 
@@ -48,6 +48,7 @@ bichinho2 = pygame.transform.scale(pygame.image.load("images/bichinho2.png"), (2
 bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (120, 110))
 
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (300, 300))
+
 
 botao_rasp_amarelo_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_amarelo.png"), (200, 200))
 botao_rasp_azul_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_azul.png"), (200, 200))
@@ -123,9 +124,14 @@ texto_intro2_rect = texto_intro2_surf.get_rect(center=(largura_tela//2, altura_t
 texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["azul"])
 texto_intro3_rect = texto_intro3_surf.get_rect(center=(largura_tela//2, altura_tela//2))
 
+
 # === SONS ===
 click_sound = pygame.mixer.Sound("sons/botao1.mp3")
 som_start = pygame.mixer.Sound("sons/botao2.mp3")
+background_sound = pygame.mixer.Sound("sons/background-sound.mp3")
+background_sound.set_volume(0.3) 
+
+
 
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
 som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
@@ -137,3 +143,31 @@ musica_fase2_3 = pygame.mixer.Sound("sons/agudo1.mp3")
 melodia_fase3_1 = pygame.mixer.Sound("sons/agudo1.mp3")
 melodia_fase3_2 = pygame.mixer.Sound("sons/agudo1.mp3")
 melodia_fase3_3 = pygame.mixer.Sound("sons/agudo1.mp3")
+
+level_complete = pygame.mixer.Sound("sons/level_complete.mp3")
+
+
+# === AJUDA ===
+texto_ajuda = (
+    "Bem vindos ao jogo Musicalizando no Céu! \n"
+    "\n"
+    "Hoje, você embarcará em uma aventura através de músicas e atividades. \n "
+    "\n"
+    "O jogo constitui de 3 fases com atividades em que você deve prestar muita atenção. \n "
+    "\n"
+    "Espero que aproveite a experiência e se dedique ao máximo para chegar ao final. \n " 
+    "\n"
+    "Este é o Projeto Integrador da aluna Luisa Narvaz Blankenbug, \n estudante do 2º ano do ensino médio do Instituto Federal de Santa Catarina de Garopaba/SC. \n"
+    "\n"
+    "Trata-se de uma proposta de melhoria do desempenho infantil nas escolas, \n aprimorando o foco e atenção de crianças em atividades que precisam ser realizadas. \n "
+    "\n"
+    "\n"
+    "Criador: Luisa Narvaz Blankenburg\n"
+    "Projeto: Música, Jogo e Atenção: uma proposta educacional com Raspberry Pi.\n"
+    "Professor orientador: André Luiz Silva de Moraes\n"
+    "Instituição: Instituto Federal de Santa Catarina - Câmpus Garopaba")
+
+linhas_texto_ajuda = texto_ajuda.split('\n')
+superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in linhas_texto_ajuda]
+velocidade_rolagem_ajuda = 1.2
+posicao_y = altura_tela
