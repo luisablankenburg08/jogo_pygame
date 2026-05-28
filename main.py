@@ -13,7 +13,7 @@ musica_relatorio = 0
 rodando = True
 
 while rodando:
-    assets.background_sound.play()
+
     for event in pygame.event.get():
 
         # ================= SAIR =================
@@ -181,14 +181,15 @@ while rodando:
                     assets.musica_fase2_1.play()
 
             elif assets.mode == "pergunta_fase2_1":
-                if assets.botao_piano.collidepoint(event.pos):
-                    respostas_fase2.append("piano")
 
-                elif assets.botao_flauta.collidepoint(event.pos):
-                    respostas_fase2.append("flauta")
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
 
+                elif assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+     
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"piano","flauta"}
+                    correta = set(respostas_fase2) == {"amarelo"}
                     registrar_resposta("fase2","fase2_1",respostas_fase2,correta)
                     respostas_fase2.clear()
                     trocar_modo("fase2_2")
@@ -201,17 +202,18 @@ while rodando:
                     assets.musica_fase2_2.play()
 
             elif assets.mode == "pergunta_fase2_2":
-                if assets.botao_violao.collidepoint(event.pos):
-                    respostas_fase2.append("violao")
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
 
-                elif assets.botao_tambor.collidepoint(event.pos):
-                    respostas_fase2.append("tambor")
-
+                if assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+             
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"violao","tambor"}
+                    correta = set(respostas_fase2) == {"azul"}
                     registrar_resposta("fase2","fase2_2",respostas_fase2,correta)
                     respostas_fase2.clear()
                     trocar_modo("fase2_3")
+
 
             elif assets.mode == "fase2_3":
                 if assets.botao_avancar_rect.collidepoint(event.pos):
@@ -221,18 +223,15 @@ while rodando:
                     assets.musica_fase2_3.play()
 
             elif assets.mode == "pergunta_fase2_3":
-                if assets.botao_piano.collidepoint(event.pos):
-                    respostas_fase2.append("piano")
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase2.append("amarelo")
 
-                elif assets.botao_flauta.collidepoint(event.pos):
-                    respostas_fase2.append("flauta")
-
-                elif assets.botao_xilofone.collidepoint(event.pos):
-                    respostas_fase2.append("xilofone")
-
+                if assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase2.append("azul")
+        
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"piano","flauta","xilofone"}
-                    registrar_resposta("fase2","fase2_3",respostas_fase2,correta)
+                    correta = set(respostas_fase2) == {"azul"}
+                    registrar_resposta("fase2","fase2_2",respostas_fase2,correta)
                     respostas_fase2.clear()
                     trocar_modo("menu_fase3")
 
@@ -251,12 +250,16 @@ while rodando:
                     assets.melodia_fase3_1.play()
 
             elif assets.mode == "pergunta_fase3_1":
-                if assets.botao_iguais.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_1","iguais",True)
-                    trocar_modo("fase3_2")
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase3.append("amarelo")
 
-                elif assets.botao_diferentes.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_1","diferentes",False)
+                if assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase3.append("azul")
+
+                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase3) == {"azul"}
+                    registrar_resposta("fase3","fase3_1",respostas_fase3,correta)
+                    respostas_fase3.clear()
                     trocar_modo("fase3_2")
 
             elif assets.mode == "fase3_2":
@@ -267,12 +270,16 @@ while rodando:
                     assets.melodia_fase3_2.play()
 
             elif assets.mode == "pergunta_fase3_2":
-                if assets.botao_iguais.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_2","iguais",False)
-                    trocar_modo("fase3_3")
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase3.append("amarelo")
 
-                elif assets.botao_diferentes.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_2","diferentes",True)
+                if assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase3.append("azul")
+
+                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase3) == {"azul"}
+                    registrar_resposta("fase3","fase3_2",respostas_fase3,correta)
+                    respostas_fase3.clear()
                     trocar_modo("fase3_3")
 
             elif assets.mode == "fase3_3":
@@ -283,12 +290,17 @@ while rodando:
                     assets.melodia_fase3_3.play()
 
             elif assets.mode == "pergunta_fase3_3":
-                if assets.botao_iguais.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_3","iguais",True)
-                    trocar_modo("relatorio")
 
-                elif assets.botao_diferentes.collidepoint(event.pos):
-                    registrar_resposta("fase3","fase3_3","diferentes",False)
+                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                    respostas_fase3.append("amarelo")
+
+                if assets.rasp_azul_rect.collidepoint(event.pos):
+                    respostas_fase3.append("azul")
+
+                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                    correta = set(respostas_fase3) == {"amarelo"}
+                    registrar_resposta("fase3","fase3_3",respostas_fase3,correta)
+                    respostas_fase3.clear()
                     trocar_modo("relatorio")
 
 
@@ -330,8 +342,6 @@ while rodando:
         while musica_relatorio == 0:
             assets.level_complete.play()
             musica_relatorio += 1
-        if pygame.time.get_ticks() - inicio_modo > 1000:
-            trocar_modo("menu")
 
 
     desenhar()

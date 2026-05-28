@@ -50,8 +50,8 @@ bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (120
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (300, 300))
 
 
-botao_rasp_amarelo_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_amarelo.png"), (200, 200))
-botao_rasp_azul_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_azul.png"), (200, 200))
+botao_rasp_amarelo_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_amarelo.png"), (250, 250))
+botao_rasp_azul_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_azul.png"), (250, 250))
 
 # === BOTÕES MENU ===
 botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", largura_tela//2-150, altura_tela//2+150)
@@ -76,17 +76,6 @@ som3_rect = som.get_rect(topleft=(largura_tela//2-150, 300))
 rasp_amarelo_rect = botao_rasp_amarelo_img.get_rect(topleft=(350, 400))
 rasp_azul_rect = botao_rasp_azul_img.get_rect(topleft=(950, 400))
 
-# === BOTÕES FASE 2 ===
-botao_piano = pygame.Rect(120, 350, 220, 80)
-botao_flauta = pygame.Rect(420, 350, 300, 50)
-botao_violao = pygame.Rect(720, 350, 300, 50)
-botao_tambor = pygame.Rect(1020, 350, 300, 50)
-botao_xilofone = pygame.Rect(570, 500, 300, 50)
-
-# === BOTÕES FASE 3 ===
-botao_iguais = pygame.Rect(300, 400, 300, 200)
-botao_diferentes = pygame.Rect(800, 400, 300, 200)
-
 # === CAMPOS DE TEXTO ===
 nome_rect = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
 escola_rect = pygame.Rect(largura_tela//2-150, altura_tela//2+50, 300, 40)
@@ -97,6 +86,7 @@ opcoes_serie = ["1º ano", "2º ano", "3º ano", "4º ano"]
 # === ESTADOS ===
 dropdown_aberto = False
 active_field = None
+
 
 player_name = ""
 player_school = ""
@@ -124,13 +114,15 @@ texto_intro2_rect = texto_intro2_surf.get_rect(center=(largura_tela//2, altura_t
 texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["azul"])
 texto_intro3_rect = texto_intro3_surf.get_rect(center=(largura_tela//2, altura_tela//2))
 
+texto_relatorio_surf = fonte_intro.render("Relatório Final", True, CORES["preto"])
+texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela*2/10, altura_tela*2/10))
+
 
 # === SONS ===
 click_sound = pygame.mixer.Sound("sons/botao1.mp3")
 som_start = pygame.mixer.Sound("sons/botao2.mp3")
 background_sound = pygame.mixer.Sound("sons/background-sound.mp3")
 background_sound.set_volume(0.3) 
-
 
 
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
@@ -157,9 +149,6 @@ texto_ajuda = (
     "\n"
     "Espero que aproveite a experiência e se dedique ao máximo para chegar ao final. \n " 
     "\n"
-    "Este é o Projeto Integrador da aluna Luisa Narvaz Blankenbug, \n estudante do 2º ano do ensino médio do Instituto Federal de Santa Catarina de Garopaba/SC. \n"
-    "\n"
-    "Trata-se de uma proposta de melhoria do desempenho infantil nas escolas, \n aprimorando o foco e atenção de crianças em atividades que precisam ser realizadas. \n "
     "\n"
     "\n"
     "Criador: Luisa Narvaz Blankenburg\n"

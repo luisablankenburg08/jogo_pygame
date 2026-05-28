@@ -2,6 +2,7 @@ import pygame
 import json
 
 pygame.init()
+
 # === CORES ===
 CORES = {
     "preto": (0, 0, 0),
@@ -50,7 +51,7 @@ def salvar_dados(nome, escola, serie):
 # === REGISTRAR RESPOSTAS ===
 respostas_fase1 = []
 respostas_fase2 = []
-respostas_fase3 = ""
+respostas_fase3 = []
 
 def registrar_resposta(fase, pergunta, resposta, correta):
     try:

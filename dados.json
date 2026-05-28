@@ -1,8 +1,8 @@
 [
     {
-        "nome": "e",
-        "escola": "e",
-        "serie": "2º ano",
+        "nome": "w",
+        "escola": "w",
+        "serie": "1º ano",
         "fase1": [
             {
                 "pergunta": "fase1_1",
@@ -30,102 +30,29 @@
                 "pergunta": "fase2_2",
                 "resposta": [],
                 "correta": false
-            }
-        ],
-        "fase3": []
-    },
-    {
-        "nome": "e",
-        "escola": "e",
-        "serie": "1º ano",
-        "fase1": [
+            },
             {
-                "pergunta": "fase1_1",
+                "pergunta": "fase2_2",
                 "resposta": [],
                 "correta": false
             }
         ],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "d",
-        "escola": "c",
-        "serie": "2º ano",
-        "fase1": [],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "f",
-        "escola": "f",
-        "serie": "1º ano",
-        "fase1": [
+        "fase3": [
             {
-                "pergunta": "fase1_1",
+                "pergunta": "fase3_1",
                 "resposta": [],
                 "correta": false
             },
             {
-                "pergunta": "fase1_2",
+                "pergunta": "fase3_2",
                 "resposta": [],
                 "correta": false
             },
             {
-                "pergunta": "fase1_3",
+                "pergunta": "fase3_3",
                 "resposta": [],
                 "correta": false
             }
-        ],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "r",
-        "escola": "r",
-        "serie": "1º ano",
-        "fase1": [],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "e",
-        "escola": "e",
-        "serie": "1º ano",
-        "fase1": [
-            {
-                "pergunta": "fase1_1",
-                "resposta": [],
-                "correta": false
-            },
-            {
-                "pergunta": "fase1_2",
-                "resposta": [],
-                "correta": false
-            },
-            {
-                "pergunta": "fase1_3",
-                "resposta": [],
-                "correta": false
-            }
-        ],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "e",
-        "escola": "e",
-        "serie": "1º ano",
-        "fase1": [],
-        "fase2": [],
-        "fase3": []
-    },
-    {
-        "nome": "e",
-        "escola": "e",
-        "serie": "2º ano",
-        "fase1": [],
-        "fase2": [],
-        "fase3": []
+        ]
     }
 ]

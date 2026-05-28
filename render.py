@@ -5,7 +5,7 @@ from utils import desenhar_barra_azul, desenhar_barra_amarela, desenhar_campo
 pygame.init()
 
 # =========================
-# 🎨 FUNÇÃO PRINCIPAL
+# FUNÇÃO PRINCIPAL
 # =========================
 def desenhar():
 
@@ -168,40 +168,35 @@ def desenhar():
         tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
 
         tela.blit(assets.som, assets.som1_rect)
+        tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
         tela.blit(assets.som, assets.som2_rect)
+        tela.blit(assets.texto_som2_surface, assets.texto_som2_rect)
 
         if "pergunta_fase1" in assets.mode:
         
-            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(25/100), assets.altura_tela*(44/100)))
-            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(68/100), assets.altura_tela*(44/100)))
+            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
+            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
 
         elif "pergunta_fase2" in assets.mode:
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_piano)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_flauta)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_violao)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_tambor)
+
+            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
+            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
 
         elif "pergunta_fase3" in assets.mode:
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.botao_iguais)
-            pygame.draw.rect(tela, assets.CORES["azul"], assets.botao_diferentes)
+            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
+            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
+            
 
     # ================= RELATÓRIO =================
     elif assets.mode == "relatorio":
 
         tela.blit(assets.fundo_fases, (0, 0))
 
-        tela.blit(assets.nuvem, (assets.largura_tela//4-50, assets.altura_tela//2+50))
-        tela.blit(assets.nuvem, (assets.largura_tela//2-50, assets.altura_tela//2-50))
         tela.blit(assets.nuvem, (assets.largura_tela//2+250, assets.altura_tela//2-170))
-
-        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_fase1_rect)
-        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem2_rect)
         pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem3_rect)
-
-        tela.blit(assets.txt_fase1, assets.txt_fase1_rect)
-        tela.blit(assets.txt_nuvem2, assets.txt_nuvem2_rect)
         tela.blit(assets.txt_nuvem3, assets.txt_nuvem3_rect)
 
         tela.blit(assets.bichinho2, (assets.largura_tela*(70/100), assets.altura_tela*(10/100)))
         tela.blit(assets.bandeira, (assets.largura_tela*(92/100), assets.altura_tela*(4/100)))
 
+        tela.blit(assets.texto_relatorio_surf, assets.texto_relatorio_rect)
