@@ -231,7 +231,7 @@ while rodando:
         
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     correta = set(respostas_fase2) == {"azul"}
-                    registrar_resposta("fase2","fase2_2",respostas_fase2,correta)
+                    registrar_resposta("fase2","fase2_3",respostas_fase2,correta)
                     respostas_fase2.clear()
                     trocar_modo("menu_fase3")
 
@@ -303,6 +303,11 @@ while rodando:
                     respostas_fase3.clear()
                     trocar_modo("relatorio")
 
+            # ================= RELATÓRIO =================
+            elif assets.mode == "relatorio":
+                if assets.botao_voltar_rect.collidepoint(event.pos):
+                    trocar_modo("menu")
+
 
         # ================= TECLADO =================
         elif event.type == pygame.KEYDOWN:
@@ -337,12 +342,16 @@ while rodando:
             trocar_modo("fase3_1")
 
 
-    # ================= RELATORIO =================
+    # ================= RELATÓRIO =================
     if assets.mode == "relatorio":
         while musica_relatorio == 0:
             assets.level_complete.play()
             musica_relatorio += 1
 
+        jogador = pegar_ultimo_jogador()
+        acertos, erros, por_fase = calcular_resultados(jogador)
+
+        y = 100
 
     desenhar()
 

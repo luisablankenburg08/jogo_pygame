@@ -21,6 +21,9 @@ FONT = pygame.font.SysFont("Arial", 28)
 fonte_menu = pygame.font.SysFont(None, 48)
 fonte_intro = pygame.font.SysFont(None, 96)
 
+
+import json
+    
 # === SALVAR DADOS ===
 def salvar_dados(nome, escola, serie):
     dados_novos = {
@@ -72,6 +75,37 @@ def registrar_resposta(fase, pergunta, resposta, correta):
     except:
         print("Erro ao registrar resposta")
 
+# === CARREGAR DADOS ===
+def carregar_dados():
+    with open("dados.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+        
+# === CALCULAR RESULTADOS ===
+def calcular_resultados(jogador):
+    acertos = 0
+    erros = 0
+
+    resultados_por_fase = {}
+
+    for fase in ["fase1", "fase2", "fase3"]:
+        acertos_fase = 0
+        erros_fase = 0
+
+        for pergunta in jogador.get(fase, []):
+            if pergunta["correta"]:
+                acertos += 1
+                acertos_fase += 1
+            else:
+                erros += 1
+                erros_fase += 1
+
+        resultados_por_fase[fase] = (acertos_fase, erros_fase)
+
+    return acertos, erros, resultados_por_fase
+
+def pegar_ultimo_jogador():
+    dados = carregar_dados()
+    return dados[-1]  # último da lista
 
 # === BARRAS DE PROGRESSÃO ===
 def desenhar_barra_azul(tela, CORES, largura_tela):
@@ -137,3 +171,9 @@ def quadro_explicativo(texto, x, y, w=300, h=40, cor=CORES["amarelo"], cor_texto
 def trocar_modo(novo_modo):
     import assets
     assets.mode = novo_modo
+
+
+# === TEXTO RELATÓRIO ===
+def desenhar_texto(texto, y):
+txt = FONT.render(texto, True, (255,255,255))
+tela.blit(txt, (100, y))

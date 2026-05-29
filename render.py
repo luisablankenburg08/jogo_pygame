@@ -200,3 +200,24 @@ def desenhar():
         tela.blit(assets.bandeira, (assets.largura_tela*(92/100), assets.altura_tela*(4/100)))
 
         tela.blit(assets.texto_relatorio_surf, assets.texto_relatorio_rect)
+
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
+
+
+        utils.desenhar_texto(f"Nome: {jogador['nome']}", y)
+        y += 50
+        desenhar_texto(f"Escola: {jogador['escola']}", y)
+        y += 50
+        desenhar_texto(f"Série: {jogador['serie']}", y)
+        y += 80
+
+        desenhar_texto(f"Acertos: {acertos}", y)
+        y += 50
+        desenhar_texto(f"Erros: {erros}", y)
+        y += 80
+
+        # Por fase
+        for fase, (a, e) in por_fase.items():
+            desenhar_texto(f"{fase.upper()} → Acertos: {a} | Erros: {e}", y)
+            y += 50
