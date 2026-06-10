@@ -145,7 +145,7 @@ def desenhar_campo(tela, FONT, CORES, label, rect, valor, ativo=False):
     tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x + 5, rect.y + 5))
 
 
-def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["ciano"]):
+def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["preto"]):
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)
@@ -156,7 +156,7 @@ def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["
     return rect, surf, texto_render, texto_rect
 
 
-def quadro_explicativo(texto, x, y, w=300, h=40, cor=CORES["amarelo"], cor_texto=CORES["preto"]):
+def quadro_explicativo(texto, x, y, w=600, h=60, cor=CORES["amarelo"], cor_texto=CORES["preto"]):
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)

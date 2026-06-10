@@ -135,30 +135,48 @@ def desenhar():
 
         if "fase1_1" in assets.mode or "pergunta_fase1_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, (assets.largura_tela)//9)
-        
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
+
         if "fase1_2" in assets.mode or "pergunta_fase1_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*2)
-        
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
+
         if "fase1_3" in assets.mode or "pergunta_fase1_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*3)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_1" in assets.mode or "pergunta_fase2_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*4)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_2" in assets.mode or "pergunta_fase2_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*5)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_3" in assets.mode or "pergunta_fase2_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*6)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
         
         if "fase3_1" in assets.mode or "pergunta_fase3_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*7)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase3_2" in assets.mode or "pergunta_fase3_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*8)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase3_3" in assets.mode or "pergunta_fase3_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, assets.largura_tela)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase" in assets.mode:
             pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
@@ -174,17 +192,24 @@ def desenhar():
 
         if "pergunta_fase1" in assets.mode:
         
-            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
-            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect)
+            tela.blit(assets.txt_quadro_explicativo2, assets.txt_quadro_explicativo2_rect)
 
-        elif "pergunta_fase2" in assets.mode:
 
-            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
-            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect)
+            pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta1_rect)
+            tela.blit(assets.txt_botao1_resposta1, assets.txt_botao1_resposta1_rect)
 
-        elif "pergunta_fase3" in assets.mode:
-            tela.blit(assets.botao_rasp_amarelo_img, (assets.largura_tela*(23.3/100), assets.altura_tela*(41/100)))
-            tela.blit(assets.botao_rasp_azul_img, (assets.largura_tela*(66/100), assets.altura_tela*(41/100)))
+
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect)
+            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta1_rect)
+            tela.blit(assets.txt_botao2_resposta1, assets.txt_botao2_resposta1_rect)
+
+        #elif "pergunta_fase2" in assets.mode:
+
+
+        #elif "pergunta_fase3" in assets.mode:
+
             
 
     # ================= RELATÓRIO =================

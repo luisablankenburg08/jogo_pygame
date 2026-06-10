@@ -49,16 +49,12 @@ bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (120
 
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (300, 300))
 
-
-botao_rasp_amarelo_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_amarelo.png"), (250, 250))
-botao_rasp_azul_img = pygame.transform.scale(pygame.image.load("images/botao_rasp_azul.png"), (250, 250))
-
 # === BOTÕES MENU ===
 botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", largura_tela//2-150, altura_tela//2+150)
 botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao("Ajuda", largura_tela//2-150, altura_tela//2+50)
 botao_jogar_rect, surf_jogar, txt_jogar, txt_jogar_rect = criar_botao("Jogar", largura_tela//2-150, altura_tela//2-50)
 
-# === BOTÕES FASES ===
+# === BOTÕES MENUS DAS FASES ===
 botao_fase1_rect, surf_fase1, txt_fase1, txt_fase1_rect = criar_nuvem("Fase 1", largura_tela//4, altura_tela//2+100)
 botao_nuvem2_rect, surf_nuvem2, txt_nuvem2, txt_nuvem2_rect = criar_nuvem("Fase 2", largura_tela//2, altura_tela//2)
 botao_nuvem3_rect, surf_nuvem3, txt_nuvem3, txt_nuvem3_rect = criar_nuvem("Fase 3", largura_tela-400, altura_tela//2-120)
@@ -72,9 +68,19 @@ som1_rect = som.get_rect(topleft=(300, 300))
 som2_rect = som.get_rect(topleft=(900, 300))
 som3_rect = som.get_rect(topleft=(largura_tela//2-150, 300))
 
-# === BOTÕES RASPBERRY ===
-rasp_amarelo_rect = botao_rasp_amarelo_img.get_rect(topleft=(350, 400))
-rasp_azul_rect = botao_rasp_azul_img.get_rect(topleft=(950, 400))
+# === BOTÕES DE RESPOSTA ===
+borda_botao1_resposta_rect = pygame.Rect(295, 295, 310, 310)
+borda_botao2_resposta_rect = pygame.Rect(895, 295, 310, 310)
+
+botao1_resposta1_rect, surf_botao1_resposta1, txt_botao1_resposta1, txt_botao1_resposta1_rect = criar_botao("SOM 1", 300, 300, 300,300)
+botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_resposta1_rect = criar_botao("SOM 2", 900, 300, 300, 300)
+
+
+#=== QUADROS EXPLICATIVOS ===
+
+quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-250, altura_tela//2-300)
+quadro_explicativo2_rect, surf_quadro_explicativo2, txt_quadro_explicativo2, txt_quadro_explicativo2_rect = quadro_explicativo("Qual som é mais agudo?", largura_tela//2-250, altura_tela//2-300)
+
 
 # === CAMPOS DE TEXTO ===
 nome_rect = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)

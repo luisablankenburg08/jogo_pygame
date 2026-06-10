@@ -106,10 +106,10 @@ while rodando:
                     assets.som_grave1_fase1.play()
 
             elif assets.mode == "pergunta_fase1_1":
-                if pygame.Rect(350,400,200,200).collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("amarelo")
 
-                elif pygame.Rect(950,400,200,200).collidepoint(event.pos):
+                elif assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -134,10 +134,10 @@ while rodando:
                     assets.som_grave1_fase1.play()
 
             elif assets.mode == "pergunta_fase1_2":
-                if pygame.Rect(350,400,200,200).collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("amarelo")
 
-                elif pygame.Rect(950,400,200,200).collidepoint(event.pos):
+                elif assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -151,10 +151,10 @@ while rodando:
                     trocar_modo("pergunta_fase1_3")
 
             elif assets.mode == "pergunta_fase1_3":
-                if pygame.Rect(350,400,200,200).collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("amarelo")
 
-                elif pygame.Rect(950,400,200,200).collidepoint(event.pos):
+                elif assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase1.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -182,10 +182,10 @@ while rodando:
 
             elif assets.mode == "pergunta_fase2_1":
 
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("amarelo")
 
-                elif assets.rasp_azul_rect.collidepoint(event.pos):
+                elif assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("azul")
      
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -202,10 +202,10 @@ while rodando:
                     assets.musica_fase2_2.play()
 
             elif assets.mode == "pergunta_fase2_2":
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("amarelo")
 
-                if assets.rasp_azul_rect.collidepoint(event.pos):
+                elif assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("azul")
              
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -223,10 +223,10 @@ while rodando:
                     assets.musica_fase2_3.play()
 
             elif assets.mode == "pergunta_fase2_3":
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("amarelo")
 
-                if assets.rasp_azul_rect.collidepoint(event.pos):
+                if assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase2.append("azul")
         
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -250,10 +250,10 @@ while rodando:
                     assets.melodia_fase3_1.play()
 
             elif assets.mode == "pergunta_fase3_1":
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("amarelo")
 
-                if assets.rasp_azul_rect.collidepoint(event.pos):
+                if assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -270,10 +270,10 @@ while rodando:
                     assets.melodia_fase3_2.play()
 
             elif assets.mode == "pergunta_fase3_2":
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("amarelo")
 
-                if assets.rasp_azul_rect.collidepoint(event.pos):
+                if assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
@@ -291,10 +291,10 @@ while rodando:
 
             elif assets.mode == "pergunta_fase3_3":
 
-                if assets.rasp_amarelo_rect.collidepoint(event.pos):
+                if assets.botao1_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("amarelo")
 
-                if assets.rasp_azul_rect.collidepoint(event.pos):
+                if assets.botao2_resposta1_rect.collidepoint(event.pos):
                     respostas_fase3.append("azul")
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
