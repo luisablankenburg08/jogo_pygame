@@ -348,11 +348,6 @@ while rodando:
             assets.level_complete.play()
             musica_relatorio += 1
 
-        jogador = pegar_ultimo_jogador()
-        acertos, erros, por_fase = calcular_resultados(jogador)
-
-        y = 100
-
     desenhar()
 
     pygame.display.flip()

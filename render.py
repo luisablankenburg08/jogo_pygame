@@ -1,6 +1,6 @@
 import pygame
 import assets
-from utils import desenhar_barra_azul, desenhar_barra_amarela, desenhar_campo
+from utils import desenhar_barra_azul, desenhar_barra_amarela, desenhar_campo, gerar_relatorio, obter_ultimo_jogador
 
 pygame.init()
 
@@ -189,8 +189,41 @@ def desenhar():
 
     # ================= RELATÓRIO =================
     elif assets.mode == "relatorio":
-
         tela.blit(assets.fundo_fases, (0, 0))
+
+        relatorio = gerar_relatorio(
+            obter_ultimo_jogador()
+        )
+
+        tela.blit(
+            assets.texto_relatorio_surf,
+            assets.texto_relatorio_rect
+        )
+
+        y = 220
+
+        linhas = [
+            f"Nome: {relatorio['nome']}",
+            f"Escola: {relatorio['escola']}",
+            f"Série: {relatorio['serie']}",
+            "",
+            f"Total de acertos: {relatorio['acertos']}",
+            f"Total de erros: {relatorio['erros']}",
+            "",
+            f"Fase 1: {relatorio['fases']['fase1']['acertos']} acertos | {relatorio['fases']['fase1']['erros']} erros",
+            f"Fase 2: {relatorio['fases']['fase2']['acertos']} acertos | {relatorio['fases']['fase2']['erros']} erros",
+            f"Fase 3: {relatorio['fases']['fase3']['acertos']} acertos | {relatorio['fases']['fase3']['erros']} erros",
+        ]
+
+        for linha in linhas:
+            texto = assets.fonte_relatorio.render(
+                linha,
+                True,
+                assets.CORES["preto"]
+            )
+
+            tela.blit(texto, (100, y))
+            y += 40
 
         tela.blit(assets.nuvem, (assets.largura_tela//2+250, assets.altura_tela//2-170))
         pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem3_rect)
@@ -199,25 +232,5 @@ def desenhar():
         tela.blit(assets.bichinho2, (assets.largura_tela*(70/100), assets.altura_tela*(10/100)))
         tela.blit(assets.bandeira, (assets.largura_tela*(92/100), assets.altura_tela*(4/100)))
 
-        tela.blit(assets.texto_relatorio_surf, assets.texto_relatorio_rect)
-
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
-
-
-        utils.desenhar_texto(f"Nome: {jogador['nome']}", y)
-        y += 50
-        desenhar_texto(f"Escola: {jogador['escola']}", y)
-        y += 50
-        desenhar_texto(f"Série: {jogador['serie']}", y)
-        y += 80
-
-        desenhar_texto(f"Acertos: {acertos}", y)
-        y += 50
-        desenhar_texto(f"Erros: {erros}", y)
-        y += 80
-
-        # Por fase
-        for fase, (a, e) in por_fase.items():
-            desenhar_texto(f"{fase.upper()} → Acertos: {a} | Erros: {e}", y)
-            y += 50

@@ -160,3 +160,8 @@ linhas_texto_ajuda = texto_ajuda.split('\n')
 superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in linhas_texto_ajuda]
 velocidade_rolagem_ajuda = 1.2
 posicao_y = altura_tela
+
+
+# ===== RELATÓRIO =====
+fonte_relatorio_titulo = pygame.font.SysFont("Arial", 50)
+fonte_relatorio = pygame.font.SysFont("Arial", 30)

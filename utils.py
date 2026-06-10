@@ -173,7 +173,48 @@ def trocar_modo(novo_modo):
     assets.mode = novo_modo
 
 
-# === TEXTO RELATÓRIO ===
-def desenhar_texto(texto, y):
-txt = FONT.render(texto, True, (255,255,255))
-tela.blit(txt, (100, y))
+# === RELATÓRIO ===
+relatorio_atual = None
+
+def carregar_dados():
+    with open("dados.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def obter_ultimo_jogador():
+    dados = carregar_dados()
+    return dados[-1]
+
+def gerar_relatorio(jogador):
+
+    total_acertos = 0
+    total_erros = 0
+    fases = {}
+
+    for fase in ["fase1", "fase2", "fase3"]:
+
+        acertos = 0
+        erros = 0
+
+        for resposta in jogador.get(fase, []):
+
+            if resposta["correta"]:
+                acertos += 1
+            else:
+                erros += 1
+
+        fases[fase] = {
+            "acertos": acertos,
+            "erros": erros
+        }
+
+        total_acertos += acertos
+        total_erros += erros
+
+    return {
+        "nome": jogador["nome"],
+        "escola": jogador["escola"],
+        "serie": jogador["serie"],
+        "acertos": total_acertos,
+        "erros": total_erros,
+        "fases": fases
+    }
