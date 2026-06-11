@@ -196,19 +196,30 @@ def desenhar():
             tela.blit(assets.txt_quadro_explicativo2, assets.txt_quadro_explicativo2_rect)
 
 
-            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect ,border_radius=10)
             pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta1_rect)
             tela.blit(assets.txt_botao1_resposta1, assets.txt_botao1_resposta1_rect)
 
 
-            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
             pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta1_rect)
             tela.blit(assets.txt_botao2_resposta1, assets.txt_botao2_resposta1_rect)
 
         #elif "pergunta_fase2" in assets.mode:
 
 
-        #elif "pergunta_fase3" in assets.mode:
+        elif "pergunta_fase3" in assets.mode:
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo3_rect)
+            tela.blit(assets.txt_quadro_explicativo3, assets.txt_quadro_explicativo3_rect)
+
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect,border_radius=10)
+            pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta3_rect)
+            tela.blit(assets.txt_botao1_resposta3, assets.txt_botao1_resposta3_rect)
+
+
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
+            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta3_rect)
+            tela.blit(assets.txt_botao2_resposta3, assets.txt_botao2_resposta3_rect)
 
             
 

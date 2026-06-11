@@ -75,12 +75,15 @@ borda_botao2_resposta_rect = pygame.Rect(895, 295, 310, 310)
 botao1_resposta1_rect, surf_botao1_resposta1, txt_botao1_resposta1, txt_botao1_resposta1_rect = criar_botao("SOM 1", 300, 300, 300,300)
 botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_resposta1_rect = criar_botao("SOM 2", 900, 300, 300, 300)
 
+botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_resposta3_rect = criar_botao("IGUAIS", 300, 300, 300,300)
+botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", 900, 300, 300, 300)
+
 
 #=== QUADROS EXPLICATIVOS ===
 
 quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-250, altura_tela//2-300)
 quadro_explicativo2_rect, surf_quadro_explicativo2, txt_quadro_explicativo2, txt_quadro_explicativo2_rect = quadro_explicativo("Qual som é mais agudo?", largura_tela//2-250, altura_tela//2-300)
-
+quadro_explicativo3_rect, surf_quadro_explicativo3, txt_quadro_explicativo3, txt_quadro_explicativo3_rect = quadro_explicativo("São melodias iguais ou diferentes?", largura_tela//2-250, altura_tela//2-300)
 
 # === CAMPOS DE TEXTO ===
 nome_rect = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
