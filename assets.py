@@ -78,8 +78,8 @@ botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_r
 botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_resposta3_rect = criar_botao("IGUAIS", 300, 300, 300,300)
 botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", 900, 300, 300, 300)
 
-botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \n\nPIANO \n\nBATERIA", 300, 300, 300,300)
-botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("VIOLÃO \n\nFLAUTA \n\nTAMBOR", 900, 300, 300, 300)
+botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \nPIANO \nBATERIA", 300, 300, 300,300)
+botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("VIOLÃO \nFLAUTA \nTAMBOR", 900, 300, 300, 300)
 #=== QUADROS EXPLICATIVOS ===
 
 quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-250, altura_tela//2-300)
@@ -128,6 +128,8 @@ texto_intro3_rect = texto_intro3_surf.get_rect(center=(largura_tela//2, altura_t
 texto_relatorio_surf = fonte_intro.render("Relatório Final", True, CORES["preto"])
 texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela*2/10, altura_tela*2/10))
 
+selecionado1_surf = FONT.render("Selecionado", True, CORES["preto"])
+selecionado1_rect = selecionado1_surf.get_rect(center=(300,280))
 
 # === SONS ===
 click_sound = pygame.mixer.Sound("sons/botao1.mp3")
