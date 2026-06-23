@@ -25,9 +25,9 @@ fonte_intro = pygame.font.SysFont(None, 96)
 import json
     
 # === SALVAR DADOS ===
-def salvar_dados(nome, escola, serie):
+def salvar_dados(usuario, escola, serie):
     dados_novos = {
-        "nome": nome,
+        "usuario": usuario,
         "escola": escola,
         "serie": serie,
         "fase1": [],
@@ -211,7 +211,7 @@ def gerar_relatorio(jogador):
         total_erros += erros
 
     return {
-        "nome": jogador["nome"],
+        "usuario": jogador["usuario"],
         "escola": jogador["escola"],
         "serie": jogador["serie"],
         "acertos": total_acertos,

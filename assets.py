@@ -14,8 +14,11 @@ CORES = {
     "verde": (0, 255, 0),
     "azul": (0, 0, 255),
     "amarelo": (255, 255, 0),
+    "magenta": (255, 0, 255),
+    "magenta_opaco": (180, 0, 180),
     "ciano": (0, 255, 255),
-    "magenta": (255, 0, 255)
+    "ciano_opaco": (0, 180, 180),
+
 }
 
 # === TELA ===
@@ -28,6 +31,7 @@ pygame.display.set_caption("Musicalizando no Céu")
 FONT = pygame.font.SysFont("Arial", 28, bold=True)
 fonte_menu = pygame.font.SysFont(None, 48)
 fonte_intro = pygame.font.SysFont(None, 96)
+fonte_pequena = pygame.font.SysFont("arial", 22, bold=True)
 
 # === IMAGENS ===
 background = pygame.transform.scale(pygame.image.load("images/fundo_menu.png"), (largura_tela, altura_tela))
@@ -88,7 +92,7 @@ quadro_explicativo3_rect, surf_quadro_explicativo3, txt_quadro_explicativo3, txt
 quadro_explicativo4_rect, surf_quadro_explicativo4, txt_quadro_explicativo4, txt_quadro_explicativo4_rect = quadro_explicativo("Quais instrumentos eram?", largura_tela//2-250, altura_tela//2-300)
 
 # === CAMPOS DE TEXTO ===
-nome_rect = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
+usuario = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
 escola_rect = pygame.Rect(largura_tela//2-150, altura_tela//2+50, 300, 40)
 serie_rect = pygame.Rect(largura_tela//2-150, altura_tela//2+150, 300, 40)
 
@@ -128,8 +132,6 @@ texto_intro3_rect = texto_intro3_surf.get_rect(center=(largura_tela//2, altura_t
 texto_relatorio_surf = fonte_intro.render("Relatório Final", True, CORES["preto"])
 texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela*2/10, altura_tela*2/10))
 
-selecionado1_surf = FONT.render("Selecionado", True, CORES["preto"])
-selecionado1_rect = selecionado1_surf.get_rect(center=(300,280))
 
 # === SONS ===
 click_sound = pygame.mixer.Sound("sons/botao1.mp3")
@@ -178,3 +180,6 @@ posicao_y = altura_tela
 # ===== RELATÓRIO =====
 fonte_relatorio_titulo = pygame.font.SysFont("Arial", 50)
 fonte_relatorio = pygame.font.SysFont("Arial", 30)
+
+# ==== SELEÇÃO DE BOTÕES ====
+resposta_selecionada = None

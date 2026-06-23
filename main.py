@@ -43,8 +43,8 @@ while rodando:
                 if assets.botao_voltar_rect.collidepoint(event.pos):
                     trocar_modo("menu")
 
-                elif assets.nome_rect.collidepoint(event.pos):
-                    assets.active_field = "nome"
+                elif assets.usuario.collidepoint(event.pos):
+                    assets.active_field = "usuario"
 
                 elif assets.escola_rect.collidepoint(event.pos):
                     assets.active_field = "escola"
@@ -96,6 +96,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_1")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -107,17 +109,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase1_1":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
-                    assets.tela.blit(assets.selecionado1_surf,assets.selecionado1_rect)
-                    respostas_fase1.append("som1")
+                    assets.resposta_selecionada = "som1"
 
                 elif assets.botao2_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase1.append("som2")
+                     assets.resposta_selecionada = "som2"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase1) == {"som2"}
-                    registrar_resposta("fase1","fase1_1",respostas_fase1,correta)
-                    respostas_fase1.clear()
-                    trocar_modo("fase1_2")
+
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "som2"
+                        registrar_resposta("fase1", "fase1_1", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase1_2")
 
             elif assets.mode == "fase1_2":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -125,6 +128,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_2")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -136,16 +141,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase1_2":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase1.append("som1")
+                    assets.resposta_selecionada = "som1"
 
                 elif assets.botao2_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase1.append("som2")
+                     assets.resposta_selecionada = "som2"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase1) == {"som1"}
-                    registrar_resposta("fase1","fase1_2",respostas_fase1,correta)
-                    respostas_fase1.clear()
-                    trocar_modo("fase1_3")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "som2"
+                        registrar_resposta("fase1", "fase1_2", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase1_3")
 
             elif assets.mode == "fase1_3":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -153,6 +160,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_3")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -164,16 +173,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase1_3":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase1.append("som1")
+                    assets.resposta_selecionada = "som1"
 
                 elif assets.botao2_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase1.append("som2")
+                     assets.resposta_selecionada = "som2"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase1) == {"som1"}
-                    registrar_resposta("fase1","fase1_3",respostas_fase1,correta)
-                    respostas_fase1.clear()
-                    trocar_modo("menu_fase2")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "som1"
+                        registrar_resposta("fase1", "fase1_3", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("menu_fase2")
 
             # ================= FASE 2 =================
 
@@ -192,28 +203,32 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_1")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
                     assets.som_agudo1_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                        assets.som_agudo1_fase1.stop()
-                        assets.som_grave1_fase1.play()
+                    assets.som_agudo1_fase1.stop()
+                    assets.som_grave1_fase1.play()
 
             elif assets.mode == "pergunta_fase2_1":
 
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("guitarra")
+                    assets.resposta_selecionada = "guitarra"
 
                 elif assets.botao2_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("violão")
-     
+                     assets.resposta_selecionada = "violão"
+
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"guitarra"}
-                    registrar_resposta("fase2","fase2_1",respostas_fase2,correta)
-                    respostas_fase2.clear()
-                    trocar_modo("fase2_2")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "guitarra"
+                        registrar_resposta("fase2", "fase2_1", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase2_2")
 
             elif assets.mode == "fase2_2":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -221,6 +236,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_2")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -232,17 +249,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase2_2":
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("guitarra")
+                    assets.resposta_selecionada = "guitarra"
 
                 elif assets.botao2_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("violão")
-             
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"violão"}
-                    registrar_resposta("fase2","fase2_2",respostas_fase2,correta)
-                    respostas_fase2.clear()
-                    trocar_modo("fase2_3")
+                     assets.resposta_selecionada = "violão"
 
+                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "violão"
+                        registrar_resposta("fase2", "fase2_2", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase2_3")
 
             elif assets.mode == "fase2_3":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -250,6 +268,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_3")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -261,16 +281,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase2_3":
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("guitarra")
+                    assets.resposta_selecionada = "guitarra"
 
-                if assets.botao2_resposta2_rect.collidepoint(event.pos):
-                    respostas_fase2.append("violão")
-        
+                elif assets.botao2_resposta2_rect.collidepoint(event.pos):
+                     assets.resposta_selecionada = "violão"
+
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase2) == {"violão"}
-                    registrar_resposta("fase2","fase2_3",respostas_fase2,correta)
-                    respostas_fase2.clear()
-                    trocar_modo("menu_fase3")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "violão"
+                        registrar_resposta("fase2", "fase2_3", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("menu_fase3")
 
             # ================= FASE 3 =================
 
@@ -285,6 +307,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_1")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -296,16 +320,18 @@ while rodando:
 
             elif assets.mode == "pergunta_fase3_1":
                 if assets.botao1_resposta3_rect.collidepoint(event.pos):
-                    respostas_fase3.append("iguais")
+                    assets.resposta_selecionada = "iguais"
 
-                if assets.botao2_resposta3_rect.collidepoint(event.pos):
-                    respostas_fase3.append("diferentes")
+                elif assets.botao2_resposta3_rect.collidepoint(event.pos):
+                     assets.resposta_selecionada = "diferentes"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase3) == {"diferentes"}
-                    registrar_resposta("fase3","fase3_1",respostas_fase3,correta)
-                    respostas_fase3.clear()
-                    trocar_modo("fase3_2")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "diferentes"
+                        registrar_resposta("fase3", "fase3_1", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase3_2")
 
             elif assets.mode == "fase3_2":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -313,6 +339,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_2")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -323,17 +351,19 @@ while rodando:
                     assets.som_grave1_fase1.play()
 
             elif assets.mode == "pergunta_fase3_2":
-                if assets.botao1_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase3.append("iguais")
+                if assets.botao1_resposta3_rect.collidepoint(event.pos):
+                    assets.resposta_selecionada = "iguais"
 
-                if assets.botao2_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase3.append("diferentes")
+                elif assets.botao2_resposta3_rect.collidepoint(event.pos):
+                     assets.resposta_selecionada = "diferentes"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase3) == {"diferentes"}
-                    registrar_resposta("fase3","fase3_2",respostas_fase3,correta)
-                    respostas_fase3.clear()
-                    trocar_modo("fase3_3")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "diferentes"
+                        registrar_resposta("fase3", "fase3_2", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("fase3_3")
 
             elif assets.mode == "fase3_3":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -341,6 +371,8 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_3")
+                    assets.som_grave1_fase1.stop()
+                    assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
                     assets.som_grave1_fase1.stop()
@@ -352,17 +384,19 @@ while rodando:
 
             elif assets.mode == "pergunta_fase3_3":
 
-                if assets.botao1_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase3.append("iguais")
+                if assets.botao1_resposta3_rect.collidepoint(event.pos):
+                    assets.resposta_selecionada = "iguais"
 
-                if assets.botao2_resposta1_rect.collidepoint(event.pos):
-                    respostas_fase3.append("diferentes")
+                elif assets.botao2_resposta3_rect.collidepoint(event.pos):
+                    assets.resposta_selecionada = "diferentes"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
-                    correta = set(respostas_fase3) == {"iguais"}
-                    registrar_resposta("fase3","fase3_3",respostas_fase3,correta)
-                    respostas_fase3.clear()
-                    trocar_modo("relatorio")
+                    
+                    if assets.resposta_selecionada is not None:
+                        correta = assets.resposta_selecionada == "iguais"
+                        registrar_resposta("fase3", "fase3_3", assets.resposta_selecionada, correta)
+                        assets.resposta_selecionada = None
+                        trocar_modo("relatorio")
 
             # ================= RELATÓRIO =================
             elif assets.mode == "relatorio":
@@ -377,7 +411,7 @@ while rodando:
                 trocar_modo("menu")
 
             elif assets.mode == "fase0":
-                if assets.active_field == "nome":
+                if assets.active_field == "usuario":
                     if event.key == pygame.K_BACKSPACE:
                         assets.player_name = assets.player_name[:-1]
                     else:

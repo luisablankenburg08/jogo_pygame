@@ -7,9 +7,17 @@ pygame.init()
 # =========================
 # FUNÇÃO PRINCIPAL
 # =========================
-def desenhar():
 
+def desenhar():
     tela = assets.tela
+    cor_botao1 = assets.CORES["magenta"]
+    cor_botao2 = assets.CORES["ciano"]
+
+    if assets.resposta_selecionada == "som1" or assets.resposta_selecionada == "guitarra" or assets.resposta_selecionada == "iguais":
+        cor_botao1 = assets.CORES["magenta_opaco"]
+
+    if assets.resposta_selecionada == "som2" or assets.resposta_selecionada == "violão" or assets.resposta_selecionada == "diferentes":
+        cor_botao2 = assets.CORES["ciano_opaco"]
 
     # ================= MENU =================
     if assets.mode == "menu":
@@ -55,7 +63,7 @@ def desenhar():
              (assets.altura_tela - assets.quadro_fase0.get_height()) // 2)
         )
 
-        desenhar_campo(tela, assets.FONT, assets.CORES, "Nome:", assets.nome_rect, assets.player_name, assets.active_field == "nome")
+        desenhar_campo(tela, assets.FONT, assets.CORES, "Usuário:", assets.usuario, assets.player_name, assets.active_field == "usuario")
         desenhar_campo(tela, assets.FONT, assets.CORES, "Escola:", assets.escola_rect, assets.player_school, assets.active_field == "escola")
         desenhar_campo(tela, assets.FONT, assets.CORES, "Série:", assets.serie_rect, assets.player_serie)
 
@@ -185,8 +193,17 @@ def desenhar():
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_avancar_rect)
         tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
 
+        if assets.som_agudo1_fase1.get_num_channels() > 0:
+                texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+                tela.blit(texto_tocando, texto_tocando_rect)
         tela.blit(assets.som, assets.som1_rect)
         tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
+
+        if assets.som_grave1_fase1.get_num_channels() > 0:
+            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
+            tela.blit(texto, texto_rect)
         tela.blit(assets.som, assets.som2_rect)
         tela.blit(assets.texto_som2_surface, assets.texto_som2_rect)
 
@@ -195,14 +212,12 @@ def desenhar():
             pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect)
             tela.blit(assets.txt_quadro_explicativo2, assets.txt_quadro_explicativo2_rect)
 
-
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect ,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta1_rect)
+            pygame.draw.rect(tela, cor_botao1, assets.botao1_resposta1_rect)
             tela.blit(assets.txt_botao1_resposta1, assets.txt_botao1_resposta1_rect)
 
-
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta1_rect)
+            pygame.draw.rect(tela, cor_botao2, assets.botao2_resposta1_rect)
             tela.blit(assets.txt_botao2_resposta1, assets.txt_botao2_resposta1_rect)
 
         elif "pergunta_fase2" in assets.mode:
@@ -211,12 +226,12 @@ def desenhar():
 
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect ,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta2_rect)
+            pygame.draw.rect(tela, cor_botao1, assets.botao1_resposta2_rect)
             tela.blit(assets.txt_botao1_resposta2, assets.txt_botao1_resposta2_rect)
 
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta2_rect)
+            pygame.draw.rect(tela, cor_botao2, assets.botao2_resposta2_rect)
             tela.blit(assets.txt_botao2_resposta2, assets.txt_botao2_resposta2_rect)
 
         elif "pergunta_fase3" in assets.mode:
@@ -224,12 +239,11 @@ def desenhar():
             tela.blit(assets.txt_quadro_explicativo3, assets.txt_quadro_explicativo3_rect)
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["magenta"], assets.botao1_resposta3_rect)
+            pygame.draw.rect(tela, cor_botao1, assets.botao1_resposta3_rect)
             tela.blit(assets.txt_botao1_resposta3, assets.txt_botao1_resposta3_rect)
 
-
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
-            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao2_resposta3_rect)
+            pygame.draw.rect(tela, cor_botao2, assets.botao2_resposta3_rect)
             tela.blit(assets.txt_botao2_resposta3, assets.txt_botao2_resposta3_rect)
 
             
@@ -250,7 +264,7 @@ def desenhar():
         y = 220
 
         linhas = [
-            f"Nome: {relatorio['nome']}",
+            f"Usuário: {relatorio['usuario']}",
             f"Escola: {relatorio['escola']}",
             f"Série: {relatorio['serie']}",
             "",
