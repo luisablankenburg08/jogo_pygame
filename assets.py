@@ -30,8 +30,11 @@ pygame.display.set_caption("Musicalizando no Céu")
 # === FONTES ===
 FONT = pygame.font.SysFont("Arial", 28, bold=True)
 fonte_menu = pygame.font.SysFont(None, 48)
-fonte_intro = pygame.font.SysFont(None, 96)
+fonte_intro = pygame.font.SysFont(None, 192)
 fonte_pequena = pygame.font.SysFont("arial", 22, bold=True)
+
+fonte_relatorio_titulo = pygame.font.SysFont("Arial", 50)
+fonte_relatorio = pygame.font.SysFont("Arial", 30)
 
 # === IMAGENS ===
 background = pygame.transform.scale(pygame.image.load("images/fundo_menu.png"), (largura_tela, altura_tela))
@@ -82,8 +85,9 @@ botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_r
 botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_resposta3_rect = criar_botao("IGUAIS", 300, 300, 300,300)
 botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", 900, 300, 300, 300)
 
-botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \nPIANO \nBATERIA", 300, 300, 300,300)
-botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("VIOLÃO \nFLAUTA \nTAMBOR", 900, 300, 300, 300)
+botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \n\nPIANO \n\nBATERIA", 300, 300, 300,300)
+botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("VIOLÃO \n\nFLAUTA \n\nTAMBOR", 900, 300, 300, 300)
+
 #=== QUADROS EXPLICATIVOS ===
 
 quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-250, altura_tela//2-300)
@@ -120,16 +124,16 @@ texto_som2_rect = texto_som2_surface.get_rect(center=(1050, 350))
 texto_som3_surface = FONT.render("MÚSICA", True, CORES["preto"])
 texto_som3_rect = texto_som3_surface.get_rect(center=(largura_tela//2, 350))
 
-texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["azul"])
+texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["preto"])
 texto_intro1_rect = texto_intro1_surf.get_rect(center=(largura_tela//2, altura_tela//2))
 
-texto_intro2_surf = fonte_intro.render("FASE 2", True, CORES["azul"])
+texto_intro2_surf = fonte_intro.render("FASE 2", True, CORES["preto"])
 texto_intro2_rect = texto_intro2_surf.get_rect(center=(largura_tela//2, altura_tela//2))
 
-texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["azul"])
+texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["preto"])
 texto_intro3_rect = texto_intro3_surf.get_rect(center=(largura_tela//2, altura_tela//2))
 
-texto_relatorio_surf = fonte_intro.render("Relatório Final", True, CORES["preto"])
+texto_relatorio_surf = fonte_relatorio_titulo.render("Relatório Final", True, CORES["preto"])
 texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela*2/10, altura_tela*2/10))
 
 
@@ -176,10 +180,6 @@ superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in 
 velocidade_rolagem_ajuda = 1.2
 posicao_y = altura_tela
 
-
-# ===== RELATÓRIO =====
-fonte_relatorio_titulo = pygame.font.SysFont("Arial", 50)
-fonte_relatorio = pygame.font.SysFont("Arial", 30)
 
 # ==== SELEÇÃO DE BOTÕES ====
 resposta_selecionada = None

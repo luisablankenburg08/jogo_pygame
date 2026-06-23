@@ -19,7 +19,7 @@ CORES = {
 # === FONTES ===
 FONT = pygame.font.SysFont("Arial", 28)
 fonte_menu = pygame.font.SysFont(None, 48)
-fonte_intro = pygame.font.SysFont(None, 96)
+fonte_intro = pygame.font.SysFont(None, 192)
 
 
 import json
@@ -117,12 +117,31 @@ def desenhar_barra_amarela(tela, CORES, tamanho):
 
 
 # === BOTÕES / CAMPOS ===
-def criar_botao(texto, x, y, w=300, h=40, cor=CORES["ciano"], cor_texto=CORES["preto"]):
+def criar_botao(texto, x, y, w=300, h=40,
+    cor=CORES["ciano"], cor_texto=CORES["preto"]):
+
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)
-    texto_render = fonte_menu.render(texto, True, cor_texto)
+
+    linhas = texto.split("\n")
+
+    altura_linha = fonte_menu.get_height()
+    altura_total = len(linhas) * altura_linha
+
+    texto_render = pygame.Surface((w, h), pygame.SRCALPHA)
+
+    y_texto = (h - altura_total) // 2
+
+    for linha in linhas:
+        linha = linha.strip()  # remove espaços antes/depois do \n
+        txt = fonte_menu.render(linha, True, cor_texto)
+        txt_rect = txt.get_rect(center=(w // 2, y_texto + altura_linha // 2))
+        texto_render.blit(txt, txt_rect)
+        y_texto += altura_linha
+
     texto_rect = texto_render.get_rect(center=rect.center)
+
     return rect, surf, texto_render, texto_rect
 
 
