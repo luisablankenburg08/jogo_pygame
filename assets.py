@@ -143,7 +143,6 @@ som_start = pygame.mixer.Sound("sons/botao2.mp3")
 background_sound = pygame.mixer.Sound("sons/background-sound.mp3")
 background_sound.set_volume(0.3) 
 
-
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
 som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
 

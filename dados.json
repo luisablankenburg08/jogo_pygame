@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "usuario": "e",
+        "escola": "e",
+        "serie": "1º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som2",
+                "correta": true
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som2",
+                "correta": true
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false
+            }
+        ],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": "guitarra",
+                "correta": true
+            }
+        ],
+        "fase3": []
+    }
+]
