@@ -194,9 +194,20 @@ def desenhar():
         tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
 
         if assets.som_agudo1_fase1.get_num_channels() > 0:
-                texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
-                texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
-                tela.blit(texto_tocando, texto_tocando_rect)
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
+
+        elif assets.som_agudo2_fase1.get_num_channels() > 0:
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
+
+        elif assets.som_agudo3_fase1.get_num_channels() > 0:
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
+
         tela.blit(assets.som, assets.som1_rect)
         tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
 
@@ -204,6 +215,15 @@ def desenhar():
             texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
             texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
             tela.blit(texto, texto_rect)
+        elif assets.som_grave2_fase1.get_num_channels() > 0:
+            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
+            tela.blit(texto, texto_rect)
+        elif assets.som_grave3_fase1.get_num_channels() > 0:
+            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
+            tela.blit(texto, texto_rect)
+            
         tela.blit(assets.som, assets.som2_rect)
         tela.blit(assets.texto_som2_surface, assets.texto_som2_rect)
 

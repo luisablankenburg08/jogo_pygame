@@ -128,16 +128,16 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_2")
-                    assets.som_grave1_fase1.stop()
-                    assets.som_agudo1_fase1.stop()
+                    assets.som_grave2_fase1.stop()
+                    assets.som_agudo2_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    assets.som_grave1_fase1.stop()
-                    assets.som_agudo1_fase1.play()
+                    assets.som_grave2_fase1.stop()
+                    assets.som_agudo2_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    assets.som_agudo1_fase1.stop()
-                    assets.som_grave1_fase1.play()
+                    assets.som_agudo2_fase1.stop()
+                    assets.som_grave2_fase1.play()
 
             elif assets.mode == "pergunta_fase1_2":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -160,16 +160,16 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_3")
-                    assets.som_grave1_fase1.stop()
-                    assets.som_agudo1_fase1.stop()
+                    assets.som_grave3_fase1.stop()
+                    assets.som_agudo3_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    assets.som_grave1_fase1.stop()
-                    assets.som_agudo1_fase1.play()
+                    assets.som_grave3_fase1.stop()
+                    assets.som_agudo3_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    assets.som_agudo1_fase1.stop()
-                    assets.som_grave1_fase1.play()
+                    assets.som_agudo3_fase1.stop()
+                    assets.som_grave3_fase1.play()
 
             elif assets.mode == "pergunta_fase1_3":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):

@@ -146,6 +146,12 @@ background_sound.set_volume(0.3)
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
 som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
 
+som_agudo2_fase1 = pygame.mixer.Sound("sons/agudo2.mp3")
+som_grave2_fase1 = pygame.mixer.Sound("sons/grave2.mp3")
+
+som_agudo3_fase1 = pygame.mixer.Sound("sons/agudo3.mp3")
+som_grave3_fase1 = pygame.mixer.Sound("sons/grave3.mp3")
+
 musica_fase2_1 = pygame.mixer.Sound("sons/agudo1.mp3")
 musica_fase2_2 = pygame.mixer.Sound("sons/agudo1.mp3")
 musica_fase2_3 = pygame.mixer.Sound("sons/agudo1.mp3")
