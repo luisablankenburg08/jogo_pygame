@@ -208,24 +208,75 @@ def desenhar():
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
-        tela.blit(assets.som, assets.som1_rect)
-        tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
+        elif assets.melodia1_fase3.get_num_channels() > 0:
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
 
-        if assets.som_grave1_fase1.get_num_channels() > 0:
-            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
-            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
-            tela.blit(texto, texto_rect)
-        elif assets.som_grave2_fase1.get_num_channels() > 0:
-            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
-            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
-            tela.blit(texto, texto_rect)
-        elif assets.som_grave3_fase1.get_num_channels() > 0:
-            texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
-            texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
-            tela.blit(texto, texto_rect)
-            
-        tela.blit(assets.som, assets.som2_rect)
-        tela.blit(assets.texto_som2_surface, assets.texto_som2_rect)
+        elif assets.melodia3_fase3.get_num_channels() > 0:
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
+
+        elif assets.melodia5_fase3.get_num_channels() > 0:
+            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
+            tela.blit(texto_tocando, texto_tocando_rect)
+
+        # ================= BOTÕES DE SOM =================
+
+        if assets.mode in (
+            "fase2_1",
+            "fase2_2",
+            "fase2_3"
+        ):
+            if (
+                assets.musica_fase2_1.get_num_channels() > 0 or
+                assets.musica_fase2_2.get_num_channels() > 0 or
+                assets.musica_fase2_3.get_num_channels() > 0
+            ):
+                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto_rect = texto.get_rect(center=(assets.som3_rect.centerx, assets.som3_rect.top - 20))
+                tela.blit(texto, texto_rect)
+
+            tela.blit(assets.som, assets.som3_rect)
+            tela.blit(assets.texto_som3_surface, assets.texto_som3_rect)
+
+        else:
+
+            # ---------- SOM 1 ----------
+
+            if (
+                assets.som_agudo1_fase1.get_num_channels() > 0 or
+                assets.som_agudo2_fase1.get_num_channels() > 0 or
+                assets.som_agudo3_fase1.get_num_channels() > 0 or
+                assets.melodia1_fase3.get_num_channels() > 0 or
+                assets.melodia3_fase3.get_num_channels() > 0 or
+                assets.melodia5_fase3.get_num_channels() > 0
+            ):
+                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto_rect = texto.get_rect(center=(assets.som1_rect.centerx,assets.som1_rect.top - 20))
+                tela.blit(texto, texto_rect)
+
+            tela.blit(assets.som, assets.som1_rect)
+            tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
+
+            # ---------- SOM 2 ----------
+
+            if (
+                assets.som_grave1_fase1.get_num_channels() > 0 or
+                assets.som_grave2_fase1.get_num_channels() > 0 or
+                assets.som_grave3_fase1.get_num_channels() > 0 or
+                assets.melodia2_fase3.get_num_channels() > 0 or
+                assets.melodia4_fase3.get_num_channels() > 0 or
+                assets.melodia6_fase3.get_num_channels() > 0
+            ):
+                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
+                tela.blit(texto, texto_rect)
+
+            tela.blit(assets.som, assets.som2_rect)
+            tela.blit(assets.texto_som2_surface, assets.texto_som2_rect)
 
         if "pergunta_fase1" in assets.mode:
         

@@ -86,7 +86,7 @@ botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_r
 botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", 900, 300, 300, 300)
 
 botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \n\nPIANO \n\nBATERIA", 300, 300, 300,300)
-botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("VIOLÃO \n\nFLAUTA \n\nTAMBOR", 900, 300, 300, 300)
+botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("PIANO \n\nSAXOFONE \n\nVIOLINO", 900, 300, 300, 300)
 
 #=== QUADROS EXPLICATIVOS ===
 
@@ -139,10 +139,11 @@ texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela*2/10, 
 
 # === SONS ===
 click_sound = pygame.mixer.Sound("sons/botao1.mp3")
-som_start = pygame.mixer.Sound("sons/botao2.mp3")
+
 background_sound = pygame.mixer.Sound("sons/background-sound.mp3")
 background_sound.set_volume(0.3) 
 
+som_nuvem = pygame.mixer.Sound("sons/som_nuvem.mp3")
 som_agudo1_fase1 = pygame.mixer.Sound("sons/agudo1.mp3")
 som_grave1_fase1 = pygame.mixer.Sound("sons/grave1.mp3")
 
@@ -152,16 +153,19 @@ som_grave2_fase1 = pygame.mixer.Sound("sons/grave2.mp3")
 som_agudo3_fase1 = pygame.mixer.Sound("sons/agudo3.mp3")
 som_grave3_fase1 = pygame.mixer.Sound("sons/grave3.mp3")
 
-musica_fase2_1 = pygame.mixer.Sound("sons/agudo1.mp3")
-musica_fase2_2 = pygame.mixer.Sound("sons/agudo1.mp3")
-musica_fase2_3 = pygame.mixer.Sound("sons/agudo1.mp3")
+musica_fase2_1 = pygame.mixer.Sound("sons/musica1.mp3")
+musica_fase2_2 = pygame.mixer.Sound("sons/musica2.mp3")
+musica_fase2_3 = pygame.mixer.Sound("sons/musica3.mp3")
 
-melodia_fase3_1 = pygame.mixer.Sound("sons/agudo1.mp3")
-melodia_fase3_2 = pygame.mixer.Sound("sons/agudo1.mp3")
-melodia_fase3_3 = pygame.mixer.Sound("sons/agudo1.mp3")
+melodia1_fase3 = pygame.mixer.Sound("sons/melodia1.mp3")
+melodia2_fase3 = pygame.mixer.Sound("sons/melodia2.mp3")
+melodia3_fase3 = pygame.mixer.Sound("sons/melodia3.mp3")
+melodia4_fase3 = pygame.mixer.Sound("sons/melodia4.mp3")
+melodia5_fase3 = pygame.mixer.Sound("sons/melodia5e6.mp3")
+melodia6_fase3 = pygame.mixer.Sound("sons/melodia5e6.mp3")
+
 
 level_complete = pygame.mixer.Sound("sons/level_complete.mp3")
-
 
 # === AJUDA ===
 texto_ajuda = (
