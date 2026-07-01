@@ -16,7 +16,7 @@ def desenhar():
     if assets.resposta_selecionada == "som1" or assets.resposta_selecionada == "guitarra" or assets.resposta_selecionada == "iguais":
         cor_botao1 = assets.CORES["magenta_opaco"]
 
-    if assets.resposta_selecionada == "som2" or assets.resposta_selecionada == "violão" or assets.resposta_selecionada == "diferentes":
+    if assets.resposta_selecionada == "som2" or assets.resposta_selecionada == "saxofone" or assets.resposta_selecionada == "diferentes":
         cor_botao2 = assets.CORES["ciano_opaco"]
 
     # ================= MENU =================

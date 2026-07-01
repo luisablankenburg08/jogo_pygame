@@ -273,7 +273,7 @@ while rodando:
                     assets.resposta_selecionada = "guitarra"
 
                 elif assets.botao2_resposta2_rect.collidepoint(event.pos):
-                     assets.resposta_selecionada = "saxofone"
+                    assets.resposta_selecionada = "saxofone"
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
                     
