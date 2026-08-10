@@ -1,5 +1,6 @@
 import pygame
 import json
+import time
 
 pygame.init()
 
@@ -56,24 +57,27 @@ respostas_fase1 = []
 respostas_fase2 = []
 respostas_fase3 = []
 
-def registrar_resposta(fase, pergunta, resposta, correta):
+def registrar_resposta(fase, pergunta, resposta, correta, tempo_resposta=None):
     try:
         with open("dados.json", "r", encoding="utf-8") as f:
             dados = json.load(f)
 
         jogador = dados[-1]
-
-        jogador[fase].append({
-            "pergunta": pergunta,
-            "resposta": resposta,
-            "correta": correta
-        })
-
+        jogador[fase].append({"pergunta": pergunta, "resposta": resposta, "correta": correta, "tempo_resposta": tempo_resposta})
+        
         with open("dados.json", "w", encoding="utf-8") as f:
             json.dump(dados, f, indent=4, ensure_ascii=False)
 
-    except:
-        print("Erro ao registrar resposta")
+    except Exception as e:
+        print("Erro ao registrar resposta:", e)
+
+# === VERIFICAR RELÓGIO ===
+def verificarRelogio(tempo=None):
+    if tempo is None:
+        return time.perf_counter()
+    else:
+        tempo_resposta = time.perf_counter() - tempo
+        return round(tempo_resposta, 2)
 
 # === CARREGAR DADOS ===
 def carregar_dados():

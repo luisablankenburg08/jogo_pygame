@@ -1,6 +1,6 @@
 import pygame
 import sys
-
+import time
 import assets
 from render import desenhar
 from utils import *
@@ -11,6 +11,7 @@ clock = pygame.time.Clock()
 inicio_modo = 0
 musica_relatorio = 0
 rodando = True
+inicio_tempo_resposta = None
 
 while rodando:
     for event in pygame.event.get():
@@ -106,10 +107,14 @@ while rodando:
                     assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_grave1_fase1.stop()
                     assets.som_agudo1_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo1_fase1.stop()
                     assets.som_grave1_fase1.play()
 
@@ -122,9 +127,12 @@ while rodando:
 
                 elif assets.botao_avancar_rect.collidepoint(event.pos):
 
-                    if assets.resposta_selecionada is not None:
+                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "som1"
-                        registrar_resposta("fase1", "fase1_1", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase1", "fase1_1", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase1_2")
 
@@ -138,10 +146,14 @@ while rodando:
                     assets.som_agudo2_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_grave2_fase1.stop()
                     assets.som_agudo2_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo2_fase1.stop()
                     assets.som_grave2_fase1.play()
 
@@ -156,7 +168,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "som1"
-                        registrar_resposta("fase1", "fase1_2", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase1", "fase1_2", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase1_3")
 
@@ -170,10 +185,14 @@ while rodando:
                     assets.som_agudo3_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_grave3_fase1.stop()
                     assets.som_agudo3_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo3_fase1.stop()
                     assets.som_grave3_fase1.play()
 
@@ -188,7 +207,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "som1"
-                        registrar_resposta("fase1", "fase1_3", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase1", "fase1_3", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("menu_fase2")
 
@@ -213,6 +235,8 @@ while rodando:
                     assets.musica_fase2_1.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.musica_fase2_1.play()
 
             elif assets.mode == "pergunta_fase2_1":
@@ -227,7 +251,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "guitarra"
-                        registrar_resposta("fase2", "fase2_1", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase2", "fase2_1", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase2_2")
 
@@ -240,6 +267,8 @@ while rodando:
                     assets.musica_fase2_2.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.musica_fase2_2.play()
 
             elif assets.mode == "pergunta_fase2_2":
@@ -253,7 +282,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "guitarra"
-                        registrar_resposta("fase2", "fase2_2", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase2", "fase2_2", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase2_3")
 
@@ -266,6 +298,8 @@ while rodando:
                     assets.musica_fase2_3.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.musica_fase2_3.play()
 
             elif assets.mode == "pergunta_fase2_3":
@@ -279,7 +313,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "saxofone"
-                        registrar_resposta("fase2", "fase2_3", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase2", "fase2_3", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("menu_fase3")
 
@@ -301,10 +338,14 @@ while rodando:
                     assets.melodia2_fase3.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia1_fase3.play()
                     assets.melodia2_fase3.stop()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia1_fase3.stop()
                     assets.melodia2_fase3.play()
 
@@ -319,9 +360,13 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "diferentes"
-                        registrar_resposta("fase3", "fase3_1", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase3", "fase3_1", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase3_2")
+
 
             elif assets.mode == "fase3_2":
                 if assets.botao_voltar_rect.collidepoint(event.pos):
@@ -333,10 +378,14 @@ while rodando:
                     assets.melodia4_fase3.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia3_fase3.play()
                     assets.melodia4_fase3.stop()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia3_fase3.stop()
                     assets.melodia4_fase3.play()
 
@@ -351,7 +400,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "diferentes"
-                        registrar_resposta("fase3", "fase3_2", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase3", "fase3_2", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("fase3_3")
 
@@ -365,10 +417,14 @@ while rodando:
                     assets.melodia6_fase3.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia6_fase3.stop()
                     assets.melodia5_fase3.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
+                    if inicio_tempo_resposta is None:
+                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.melodia5_fase3.stop()
                     assets.melodia6_fase3.play()
 
@@ -384,7 +440,10 @@ while rodando:
                     
                     if assets.resposta_selecionada is not None:
                         correta = assets.resposta_selecionada == "iguais"
-                        registrar_resposta("fase3", "fase3_3", assets.resposta_selecionada, correta)
+                        tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
+                        registrar_resposta("fase3", "fase3_3", assets.resposta_selecionada, correta, tempo_resposta)
+                        inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
                         trocar_modo("relatorio")
 
