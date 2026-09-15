@@ -50,8 +50,8 @@ while rodando:
                 elif assets.usuario.collidepoint(event.pos):
                     assets.active_field = "usuario"
 
-                elif assets.escola_rect.collidepoint(event.pos):
-                    assets.active_field = "escola"
+                elif assets.idade_rect.collidepoint(event.pos):
+                    assets.active_field = "idade"
 
                 elif assets.serie_rect.collidepoint(event.pos):
                     assets.dropdown_aberto = not assets.dropdown_aberto
@@ -71,12 +71,12 @@ while rodando:
                 elif assets.botao_comecar_rect.collidepoint(event.pos):
                     if (
                         assets.player_name.strip()
-                        and assets.player_school.strip()
+                        and assets.player_age.strip()
                         and assets.player_serie.strip()
                     ):
                         salvar_dados(
                             assets.player_name,
-                            assets.player_school,
+                            assets.player_age,
                             assets.player_serie
                         )
                         assets.click_sound.play()
@@ -460,17 +460,28 @@ while rodando:
                 trocar_modo("menu")
 
             elif assets.mode == "fase0":
+
+                # ================= NOME =================
                 if assets.active_field == "usuario":
+
                     if event.key == pygame.K_BACKSPACE:
                         assets.player_name = assets.player_name[:-1]
-                    else:
-                        assets.player_name += event.unicode
 
-                elif assets.active_field == "escola":
-                    if event.key == pygame.K_BACKSPACE:
-                        assets.player_school = assets.player_school[:-1]
                     else:
-                        assets.player_school += event.unicode
+                        # Adiciona qualquer caractere digitado no nome
+                        if event.unicode:
+                            assets.player_name += event.unicode
+
+                # ================= IDADE =================
+                elif assets.active_field == "idade":
+
+                    if event.key == pygame.K_BACKSPACE:
+                        assets.player_age = assets.player_age[:-1]
+
+                    else:
+                        # Aceita somente números e no máximo 2 dígitos
+                        if event.unicode.isdigit() and len(assets.player_age) < 2:
+                            assets.player_age += event.unicode
 
     # ================= INTRO TEMPO =================
     if assets.mode == "introducao_fase1":

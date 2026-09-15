@@ -23,9 +23,7 @@ def desenhar():
     if assets.mode == "menu":
         tela.blit(assets.background, (0, 0))
         tela.blit(
-            assets.quadro_menu,
-            ((assets.largura_tela - assets.quadro_menu.get_width()) // 2,
-             (assets.altura_tela - assets.quadro_menu.get_height()) // 2)
+            assets.quadro_menu, ((assets.largura_tela - assets.quadro_menu.get_width()) // 2, (assets.altura_tela - assets.quadro_menu.get_height()) // 2)
         )
 
         for surf, rect, txt, txt_rect in [
@@ -64,7 +62,7 @@ def desenhar():
         )
 
         desenhar_campo(tela, assets.FONT, assets.CORES, "Usuário:", assets.usuario, assets.player_name, assets.active_field == "usuario")
-        desenhar_campo(tela, assets.FONT, assets.CORES, "Escola:", assets.escola_rect, assets.player_school, assets.active_field == "escola")
+        desenhar_campo(tela, assets.FONT, assets.CORES, "Idade:", assets.idade_rect, assets.player_age, assets.active_field == "idade")
         desenhar_campo(tela, assets.FONT, assets.CORES, "Série:", assets.serie_rect, assets.player_serie)
 
         if assets.dropdown_aberto:
@@ -82,7 +80,7 @@ def desenhar():
         tela.blit(assets.txt_comecar, assets.txt_comecar_rect)
 
         if assets.error_msg:
-            tela.blit( assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]), (assets.largura_tela*37/100, assets.altura_tela*33/100) )
+            tela.blit( assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]), (assets.largura_tela//2-200, assets.altura_tela//2-150) )
 
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
@@ -102,7 +100,7 @@ def desenhar():
         tela.blit(assets.txt_fase1, assets.txt_fase1_rect)
         tela.blit(assets.txt_nuvem2, assets.txt_nuvem2_rect)
         tela.blit(assets.txt_nuvem3, assets.txt_nuvem3_rect)
-        tela.blit(assets.bandeira, (assets.largura_tela*(92/100), assets.altura_tela*(4/100)))
+        tela.blit(assets.bandeira, (assets.largura_tela*(94/100), assets.altura_tela*(4/100)))
 
         if assets.mode == "menu_fase1":
             tela.blit(assets.cadeado, (assets.largura_tela//2-50, assets.altura_tela//2-50))
@@ -336,7 +334,7 @@ def desenhar():
 
         linhas = [
             f"Usuário: {relatorio['usuario']}",
-            f"Escola: {relatorio['escola']}",
+            f"Idade: {relatorio['idade']}",
             f"Série: {relatorio['serie']}",
             "",
             f"Total de acertos: {relatorio['acertos']}",

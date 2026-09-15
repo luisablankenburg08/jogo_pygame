@@ -1,1 +1,484 @@
-[]
+[
+    {
+        "usuario": "e",
+        "escola": "ee",
+        "serie": "1º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 223.076191034
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "10",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "2",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "1",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3193.839323236
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3196.282994423
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 2.49
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "1",
+        "serie": "1º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "1º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 3327.606371452
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.63
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 1.79
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.65
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 1.36
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.41
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "1",
+        "serie": "1º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.58
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3530.764340926
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3531.752681189
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "1",
+        "serie": "2º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.25
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.31
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1.39
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "1",
+        "serie": "2º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3650.110127971
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3651.205939975
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3652.384763655
+            }
+        ],
+        "fase2": [],
+        "fase3": []
+    },
+    {
+        "usuario": "e",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 0.94
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3682.58434163
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3683.61548511
+            }
+        ],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 3688.103795654
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 1.24
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": "guitarra",
+                "correta": false,
+                "tempo_resposta": 0.89
+            }
+        ],
+        "fase3": [
+            {
+                "pergunta": "fase3_1",
+                "resposta": "iguais",
+                "correta": false,
+                "tempo_resposta": 3698.090108867
+            },
+            {
+                "pergunta": "fase3_2",
+                "resposta": "iguais",
+                "correta": false,
+                "tempo_resposta": 3699.10922992
+            },
+            {
+                "pergunta": "fase3_3",
+                "resposta": "iguais",
+                "correta": true,
+                "tempo_resposta": 3700.278589625
+            }
+        ]
+    }
+]

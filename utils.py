@@ -26,10 +26,10 @@ fonte_intro = pygame.font.SysFont(None, 192)
 import json
     
 # === SALVAR DADOS ===
-def salvar_dados(usuario, escola, serie):
+def salvar_dados(usuario, idade, serie):
     dados_novos = {
         "usuario": usuario,
-        "escola": escola,
+        "idade": idade,
         "serie": serie,
         "fase1": [],
         "fase2": [],
@@ -121,9 +121,8 @@ def desenhar_barra_amarela(tela, CORES, tamanho):
 
 
 # === BOTÕES / CAMPOS ===
-def criar_botao(texto, x, y, w=300, h=40,
+def criar_botao(texto, x, y, w=400, h=60,
     cor=CORES["ciano"], cor_texto=CORES["preto"]):
-
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)
@@ -235,7 +234,7 @@ def gerar_relatorio(jogador):
 
     return {
         "usuario": jogador["usuario"],
-        "escola": jogador["escola"],
+        "idade": jogador["idade"],
         "serie": jogador["serie"],
         "acertos": total_acertos,
         "erros": total_erros,

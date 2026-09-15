@@ -22,8 +22,8 @@ CORES = {
 }
 
 # === TELA ===
-largura_tela = 1400
-altura_tela = 800
+largura_tela = pygame.display.Info().current_w
+altura_tela = pygame.display.Info().current_h
 tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption("Musicalizando no Céu")
 
@@ -57,48 +57,48 @@ bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (120
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (300, 300))
 
 # === BOTÕES MENU ===
-botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", largura_tela//2-150, altura_tela//2+150)
-botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao("Ajuda", largura_tela//2-150, altura_tela//2+50)
-botao_jogar_rect, surf_jogar, txt_jogar, txt_jogar_rect = criar_botao("Jogar", largura_tela//2-150, altura_tela//2-50)
+botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", largura_tela//2-200, altura_tela//2+150)
+botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao("Ajuda", largura_tela//2-200, altura_tela//2+50)
+botao_jogar_rect, surf_jogar, txt_jogar, txt_jogar_rect = criar_botao("Jogar", largura_tela//2-200, altura_tela//2-50)
 
 # === BOTÕES MENUS DAS FASES ===
 botao_fase1_rect, surf_fase1, txt_fase1, txt_fase1_rect = criar_nuvem("Fase 1", largura_tela//4, altura_tela//2+100)
 botao_nuvem2_rect, surf_nuvem2, txt_nuvem2, txt_nuvem2_rect = criar_nuvem("Fase 2", largura_tela//2, altura_tela//2)
-botao_nuvem3_rect, surf_nuvem3, txt_nuvem3, txt_nuvem3_rect = criar_nuvem("Fase 3", largura_tela-400, altura_tela//2-120)
+botao_nuvem3_rect, surf_nuvem3, txt_nuvem3, txt_nuvem3_rect = criar_nuvem("Fase 3", largura_tela-650, altura_tela//2-120)
 
 botao_comecar_rect, surf_comecar, txt_comecar, txt_comecar_rect = criar_botao("Começar", largura_tela-300, altura_tela-150, 240, 56)
 botao_voltar_rect, surf_voltar, txt_voltar, txt_voltar_rect = criar_botao("Voltar", largura_tela//15, altura_tela//17, 240, 56)
-botao_avancar_rect, surf_avancar, txt_avancar, txt_avancar_rect = criar_botao("Avançar", largura_tela//2-120, altura_tela-100, 240, 56)
+botao_avancar_rect, surf_avancar, txt_avancar, txt_avancar_rect = criar_botao("Avançar", largura_tela//2-120, altura_tela-200, 240, 56)
 
 # === ÁREAS DE SOM ===
-som1_rect = som.get_rect(topleft=(300, 300))
-som2_rect = som.get_rect(topleft=(900, 300))
-som3_rect = som.get_rect(topleft=(largura_tela//2-150, 300))
+som1_rect = som.get_rect(topleft=(largura_tela//2-600, 400))
+som2_rect = som.get_rect(topleft=(largura_tela//2+300, 400))
+som3_rect = som.get_rect(topleft=(largura_tela//2-150, 400))
 
 # === BOTÕES DE RESPOSTA ===
-borda_botao1_resposta_rect = pygame.Rect(295, 295, 310, 310)
-borda_botao2_resposta_rect = pygame.Rect(895, 295, 310, 310)
+borda_botao1_resposta_rect = pygame.Rect(largura_tela//2-605, 395, 310, 310)
+borda_botao2_resposta_rect = pygame.Rect(largura_tela//2+295, 395, 310, 310)
 
-botao1_resposta1_rect, surf_botao1_resposta1, txt_botao1_resposta1, txt_botao1_resposta1_rect = criar_botao("SOM 1", 300, 300, 300,300)
-botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_resposta1_rect = criar_botao("SOM 2", 900, 300, 300, 300)
+botao1_resposta1_rect, surf_botao1_resposta1, txt_botao1_resposta1, txt_botao1_resposta1_rect = criar_botao("SOM 1", largura_tela//2-600, 400, 300,300)
+botao2_resposta1_rect, surf_botao2_resposta1, txt_botao2_resposta1, txt_botao2_resposta1_rect = criar_botao("SOM 2", largura_tela//2+300, 400, 300, 300)
 
-botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_resposta3_rect = criar_botao("IGUAIS", 300, 300, 300,300)
-botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", 900, 300, 300, 300)
+botao1_resposta3_rect, surf_botao1_resposta3, txt_botao1_resposta3, txt_botao1_resposta3_rect = criar_botao("IGUAIS", largura_tela//2-600, 400, 300,300)
+botao2_resposta3_rect, surf_botao2_resposta3, txt_botao2_resposta3, txt_botao2_resposta3_rect = criar_botao("DIFERENTES", largura_tela//2+300, 400, 300, 300)
 
-botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \n\nPIANO \n\nBATERIA", 300, 300, 300,300)
-botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("PIANO \n\nSAXOFONE \n\nVIOLINO", 900, 300, 300, 300)
+botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_resposta2_rect = criar_botao("GUITARRA \n\nPIANO \n\nBATERIA",largura_tela//2-600, 400, 300,300)
+botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("PIANO \n\nSAXOFONE \n\nVIOLINO", largura_tela//2+300, 400, 300, 300)
 
 #=== QUADROS EXPLICATIVOS ===
 
-quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-250, altura_tela//2-300)
-quadro_explicativo2_rect, surf_quadro_explicativo2, txt_quadro_explicativo2, txt_quadro_explicativo2_rect = quadro_explicativo("Qual som é mais agudo?", largura_tela//2-250, altura_tela//2-300)
-quadro_explicativo3_rect, surf_quadro_explicativo3, txt_quadro_explicativo3, txt_quadro_explicativo3_rect = quadro_explicativo("São melodias iguais ou diferentes?", largura_tela//2-250, altura_tela//2-300)
-quadro_explicativo4_rect, surf_quadro_explicativo4, txt_quadro_explicativo4, txt_quadro_explicativo4_rect = quadro_explicativo("Quais instrumentos eram?", largura_tela//2-250, altura_tela//2-300)
+quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo("Escute com atenção!", largura_tela//2-300, altura_tela//6)
+quadro_explicativo2_rect, surf_quadro_explicativo2, txt_quadro_explicativo2, txt_quadro_explicativo2_rect = quadro_explicativo("Qual som é mais agudo?",largura_tela//2-300, altura_tela//6)
+quadro_explicativo3_rect, surf_quadro_explicativo3, txt_quadro_explicativo3, txt_quadro_explicativo3_rect = quadro_explicativo("São melodias iguais ou diferentes?", largura_tela//2-300, altura_tela//6)
+quadro_explicativo4_rect, surf_quadro_explicativo4, txt_quadro_explicativo4, txt_quadro_explicativo4_rect = quadro_explicativo("Quais instrumentos eram?", largura_tela//2-300, altura_tela//6)
 
 # === CAMPOS DE TEXTO ===
-usuario = pygame.Rect(largura_tela//2-150, altura_tela//2-50, 300, 40)
-escola_rect = pygame.Rect(largura_tela//2-150, altura_tela//2+50, 300, 40)
-serie_rect = pygame.Rect(largura_tela//2-150, altura_tela//2+150, 300, 40)
+usuario = pygame.Rect(largura_tela//2-200, altura_tela//2-50, 400, 50)
+idade_rect = pygame.Rect(largura_tela//2-200, altura_tela//2+50, 400, 50)
+serie_rect = pygame.Rect(largura_tela//2-200, altura_tela//2+150, 400, 50)
 
 opcoes_serie = ["1º ano", "2º ano", "3º ano", "4º ano"]
 
@@ -108,21 +108,24 @@ active_field = None
 
 
 player_name = ""
-player_school = ""
+player_age = ""
 player_serie = ""
 
 mode = "menu"
 error_msg = ""
 
 # === TEXTOS ===
+
+
+
 texto_som1_surface = FONT.render("SOM 1", True, CORES["preto"])
-texto_som1_rect = texto_som1_surface.get_rect(center=(450, 350))
+texto_som1_rect = texto_som1_surface.get_rect(topleft=(largura_tela//2-500, 450))
 
 texto_som2_surface = FONT.render("SOM 2", True, CORES["preto"])
-texto_som2_rect = texto_som2_surface.get_rect(center=(1050, 350))
+texto_som2_rect = texto_som2_surface.get_rect(topleft=(largura_tela//2+400, 450))
 
 texto_som3_surface = FONT.render("MÚSICA", True, CORES["preto"])
-texto_som3_rect = texto_som3_surface.get_rect(center=(largura_tela//2, 350))
+texto_som3_rect = texto_som3_surface.get_rect(topleft=(largura_tela//2-60, 430))
 
 texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["preto"])
 texto_intro1_rect = texto_intro1_surf.get_rect(center=(largura_tela//2, altura_tela//2))
