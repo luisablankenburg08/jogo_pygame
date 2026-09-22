@@ -41,42 +41,19 @@ FONT = pygame.font.SysFont("Arial", s(28))
 fonte_menu = pygame.font.SysFont(None, s(48))
 fonte_intro = pygame.font.SysFont(None, s(192))
 
-# === GOOGLE SHEETS ===
-# URL do Web App publicado no Google Apps Script.
-URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxozRAb5Yl3QdQuYlI-0f5O2vAPJ8ndvNHRGn9EZU78yNN0qebstECF9DBLZDQ-YIpGzA/exec"
-
-# Deve ser igual ao API_TOKEN definido no Google Apps Script.
-# Ele evita chamadas acidentais ao Web App.
-API_TOKEN = "MUSICALIZANDO_2026"
-
-
-def _requisicao_get(parametros, timeout=5):
-    """Faz uma requisição GET ao Web App e devolve o JSON."""
-    parametros = dict(parametros)
-    parametros["token"] = API_TOKEN
-
-    query = urllib.parse.urlencode(parametros)
-    url = URL_GOOGLE_SHEETS + "?" + query
-
-    with urllib.request.urlopen(url, timeout=timeout) as resposta:
-        return json.loads(resposta.read().decode("utf-8"))
-
+# === SALVAR DADOS ===
+URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbz0onfpg_VMyrXs8ad6Mx6Hjk-lp0bo8OD0xo1PRkLVbW1ILta8M4yAWmKZAhW2eZsP1Q/exec"
 
 def gerar_id_participante():
-    """
-    Solicita um novo ID ao Google Sheets.
-
-    Retorna:
-        (id_participante, coluna)
-    ou:
-        (None, None) em caso de erro.
-    """
     try:
-        dados = _requisicao_get({"acao": "novo_id"})
+        parametros = urllib.parse.urlencode({"acao": "novo_id"})
+        url = URL_GOOGLE_SHEETS + "?" + parametros
+
+        with urllib.request.urlopen(url, timeout=10) as resposta:
+            dados = json.loads(resposta.read().decode("utf-8"))
 
         if dados.get("sucesso"):
-            return dados["id"], dados["coluna"]
-
+            return (dados["id"], dados["coluna"])
         print("Erro ao gerar ID:", dados.get("erro"))
         return None, None
 
@@ -84,15 +61,8 @@ def gerar_id_participante():
         print("Erro ao conectar ao Google Sheets:", e)
         return None, None
 
-
 def salvar_dados(id_participante, usuario, idade, serie):
-    """
-    Salva os dados iniciais do participante somente no dados.json.
 
-    A comunicação com o Google Sheets não acontece aqui para evitar
-    que a conexão de rede deixe o jogo lento durante a execução.
-    A sincronização completa ocorre uma única vez no final.
-    """
     dados_novos = {
         "id_participante": id_participante,
         "usuario": usuario,
@@ -112,157 +82,33 @@ def salvar_dados(id_participante, usuario, idade, serie):
 
     except (FileNotFoundError, json.JSONDecodeError):
         dados_existentes = []
-
     dados_existentes.append(dados_novos)
 
     with open("dados.json", "w", encoding="utf-8") as f:
-        json.dump(
-            dados_existentes,
-            f,
-            indent=4,
-            ensure_ascii=False
-        )
-
+        json.dump(dados_existentes, f,  indent=4, ensure_ascii=False)
     return id_participante
 
 
 # === REGISTRAR RESPOSTAS ===
-
 respostas_fase1 = []
 respostas_fase2 = []
 respostas_fase3 = []
 
-
-def _obter_jogador_atual():
-    """Obtém o participante correspondente ao ID guardado em assets."""
-    import assets
-
+def registrar_resposta(fase, pergunta, resposta, correta, tempo_resposta=None):
     try:
         with open("dados.json", "r", encoding="utf-8") as f:
             dados = json.load(f)
 
-        id_atual = assets.id_participante
-
-        if id_atual:
-            for jogador in reversed(dados):
-                if jogador.get("id_participante") == id_atual:
-                    return jogador
-
-        if dados:
-            return dados[-1]
-
-    except (FileNotFoundError, json.JSONDecodeError):
-        pass
-
-    return None
-
-
-def registrar_resposta(
-    fase,
-    pergunta,
-    resposta,
-    correta,
-    tempo_resposta=None
-):
-    """
-    Salva a resposta somente no dados.json.
-
-    Nenhuma requisição de rede é feita aqui. Isso evita travamentos
-    durante as atividades caso o Google Sheets esteja lento ou
-    temporariamente indisponível.
-    """
-    try:
-        jogador = _obter_jogador_atual()
-
-        if jogador is None:
-            raise ValueError("Nenhum participante ativo encontrado.")
-
-        registro = {
-            "pergunta": pergunta,
-            "resposta": resposta,
-            "correta": correta,
-            "tempo_resposta": tempo_resposta
-        }
-
-        jogador.setdefault(fase, []).append(registro)
-
-        with open("dados.json", "r", encoding="utf-8") as f:
-            dados = json.load(f)
-
-        id_atual = jogador.get("id_participante")
-        atualizado = False
-
-        if id_atual:
-            for indice in range(len(dados) - 1, -1, -1):
-                if dados[indice].get("id_participante") == id_atual:
-                    dados[indice] = jogador
-                    atualizado = True
-                    break
-
-        if not atualizado:
-            dados[-1] = jogador
-
+        jogador = dados[-1]
+        jogador[fase].append({"pergunta": pergunta, "resposta": resposta, "correta": correta, "tempo_resposta": tempo_resposta})
+        
         with open("dados.json", "w", encoding="utf-8") as f:
-            json.dump(
-                dados,
-                f,
-                indent=4,
-                ensure_ascii=False
-            )
+            json.dump(dados, f, indent=4, ensure_ascii=False)
 
     except Exception as e:
         print("Erro ao registrar resposta:", e)
 
-
-def sincronizar_participante():
-    """
-    Envia todos os dados do participante atual para o Google Sheets.
-
-    Esta é a única sincronização feita durante a partida depois da
-    geração do ID. As respostas já estão preservadas localmente no
-    dados.json, então uma falha de rede não apaga os dados coletados.
-    """
-    jogador = _obter_jogador_atual()
-
-    if jogador is None:
-        return False
-
-    dados_participante = {
-        "id": jogador.get("id_participante"),
-        "usuario": jogador.get("usuario", ""),
-        "idade": jogador.get("idade", ""),
-        "serie": jogador.get("serie", ""),
-        "fase1": jogador.get("fase1", []),
-        "fase2": jogador.get("fase2", []),
-        "fase3": jogador.get("fase3", [])
-    }
-
-    try:
-        dados_google = _requisicao_get({
-            "acao": "sincronizar_participante",
-            "dados": json.dumps(
-                dados_participante,
-                ensure_ascii=False,
-                separators=(",", ":")
-            )
-        }, timeout=5)
-
-        if dados_google.get("sucesso"):
-            return True
-
-        print(
-            "Falha na sincronização final:",
-            dados_google.get("erro")
-        )
-        return False
-
-    except Exception as e:
-        print("Falha na sincronização final:", e)
-        return False
-
-
 # === VERIFICAR RELÓGIO ===
-
 def verificarRelogio(tempo=None):
     if tempo is None:
         return time.perf_counter()
@@ -270,16 +116,12 @@ def verificarRelogio(tempo=None):
         tempo_resposta = time.perf_counter() - tempo
         return round(tempo_resposta, 2)
 
-
 # === CARREGAR DADOS ===
-
 def carregar_dados():
     with open("dados.json", "r", encoding="utf-8") as f:
         return json.load(f)
-
-
+        
 # === CALCULAR RESULTADOS ===
-
 def calcular_resultados(jogador):
     acertos = 0
     erros = 0
@@ -302,11 +144,9 @@ def calcular_resultados(jogador):
 
     return acertos, erros, resultados_por_fase
 
-
 def pegar_ultimo_jogador():
     dados = carregar_dados()
-    return dados[-1]
-
+    return dados[-1]  # último da lista
 
 # === BARRAS DE PROGRESSÃO ===
 def desenhar_barra_azul(tela, CORES, largura_tela):
@@ -393,8 +233,13 @@ def trocar_modo(novo_modo):
 # === RELATÓRIO ===
 relatorio_atual = None
 
+def carregar_dados():
+    with open("dados.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
 def obter_ultimo_jogador():
-    return pegar_ultimo_jogador()
+    dados = carregar_dados()
+    return dados[-1]
 
 def gerar_relatorio(jogador):
 
@@ -423,7 +268,6 @@ def gerar_relatorio(jogador):
         total_erros += erros
 
     return {
-        "id_participante": jogador.get("id_participante"),
         "usuario": jogador["usuario"],
         "idade": jogador["idade"],
         "serie": jogador["serie"],

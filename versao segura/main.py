@@ -74,6 +74,8 @@ while rodando:
                         and assets.player_age.strip()
                         and assets.player_serie.strip()
                     ):
+                        id_participante = gerar_id_participante()
+
                         id_participante, coluna_participante = gerar_id_participante()
 
                         if id_participante is not None:
@@ -87,16 +89,12 @@ while rodando:
                                 assets.player_age,
                                 assets.player_serie
                             )
-
-                            assets.error_msg = ""
-                            assets.click_sound.play()
                             trocar_modo("menu_fase1")
-
                         else:
-                            assets.error_msg = (
-                                "Não foi possível gerar o ID. "
-                                "Verifique a conexão com a internet."
-                            )
+                            assets.error_msg = ("Não foi possível conectar à internet.")
+
+                        assets.click_sound.play()
+                        trocar_modo("menu_fase1")
                     else:
                         assets.error_msg = "Preencha todos os campos."
 
@@ -461,11 +459,6 @@ while rodando:
                         registrar_resposta("fase3", "fase3_3", assets.resposta_selecionada, correta, tempo_resposta)
                         inicio_tempo_resposta = None
                         assets.resposta_selecionada = None
-
-                        # Sincroniza tudo de uma vez, somente ao final da partida.
-                        # Durante as perguntas, os dados ficam apenas no dados.json.
-                        sincronizar_participante()
-
                         trocar_modo("relatorio")
 
             # ================= RELATÓRIO =================
