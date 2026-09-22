@@ -34,9 +34,7 @@ escala = min(escala_x, escala_y)
 def s(valor):
     return int(valor * escala)
 
-
 # === FONTES ===
-
 FONT = pygame.font.SysFont("Arial", s(28))
 fonte_menu = pygame.font.SysFont(None, s(48))
 fonte_intro = pygame.font.SysFont(None, s(192))
@@ -50,7 +48,7 @@ URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxozRAb5Yl3QdQuYlI-
 API_TOKEN = "MUSICALIZANDO_2026"
 
 
-def _requisicao_get(parametros, timeout=5):
+def _requisicao_get(parametros, timeout=10):
     """Faz uma requisição GET ao Web App e devolve o JSON."""
     parametros = dict(parametros)
     parametros["token"] = API_TOKEN
@@ -60,7 +58,6 @@ def _requisicao_get(parametros, timeout=5):
 
     with urllib.request.urlopen(url, timeout=timeout) as resposta:
         return json.loads(resposta.read().decode("utf-8"))
-
 
 def gerar_id_participante():
     """
@@ -83,7 +80,6 @@ def gerar_id_participante():
     except Exception as e:
         print("Erro ao conectar ao Google Sheets:", e)
         return None, None
-
 
 def salvar_dados(id_participante, usuario, idade, serie):
     """
@@ -125,13 +121,10 @@ def salvar_dados(id_participante, usuario, idade, serie):
 
     return id_participante
 
-
 # === REGISTRAR RESPOSTAS ===
-
 respostas_fase1 = []
 respostas_fase2 = []
 respostas_fase3 = []
-
 
 def _obter_jogador_atual():
     """Obtém o participante correspondente ao ID guardado em assets."""
@@ -156,14 +149,7 @@ def _obter_jogador_atual():
 
     return None
 
-
-def registrar_resposta(
-    fase,
-    pergunta,
-    resposta,
-    correta,
-    tempo_resposta=None
-):
+def registrar_resposta(fase,pergunta,resposta,correta,tempo_resposta=None):
     """
     Salva a resposta somente no dados.json.
 
@@ -213,7 +199,6 @@ def registrar_resposta(
     except Exception as e:
         print("Erro ao registrar resposta:", e)
 
-
 def sincronizar_participante():
     """
     Envia todos os dados do participante atual para o Google Sheets.
@@ -245,7 +230,7 @@ def sincronizar_participante():
                 ensure_ascii=False,
                 separators=(",", ":")
             )
-        }, timeout=5)
+        }, timeout=10)
 
         if dados_google.get("sucesso"):
             return True
@@ -260,9 +245,7 @@ def sincronizar_participante():
         print("Falha na sincronização final:", e)
         return False
 
-
 # === VERIFICAR RELÓGIO ===
-
 def verificarRelogio(tempo=None):
     if tempo is None:
         return time.perf_counter()
@@ -270,16 +253,12 @@ def verificarRelogio(tempo=None):
         tempo_resposta = time.perf_counter() - tempo
         return round(tempo_resposta, 2)
 
-
 # === CARREGAR DADOS ===
-
 def carregar_dados():
     with open("dados.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
-
 # === CALCULAR RESULTADOS ===
-
 def calcular_resultados(jogador):
     acertos = 0
     erros = 0
@@ -302,20 +281,16 @@ def calcular_resultados(jogador):
 
     return acertos, erros, resultados_por_fase
 
-
 def pegar_ultimo_jogador():
     dados = carregar_dados()
     return dados[-1]
-
 
 # === BARRAS DE PROGRESSÃO ===
 def desenhar_barra_azul(tela, CORES, largura_tela):
     pygame.draw.rect(tela, CORES["ciano"], (0, 0, largura_tela, 20))
 
-
 def desenhar_barra_amarela(tela, CORES, tamanho):
     pygame.draw.rect(tela, CORES["amarelo"], (0, 0, tamanho, 20))
-
 
 # === BOTÕES / CAMPOS ===
 def criar_botao(texto, x, y, w=400, h=60, cor=CORES["ciano"], cor_texto=CORES["preto"]):
@@ -351,16 +326,14 @@ def desenhar_botao(tela, rect, texto, FONT, CORES, cor=None):
     render = FONT.render(texto, True, CORES["preto"])
     tela.blit(render, render.get_rect(center=rect.center))
 
-
 def desenhar_campo(tela, FONT, CORES, label, rect, valor, ativo=False):
-    tela.blit(FONT.render(label, True, CORES["preto"]), (rect.x, rect.y - 30))
+    tela.blit(FONT.render(label, True, CORES["preto"]), (rect.x, rect.y - 40))
     pygame.draw.rect(
         tela,
         CORES["amarelo"] if ativo else CORES["ciano"],
         rect
     )
-    tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x + 5, rect.y + 5))
-
+    tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x + 5, rect.y + 10))
 
 def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["preto"]):
     rect = pygame.Rect(x, y, w, h)
@@ -372,7 +345,6 @@ def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["
 
     return rect, surf, texto_render, texto_rect
 
-
 def quadro_explicativo(texto, x, y, w=600, h=60, cor=CORES["amarelo"], cor_texto=CORES["preto"]):
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
@@ -383,12 +355,10 @@ def quadro_explicativo(texto, x, y, w=600, h=60, cor=CORES["amarelo"], cor_texto
 
     return rect, surf, texto_render, texto_rect
 
-
 # === TROCAR MODO ===
 def trocar_modo(novo_modo):
     import assets
     assets.mode = novo_modo
-
 
 # === RELATÓRIO ===
 relatorio_atual = None

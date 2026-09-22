@@ -80,7 +80,7 @@ def desenhar():
         tela.blit(assets.txt_comecar, assets.txt_comecar_rect)
 
         if assets.error_msg:
-            tela.blit( assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]), (assets.largura_tela//2-200, assets.altura_tela//2-150) )
+            tela.blit( assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]), (assets.largura_tela//2-220, assets.altura_tela//2-150) )
 
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
@@ -89,8 +89,7 @@ def desenhar():
     elif assets.mode in ["menu_fase1", "menu_fase2", "menu_fase3"]:
         tela.blit(assets.fundo_fases, (0, 0))
 
-        for botao_fase in (
-            assets.botao_fase1_rect,
+        for botao_fase in (assets.botao_fase1_rect,
             assets.botao_nuvem2_rect,
             assets.botao_nuvem3_rect,
         ):
@@ -104,21 +103,18 @@ def desenhar():
         tela.blit(assets.txt_fase1, assets.txt_fase1_rect)
         tela.blit(assets.txt_nuvem2, assets.txt_nuvem2_rect)
         tela.blit(assets.txt_nuvem3, assets.txt_nuvem3_rect)
-        tela.blit(assets.bandeira, (assets.largura_tela*(94/100), assets.altura_tela*(4/100)))
+        tela.blit(assets.bandeira, (assets.largura_tela*(93/100), assets.altura_tela//2-110))
 
         if assets.mode == "menu_fase1":
-            tela.blit(assets.cadeado, (assets.largura_tela//2-50, assets.altura_tela//2-50))
-            tela.blit(assets.cadeado, (assets.largura_tela//2+250, assets.altura_tela//2-170))
-            tela.blit(assets.bichinho1, (assets.largura_tela*(4/100), assets.altura_tela*(60/100)))
+            tela.blit(assets.cadeado, (assets.largura_tela//2+110, assets.altura_tela//2-90))
+            tela.blit(assets.cadeado, (assets.largura_tela//2+600, assets.altura_tela//2-90))
 
         elif assets.mode == "menu_fase2":
-            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2-50, assets.altura_tela//2-70))
-            tela.blit(assets.cadeado, (assets.largura_tela//2+250, assets.altura_tela//2-170))
-            tela.blit(assets.bichinho1, (assets.largura_tela*(23/100), assets.altura_tela*(37/100)))
+            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2+110, assets.altura_tela//2-90))
+            tela.blit(assets.cadeado, (assets.largura_tela//2+600, assets.altura_tela//2-90))
 
         elif assets.mode == "menu_fase3":
-            tela.blit(assets.cadeadoaberto, (950, 200))
-            tela.blit(assets.bichinho1, (assets.largura_tela*(48/100), assets.altura_tela*(25/100)))
+            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2+600, assets.altura_tela//2-90))
 
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
@@ -334,7 +330,7 @@ def desenhar():
             assets.texto_relatorio_rect
         )
 
-        y = 220
+        y = assets.sy(220)
 
         linhas = [
             f"Usuário: {relatorio['usuario']}",
@@ -356,15 +352,14 @@ def desenhar():
                 assets.CORES["preto"]
             )
 
-            tela.blit(texto, (100, y))
-            y += 40
+            texto_rect = texto.get_rect(
+                center=(assets.largura_tela // 2, y)
+            )
 
-        tela.blit(assets.nuvem, (assets.largura_tela//2+250, assets.altura_tela//2-170))
-        pygame.draw.rect(tela, assets.CORES["branco"], assets.botao_nuvem3_rect)
-        tela.blit(assets.txt_nuvem3, assets.txt_nuvem3_rect)
+            tela.blit(texto, texto_rect)
 
-        tela.blit(assets.bichinho2, (assets.largura_tela*(70/100), assets.altura_tela*(10/100)))
-        tela.blit(assets.bandeira, (assets.largura_tela*(92/100), assets.altura_tela*(4/100)))
+            y += assets.sy(40)
+
 
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
