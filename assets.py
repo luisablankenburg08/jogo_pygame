@@ -76,9 +76,11 @@ bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (s(1
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (s(300), s(300)))
 
 #=== BOTÕES DO MENU ===
-botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", sx(700-185), sy(400 + 150), s(400), s(60))
-botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao("Ajuda", sx(700-185), sy(400 + 50), s(400), s(60))
-botao_jogar_rect, surf_jogar, txt_jogar, txt_jogar_rect = criar_botao("Jogar", sx(700-185), sy(400 - 50), s(400), s(60))
+largura_botoes_menu = s(400)
+x_botoes_menu = (largura_tela - largura_botoes_menu) // 2
+botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao("Sair", x_botoes_menu, sy(400 + 150), largura_botoes_menu, s(60))
+botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao("Ajuda", x_botoes_menu, sy(400 + 50), largura_botoes_menu, s(60))
+botao_jogar_rect, surf_jogar, txt_jogar, txt_jogar_rect = criar_botao("Jogar", x_botoes_menu, sy(400 - 50), largura_botoes_menu, s(60))
 
 # === BOTÕES DOS MENUS DAS FASES === 
 largura_botao_nuvem = s(200)
@@ -101,7 +103,7 @@ inicio_sons = (largura_tela - largura_total_sons) // 2
 
 som1_rect = som.get_rect(topleft=(inicio_sons, sy(300)))
 som2_rect = som.get_rect(topleft=(inicio_sons + som.get_width() + espaco_botoes_som, sy(300)))
-som3_rect = som.get_rect(topleft=(sx(BASE_LARGURA // 2 - 150), sy(300)))
+som3_rect = som.get_rect(midtop=(largura_tela // 2, sy(300)))
 
 # === BOTÕES DE RESPOSTA ===
 borda_botao1_resposta_rect = pygame.Rect(som1_rect.x - s(5), sy(295), s(310), s(310))
@@ -115,43 +117,51 @@ botao1_resposta2_rect, surf_botao1_resposta2, txt_botao1_resposta2, txt_botao1_r
 botao2_resposta2_rect, surf_botao2_resposta2, txt_botao2_resposta2, txt_botao2_resposta2_rect = criar_botao("PIANO\n\nSAXOFONE\n\nVIOLINO", som2_rect.x, sy(300), s(300), s(300))
 
 # === QUADROS EXPLICATIVOS === 
+altura_quadros = s(60)
+largura_quadro_padrao = s(600)
+largura_quadro_fase3 = s(800)
+x_quadro_padrao = largura_tela // 2 - largura_quadro_padrao // 2
+x_quadro_fase3 = largura_tela // 2 - largura_quadro_fase3 // 2
+
 quadro_explicativo1_rect, surf_quadro_explicativo1, txt_quadro_explicativo1, txt_quadro_explicativo1_rect = quadro_explicativo(
     "Escute com atenção!",
-    sx(BASE_LARGURA // 2 - 300),
+    x_quadro_padrao,
     sy(BASE_ALTURA // 6),
-    s(600),
-    s(60)
+    largura_quadro_padrao,
+    altura_quadros
 )
 
 quadro_explicativo2_rect, surf_quadro_explicativo2, txt_quadro_explicativo2, txt_quadro_explicativo2_rect = quadro_explicativo(
     "Qual som é mais agudo?",
-    sx(BASE_LARGURA // 2 - 300),
+    x_quadro_padrao,
     sy(BASE_ALTURA // 6),
-    s(600),
-    s(60)
+    largura_quadro_padrao,
+    altura_quadros
 )
 
 quadro_explicativo3_rect, surf_quadro_explicativo3, txt_quadro_explicativo3, txt_quadro_explicativo3_rect = quadro_explicativo(
     "São melodias iguais ou diferentes?",
-    sx(BASE_LARGURA // 2 - 300),
+    x_quadro_fase3,
     sy(BASE_ALTURA // 6),
-    s(600),
-    s(60)
+    largura_quadro_fase3,
+    altura_quadros
 )
 
 quadro_explicativo4_rect, surf_quadro_explicativo4, txt_quadro_explicativo4, txt_quadro_explicativo4_rect = quadro_explicativo(
     "Quais instrumentos eram?",
-    sx(BASE_LARGURA // 2 - 300),
+    x_quadro_padrao,
     sy(BASE_ALTURA // 6),
-    s(600),
-    s(60)
+    largura_quadro_padrao,
+    altura_quadros
 )
 
 
 # === CAMPOS DE TEXTO === 
-usuario = pygame.Rect(sx(BASE_LARGURA // 2 - 200),sy(BASE_ALTURA // 2 - 40),s(400),s(50))
-idade_rect = pygame.Rect(sx(BASE_LARGURA // 2 - 200),sy(BASE_ALTURA // 2 + 60),s(400),s(50))
-serie_rect = pygame.Rect(sx(BASE_LARGURA // 2 - 200), sy(BASE_ALTURA // 2 + 150), s(400), s(50))
+largura_campos = s(400)
+x_campos = (largura_tela - largura_campos) // 2
+usuario = pygame.Rect(x_campos, sy(BASE_ALTURA // 2 - 40), largura_campos, s(50))
+idade_rect = pygame.Rect(x_campos, sy(BASE_ALTURA // 2 + 60), largura_campos, s(50))
+serie_rect = pygame.Rect(x_campos, sy(BASE_ALTURA // 2 + 150), largura_campos, s(50))
 opcoes_serie = ["1º ano","2º ano","3º ano", "4º ano"]
 
 # == ESTADOS === 
@@ -169,11 +179,11 @@ resposta_selecionada = None
 # === TEXTOS ===
 
 texto_som1_surface = FONT.render("SOM 1", True, CORES["preto"])
-texto_som1_rect = texto_som1_surface.get_rect(center=(sx(inicio_sons+25), sy(340)))
+texto_som1_rect = texto_som1_surface.get_rect(center=(som1_rect.centerx, som1_rect.top + s(40)))
 texto_som2_surface = FONT.render("SOM 2", True, CORES["preto"])
-texto_som2_rect = texto_som2_surface.get_rect(center=(sx(inicio_sons + espaco_botoes_som+230), sy(340)))
+texto_som2_rect = texto_som2_surface.get_rect(center=(som2_rect.centerx, som2_rect.top + s(40)))
 texto_som3_surface = FONT.render("MÚSICA", True, CORES["preto"])
-texto_som3_rect = texto_som3_surface.get_rect(center=(sx(BASE_LARGURA // 2-10), sy(340)))
+texto_som3_rect = texto_som3_surface.get_rect(center=(som3_rect.centerx, som3_rect.top + s(40)))
 
 texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["preto"])
 texto_intro1_rect = texto_intro1_surf.get_rect( center=(sx(BASE_LARGURA // 2), sy(BASE_ALTURA // 2)))

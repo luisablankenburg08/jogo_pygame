@@ -19,6 +19,18 @@ def desenhar():
     if assets.resposta_selecionada == "som2" or assets.resposta_selecionada == "saxofone" or assets.resposta_selecionada == "diferentes":
         cor_botao2 = assets.CORES["ciano_opaco"]
 
+    def desenhar_cadeado_na_nuvem(botao_nuvem, imagem_cadeado):
+        rect_nuvem = assets.nuvem.get_rect(center=botao_nuvem.center)
+        margem_horizontal = assets.s(12)
+        margem_vertical = assets.s(1)
+        rect_cadeado = imagem_cadeado.get_rect(
+            topleft=(
+                rect_nuvem.right - imagem_cadeado.get_width() - margem_horizontal,
+                rect_nuvem.top + margem_vertical
+            )
+        )
+        tela.blit(imagem_cadeado, rect_cadeado)
+
     # ================= MENU =================
     if assets.mode == "menu":
         tela.blit(assets.background, (0, 0))
@@ -106,15 +118,15 @@ def desenhar():
         tela.blit(assets.bandeira, (assets.largura_tela*(93/100), assets.altura_tela//2-110))
 
         if assets.mode == "menu_fase1":
-            tela.blit(assets.cadeado, (assets.largura_tela//2+110, assets.altura_tela//2-90))
-            tela.blit(assets.cadeado, (assets.largura_tela//2+600, assets.altura_tela//2-90))
+            desenhar_cadeado_na_nuvem(assets.botao_nuvem2_rect, assets.cadeado)
+            desenhar_cadeado_na_nuvem(assets.botao_nuvem3_rect, assets.cadeado)
 
         elif assets.mode == "menu_fase2":
-            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2+110, assets.altura_tela//2-90))
-            tela.blit(assets.cadeado, (assets.largura_tela//2+600, assets.altura_tela//2-90))
+            desenhar_cadeado_na_nuvem(assets.botao_nuvem2_rect, assets.cadeadoaberto)
+            desenhar_cadeado_na_nuvem(assets.botao_nuvem3_rect, assets.cadeado)
 
         elif assets.mode == "menu_fase3":
-            tela.blit(assets.cadeadoaberto, (assets.largura_tela//2+600, assets.altura_tela//2-90))
+            desenhar_cadeado_na_nuvem(assets.botao_nuvem3_rect, assets.cadeadoaberto)
 
         pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
