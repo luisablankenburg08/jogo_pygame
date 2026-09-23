@@ -34,6 +34,7 @@ def desenhar():
     # ================= MENU =================
     if assets.mode == "menu":
         tela.blit(assets.background, (0, 0))
+        assets.desenhar_bandeiras(tela)
         tela.blit(
             assets.quadro_menu, ((assets.largura_tela - assets.quadro_menu.get_width()) // 2, (assets.altura_tela - assets.quadro_menu.get_height()) // 2)
         )
@@ -73,9 +74,9 @@ def desenhar():
              (assets.altura_tela - assets.quadro_fase0.get_height()) // 2)
         )
 
-        desenhar_campo(tela, assets.FONT, assets.CORES, "Usuário:", assets.usuario, assets.player_name, assets.active_field == "usuario")
-        desenhar_campo(tela, assets.FONT, assets.CORES, "Idade:", assets.idade_rect, assets.player_age, assets.active_field == "idade")
-        desenhar_campo(tela, assets.FONT, assets.CORES, "Série:", assets.serie_rect, assets.player_serie)
+        desenhar_campo(tela, assets.FONT, assets.CORES, assets.texto_campo("usuario"), assets.usuario, assets.player_name, assets.active_field == "usuario")
+        desenhar_campo(tela, assets.FONT, assets.CORES, assets.texto_campo("idade"), assets.idade_rect, assets.player_age, assets.active_field == "idade")
+        desenhar_campo(tela, assets.FONT, assets.CORES, assets.texto_campo("serie"), assets.serie_rect, assets.player_serie)
 
         if assets.dropdown_aberto:
             for i, opcao in enumerate(assets.opcoes_serie):
@@ -204,32 +205,32 @@ def desenhar():
         tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
 
         if assets.som_agudo1_fase1.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
         elif assets.som_agudo2_fase1.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
         elif assets.som_agudo3_fase1.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
         elif assets.melodia1_fase3.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
         elif assets.melodia3_fase3.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
         elif assets.melodia5_fase3.get_num_channels() > 0:
-            texto_tocando = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+            texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
             texto_tocando_rect = texto_tocando.get_rect(center=(assets.som1_rect.centerx, assets.som1_rect.top - 20))
             tela.blit(texto_tocando, texto_tocando_rect)
 
@@ -245,7 +246,7 @@ def desenhar():
                 assets.musica_fase2_2.get_num_channels() > 0 or
                 assets.musica_fase2_3.get_num_channels() > 0
             ):
-                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
                 texto_rect = texto.get_rect(center=(assets.som3_rect.centerx, assets.som3_rect.top - 20))
                 tela.blit(texto, texto_rect)
 
@@ -264,7 +265,7 @@ def desenhar():
                 assets.melodia3_fase3.get_num_channels() > 0 or
                 assets.melodia5_fase3.get_num_channels() > 0
             ):
-                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
                 texto_rect = texto.get_rect(center=(assets.som1_rect.centerx,assets.som1_rect.top - 20))
                 tela.blit(texto, texto_rect)
 
@@ -281,7 +282,7 @@ def desenhar():
                 assets.melodia4_fase3.get_num_channels() > 0 or
                 assets.melodia6_fase3.get_num_channels() > 0
             ):
-                texto = assets.fonte_pequena.render("Tocando...", True, assets.CORES["preto"])
+                texto = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
                 texto_rect = texto.get_rect(center=(assets.som2_rect.centerx, assets.som2_rect.top - 20))
                 tela.blit(texto, texto_rect)
 
@@ -345,16 +346,16 @@ def desenhar():
         y = assets.sy(220)
 
         linhas = [
-            f"Usuário: {relatorio['usuario']}",
-            f"Idade: {relatorio['idade']}",
-            f"Série: {relatorio['serie']}",
+            f"{assets.t('usuario')} {relatorio['usuario']}",
+            f"{assets.t('idade')} {relatorio['idade']}",
+            f"{assets.t('serie')} {relatorio['serie']}",
             "",
-            f"Total de acertos: {relatorio['acertos']}",
-            f"Total de erros: {relatorio['erros']}",
+            f"{assets.t('acertos')} {relatorio['acertos']}",
+            f"{assets.t('erros')} {relatorio['erros']}",
             "",
-            f"Fase 1: {relatorio['fases']['fase1']['acertos']} acertos | {relatorio['fases']['fase1']['erros']} erros",
-            f"Fase 2: {relatorio['fases']['fase2']['acertos']} acertos | {relatorio['fases']['fase2']['erros']} erros",
-            f"Fase 3: {relatorio['fases']['fase3']['acertos']} acertos | {relatorio['fases']['fase3']['erros']} erros",
+            f"{assets.t('fase')} 1: {relatorio['fases']['fase1']['acertos']} {assets.t('acerto')} | {relatorio['fases']['fase1']['erros']} {assets.t('erro')}",
+            f"{assets.t('fase')} 2: {relatorio['fases']['fase2']['acertos']} {assets.t('acerto')} | {relatorio['fases']['fase2']['erros']} {assets.t('erro')}",
+            f"{assets.t('fase')} 3: {relatorio['fases']['fase3']['acertos']} {assets.t('acerto')} | {relatorio['fases']['fase3']['erros']} {assets.t('erro')}",
         ]
 
         for linha in linhas:

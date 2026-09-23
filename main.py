@@ -17,7 +17,7 @@ inicio_tempo_resposta = None
 def mostrar_carregando():
     tela = assets.tela
     tela.blit(assets.fundo_fases, (0, 0))
-    texto = assets.fonte_intro.render("Carregando...",True,assets.CORES["preto"])
+    texto = assets.fonte_intro.render(assets.t("carregando"),True,assets.CORES["preto"])
     texto_rect = texto.get_rect(center=( assets.largura_tela // 2, assets.altura_tela // 2))
     tela.blit(texto, texto_rect)
     pygame.display.flip()
@@ -31,6 +31,13 @@ while rodando:
 
         # ================= CLIQUE =================
         elif event.type == pygame.MOUSEBUTTONDOWN:
+
+            if assets.espanha_rect.collidepoint(event.pos):
+                assets.definir_idioma_e_atualizar("es")
+                continue
+            elif assets.brasil_rect.collidepoint(event.pos):
+                assets.definir_idioma_e_atualizar("pt")
+                continue
 
             # ===== MENU =====
             if assets.mode == "menu":
@@ -104,10 +111,10 @@ while rodando:
                             trocar_modo("menu_fase1")
 
                         else:
-                            assets.error_msg = ("Não foi possível gerar o ID.")
+                            assets.error_msg = assets.texto_erro("id_erro")
 
                     else:
-                        assets.error_msg = "Preencha todos os campos."
+                        assets.error_msg = assets.texto_erro("preencha")
 
             # ===== MENU FASE 1 =====
             elif assets.mode == "menu_fase1":
