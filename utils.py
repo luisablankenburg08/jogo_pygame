@@ -68,6 +68,7 @@ def gerar_id_participante():
     ou:
         (None, None) em caso de erro.
     """
+    inicio = time.perf_counter()
     try:
         dados = _requisicao_get({"acao": "novo_id"})
 
@@ -80,6 +81,11 @@ def gerar_id_participante():
     except Exception as e:
         print("Erro ao conectar ao Google Sheets:", e)
         return None, None
+    finally:
+        duracao_ms = round((time.perf_counter() - inicio) * 1000, 3)
+        import assets
+        assets.metricas_experimentais["geracao_id_ms"] = duracao_ms
+        print(f"Tempo para gerar ID: {duracao_ms} ms")
 
 def salvar_dados(id_participante, usuario, idade, serie):
     """
@@ -89,6 +95,8 @@ def salvar_dados(id_participante, usuario, idade, serie):
     que a conexão de rede deixe o jogo lento durante a execução.
     A sincronização completa ocorre uma única vez no final.
     """
+    import assets
+
     dados_novos = {
         "id_participante": id_participante,
         "usuario": usuario,
@@ -96,7 +104,12 @@ def salvar_dados(id_participante, usuario, idade, serie):
         "serie": serie,
         "fase1": [],
         "fase2": [],
-        "fase3": []
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": list(assets.metricas_experimentais["troca_idioma_ms"]),
+            "geracao_id_ms": assets.metricas_experimentais["geracao_id_ms"],
+            "contabilizacao_respostas_ms": []
+        }
     }
 
     try:
@@ -157,7 +170,9 @@ def registrar_resposta(fase,pergunta,resposta,correta,tempo_resposta=None):
     durante as atividades caso o Google Sheets esteja lento ou
     temporariamente indisponível.
     """
+    inicio_contabilizacao = time.perf_counter()
     try:
+        import assets
         jogador = _obter_jogador_atual()
 
         if jogador is None:
@@ -195,6 +210,17 @@ def registrar_resposta(fase,pergunta,resposta,correta,tempo_resposta=None):
                 indent=4,
                 ensure_ascii=False
             )
+
+        duracao_ms = round((time.perf_counter() - inicio_contabilizacao) * 1000, 3)
+        metricas = jogador.setdefault("metricas_experimentais", {})
+        metricas.setdefault("contabilizacao_respostas_ms", []).append(duracao_ms)
+        for indice in range(len(dados) - 1, -1, -1):
+            if dados[indice].get("id_participante") == id_atual:
+                dados[indice] = jogador
+                break
+        with open("dados.json", "w", encoding="utf-8") as f:
+            json.dump(dados, f, indent=4, ensure_ascii=False)
+        print(f"Tempo para contabilizar resposta: {duracao_ms} ms")
 
     except Exception as e:
         print("Erro ao registrar resposta:", e)
@@ -250,8 +276,8 @@ def verificarRelogio(tempo=None):
     if tempo is None:
         return time.perf_counter()
     else:
-        tempo_resposta = time.perf_counter() - tempo
-        return round(tempo_resposta, 2)
+        tempo_resposta_ms = (time.perf_counter() - tempo) * 1000
+        return round(tempo_resposta_ms, 3)
 
 # === CARREGAR DADOS ===
 def carregar_dados():

@@ -1,1 +1,83 @@
-[]
+[
+    {
+        "id_participante": "MUS-0004",
+        "usuario": "luisa",
+        "idade": "18",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 3258.895
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 4989.237
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 1952.2
+            }
+        ],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 4557.626
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 1342.498
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": "saxofone",
+                "correta": true,
+                "tempo_resposta": 1647.0257864
+            }
+        ],
+        "fase3": [
+            {
+                "pergunta": "fase3_1",
+                "resposta": "diferentes",
+                "correta": true,
+                "tempo_resposta": 2552.139
+            },
+            {
+                "pergunta": "fase3_2",
+                "resposta": "diferentes",
+                "correta": true,
+                "tempo_resposta": 1654.8454594
+            },
+            {
+                "pergunta": "fase3_3",
+                "resposta": "iguais",
+                "correta": true,
+                "tempo_resposta": 2498.588
+            }
+        ],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 4813.147,
+            "contabilizacao_respostas_ms": [
+                1.665,
+                1.977,
+                1.81,
+                2.012,
+                1.676,
+                1.605,
+                2.057,
+                1.908,
+                1.797
+            ]
+        }
+    }
+]

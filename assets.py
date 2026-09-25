@@ -1,6 +1,7 @@
 import pygame
 from utils import criar_nuvem, quadro_explicativo, criar_botao
 import sys
+import time
 
 pygame.init()
 
@@ -130,6 +131,8 @@ cadeadoaberto = pygame.transform.scale(pygame.image.load("images/cadeadoaberto.p
 bichinho1 = pygame.transform.scale(pygame.image.load("images/bichinho1.png"), (s(200), s(180)))
 bichinho2 = pygame.transform.scale(pygame.image.load("images/bichinho2.png"), (s(200), s(180)))
 bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (s(120), s(110)))
+bandeira_brasil = pygame.transform.scale(pygame.image.load("images/bandeira-brasil.png"), (s(42), s(28)))
+bandeira_espanha = pygame.transform.scale(pygame.image.load("images/bandeira-espanha.png"), (s(42), s(28)))
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (s(300), s(300)))
 
 #=== BOTÕES DO MENU ===
@@ -232,6 +235,13 @@ coluna_participante = None
 mode = "menu"
 error_msg = ""
 resposta_selecionada = None
+
+# === MÉTRICAS EXPERIMENTAIS ===
+metricas_experimentais = {
+    "troca_idioma_ms": [],
+    "geracao_id_ms": None,
+    "contabilizacao_respostas_ms": []
+}
 
 # === TEXTOS ===
 
@@ -394,17 +404,17 @@ def definir_idioma(novo_idioma):
     superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in linhas_ajuda]
 
 def desenhar_bandeiras(tela):
-    pygame.draw.rect(tela, CORES["branco"], espanha_rect)
-    pygame.draw.rect(tela, (190, 0, 0), (espanha_rect.x, espanha_rect.y, espanha_rect.width, espanha_rect.height // 4))
-    pygame.draw.rect(tela, (190, 0, 0), (espanha_rect.x, espanha_rect.bottom - espanha_rect.height // 4, espanha_rect.width, espanha_rect.height // 4))
-    pygame.draw.rect(tela, (0, 156, 59), brasil_rect)
-    pygame.draw.polygon(tela, (255, 223, 0), [(brasil_rect.centerx, brasil_rect.y + 3), (brasil_rect.right - 3, brasil_rect.centery), (brasil_rect.centerx, brasil_rect.bottom - 3), (brasil_rect.x + 3, brasil_rect.centery)])
-    pygame.draw.circle(tela, (0, 39, 118), brasil_rect.center, max(2, altura_bandeira // 4))
+    tela.blit(bandeira_espanha, espanha_rect)
+    tela.blit(bandeira_brasil, brasil_rect)
     pygame.draw.rect(tela, CORES["preto"], espanha_rect, 1)
     pygame.draw.rect(tela, CORES["preto"], brasil_rect, 1)
 
 def definir_idioma_e_atualizar(novo_idioma):
+    inicio = time.perf_counter()
     definir_idioma(novo_idioma)
+    duracao_ms = round((time.perf_counter() - inicio) * 1000, 3)
+    metricas_experimentais["troca_idioma_ms"].append(duracao_ms)
+    print(f"Tempo de troca de idioma: {duracao_ms} ms")
 
 def idioma_esta_em(escolha):
     return idioma == escolha
