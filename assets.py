@@ -57,7 +57,7 @@ def s(valor):
 #=== FONTES ===
 FONT = pygame.font.SysFont("Arial", s(28), bold=True)
 fonte_menu = pygame.font.SysFont(None, s(48))
-fonte_intro = pygame.font.SysFont(None, s(192))
+fonte_intro = pygame.font.SysFont(None, s(148))
 fonte_pequena = pygame.font.SysFont("arial", s(22), bold=True)
 fonte_relatorio_titulo = pygame.font.SysFont("Arial", s(50))
 fonte_relatorio = pygame.font.SysFont("Arial", s(30))

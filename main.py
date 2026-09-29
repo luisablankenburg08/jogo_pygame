@@ -141,14 +141,23 @@ while rodando:
                 elif assets.som1_rect.collidepoint(event.pos):
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
+
                     assets.som_grave1_fase1.stop()
-                    assets.som_agudo1_fase1.play()
+
+                    if pygame.mixer.get_busy() and assets.som_agudo1_fase1.get_num_channels() > 0:
+                        assets.som_agudo1_fase1.stop()
+                    else:
+                        assets.som_agudo1_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo1_fase1.stop()
-                    assets.som_grave1_fase1.play()
+
+                    if pygame.mixer.get_busy() and assets.som_grave1_fase1.get_num_channels() > 0:
+                        assets.som_grave1_fase1.stop()
+                    else:
+                        assets.som_grave1_fase1.play()
 
             elif assets.mode == "pergunta_fase1_1":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -181,13 +190,21 @@ while rodando:
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_grave2_fase1.stop()
-                    assets.som_agudo2_fase1.play()
+
+                    if pygame.mixer.get_busy() and assets.som_agudo2_fase1.get_num_channels() > 0:
+                        assets.som_agudo2_fase1.stop()
+                    else:
+                        assets.som_agudo2_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo2_fase1.stop()
-                    assets.som_grave2_fase1.play()
+                    
+                    if pygame.mixer.get_busy() and assets.som_grave2_fase1.get_num_channels() > 0:
+                        assets.som_grave2_fase1.stop()
+                    else:
+                        assets.som_grave2_fase1.play()
 
             elif assets.mode == "pergunta_fase1_2":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -220,13 +237,21 @@ while rodando:
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_grave3_fase1.stop()
-                    assets.som_agudo3_fase1.play()
+
+                    if pygame.mixer.get_busy() and assets.som_agudo3_fase1.get_num_channels() > 0:
+                        assets.som_agudo3_fase1.stop()
+                    else:
+                        assets.som_agudo3_fase1.play()
 
                 elif assets.som2_rect.collidepoint(event.pos):
                     if inicio_tempo_resposta is None:
                         inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
                     assets.som_agudo3_fase1.stop()
-                    assets.som_grave3_fase1.play()
+
+                    if pygame.mixer.get_busy() and assets.som_grave3_fase1.get_num_channels() > 0:
+                        assets.som_grave3_fase1.stop()
+                    else:
+                        assets.som_grave3_fase1.play()
 
             elif assets.mode == "pergunta_fase1_3":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
