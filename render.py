@@ -45,13 +45,15 @@ def desenhar():
             (assets.surf_jogar, assets.botao_jogar_rect, assets.txt_jogar, assets.txt_jogar_rect),
         ]:
             tela.blit(surf, rect.topleft)
+            pygame.draw.rect(tela, assets.CORES["preto"], rect, width=2, border_radius=6)
             tela.blit(txt, txt_rect)
 
     # ================= AJUDA =================
     elif assets.mode == "ajuda":
         tela.blit(assets.fundo_fases, (0, 0))
-
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect, border_radius=6)
+        pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_voltar_rect, width=2, border_radius=6)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
 
         pos_y = assets.posicao_y
@@ -89,13 +91,16 @@ def desenhar():
                 pygame.draw.rect(tela, assets.CORES["amarelo"], rect)
                 tela.blit(assets.FONT.render(opcao, True, assets.CORES["preto"]), (rect.x+5, rect.y+5))
 
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_comecar_rect)
+        
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_comecar_rect, border_radius=6)
+        pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_comecar_rect, width=2, border_radius=6)
         tela.blit(assets.txt_comecar, assets.txt_comecar_rect)
 
         if assets.error_msg:
             tela.blit( assets.FONT.render(assets.error_msg, True, assets.CORES["vermelho"]), (assets.largura_tela//2-220, assets.altura_tela//2-150) )
 
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect, border_radius=6)
+        pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_voltar_rect, width=2, border_radius=6)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
 
     # ================= MENUS DE FASE =================
@@ -129,7 +134,9 @@ def desenhar():
         elif assets.mode == "menu_fase3":
             desenhar_cadeado_na_nuvem(assets.botao_nuvem3_rect, assets.cadeadoaberto)
 
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect, border_radius=6)
+        pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_voltar_rect, width=2, border_radius=6)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
 
     # ================= INTRODUÇÕES =================
@@ -154,55 +161,71 @@ def desenhar():
 
         if "fase1_1" in assets.mode or "pergunta_fase1_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, (assets.largura_tela)//9)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase1_2" in assets.mode or "pergunta_fase1_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*2)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase1_3" in assets.mode or "pergunta_fase1_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*3)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_1" in assets.mode or "pergunta_fase2_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*4)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_2" in assets.mode or "pergunta_fase2_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*5)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase2_3" in assets.mode or "pergunta_fase2_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*6)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
         
         if "fase3_1" in assets.mode or "pergunta_fase3_1" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*7)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase3_2" in assets.mode or "pergunta_fase3_2" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, ((assets.largura_tela)//9)*8)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase3_3" in assets.mode or "pergunta_fase3_3" in assets.mode:
             desenhar_barra_amarela(tela, assets.CORES, assets.largura_tela)
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect)
+            
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo1_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo1_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo1, assets.txt_quadro_explicativo1_rect)
 
         if "fase" in assets.mode:
-            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
-            tela.blit(assets.txt_voltar, assets.txt_voltar_rect)
-
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_avancar_rect)
-        tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
+            pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_avancar_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_avancar_rect, width=2, border_radius=6)
+            tela.blit(assets.txt_avancar, assets.txt_avancar_rect)
 
         if assets.som_agudo1_fase1.get_num_channels() > 0:
             texto_tocando = assets.fonte_pequena.render(assets.texto_tocando(), True, assets.CORES["preto"])
@@ -236,11 +259,7 @@ def desenhar():
 
         # ================= BOTÕES DE SOM =================
 
-        if assets.mode in (
-            "fase2_1",
-            "fase2_2",
-            "fase2_3"
-        ):
+        if assets.mode in ("fase2_1", "fase2_2", "fase2_3"):
             if (
                 assets.musica_fase2_1.get_num_channels() > 0 or
                 assets.musica_fase2_2.get_num_channels() > 0 or
@@ -254,9 +273,7 @@ def desenhar():
             tela.blit(assets.texto_som3_surface, assets.texto_som3_rect)
 
         else:
-
             # ---------- SOM 1 ----------
-
             if (
                 assets.som_agudo1_fase1.get_num_channels() > 0 or
                 assets.som_agudo2_fase1.get_num_channels() > 0 or
@@ -273,7 +290,6 @@ def desenhar():
             tela.blit(assets.texto_som1_surface, assets.texto_som1_rect)
 
             # ---------- SOM 2 ----------
-
             if (
                 assets.som_grave1_fase1.get_num_channels() > 0 or
                 assets.som_grave2_fase1.get_num_channels() > 0 or
@@ -291,7 +307,8 @@ def desenhar():
 
         if "pergunta_fase1" in assets.mode:
         
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect)
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo2_rect, width=2, border_radius=6)
             tela.blit(assets.txt_quadro_explicativo2, assets.txt_quadro_explicativo2_rect)
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect ,border_radius=10)
@@ -303,14 +320,14 @@ def desenhar():
             tela.blit(assets.txt_botao2_resposta1, assets.txt_botao2_resposta1_rect)
 
         elif "pergunta_fase2" in assets.mode:
-            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect)
-            tela.blit(assets.txt_quadro_explicativo4, assets.txt_quadro_explicativo4_rect)
 
+            pygame.draw.rect(tela, assets.CORES["amarelo"], assets.quadro_explicativo2_rect, border_radius=6)
+            pygame.draw.rect(tela, assets.CORES["preto"], assets.quadro_explicativo2_rect, width=2, border_radius=6)
+            tela.blit(assets.txt_quadro_explicativo4, assets.txt_quadro_explicativo4_rect)
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao1_resposta_rect ,border_radius=10)
             pygame.draw.rect(tela, cor_botao1, assets.botao1_resposta2_rect)
             tela.blit(assets.txt_botao1_resposta2, assets.txt_botao1_resposta2_rect)
-
 
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
             pygame.draw.rect(tela, cor_botao2, assets.botao2_resposta2_rect)
@@ -327,7 +344,6 @@ def desenhar():
             pygame.draw.rect(tela, assets.CORES["preto"], assets.borda_botao2_resposta_rect,border_radius=10)
             pygame.draw.rect(tela, cor_botao2, assets.botao2_resposta3_rect)
             tela.blit(assets.txt_botao2_resposta3, assets.txt_botao2_resposta3_rect)
-
             
 
     # ================= RELATÓRIO =================
@@ -374,5 +390,6 @@ def desenhar():
             y += assets.sy(40)
 
 
-        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect)
+        pygame.draw.rect(tela, assets.CORES["ciano"], assets.botao_voltar_rect, border_radius=6)
+        pygame.draw.rect(tela, assets.CORES["preto"], assets.botao_voltar_rect, width=2, border_radius=6)
         tela.blit(assets.txt_voltar, assets.txt_voltar_rect)

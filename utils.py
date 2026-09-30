@@ -279,6 +279,17 @@ def verificarRelogio(tempo=None):
         tempo_resposta_ms = (time.perf_counter() - tempo) * 1000
         return round(tempo_resposta_ms, 3)
 
+# === VERIFICAR SE ESTÁ TOCANDO
+def som_esta_tocando():
+    return pygame.mixer.get_busy()
+
+def tocar_som_se_livre(som):
+    if not pygame.mixer.get_busy():
+        som.play()
+        return True
+
+    return False
+
 # === CARREGAR DADOS ===
 def carregar_dados():
     with open("dados.json", "r", encoding="utf-8") as f:
@@ -351,6 +362,15 @@ def desenhar_botao(tela, rect, texto, FONT, CORES, cor=None):
     pygame.draw.rect(tela, cor, rect)
     render = FONT.render(texto, True, CORES["preto"])
     tela.blit(render, render.get_rect(center=rect.center))
+
+def desenhar_borda(tela, rect, raio=6, espessura=2):
+    pygame.draw.rect(
+        tela,
+        CORES["preto"],
+        rect,
+        width=espessura,
+        border_radius=raio
+    )
 
 def desenhar_campo(tela, FONT, CORES, label, rect, valor, ativo=False):
     texto_label = FONT.render(label, True, CORES["preto"])

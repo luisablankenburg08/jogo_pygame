@@ -130,34 +130,21 @@ while rodando:
             # ================= FASE 1 =================
 
             elif assets.mode == "fase1_1":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
 
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_1")
                     assets.som_grave1_fase1.stop()
                     assets.som_agudo1_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-
-                    assets.som_grave1_fase1.stop()
-
-                    if pygame.mixer.get_busy() and assets.som_agudo1_fase1.get_num_channels() > 0:
-                        assets.som_agudo1_fase1.stop()
-                    else:
-                        assets.som_agudo1_fase1.play()
+                    if tocar_som_se_livre(assets.som_agudo1_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.som_agudo1_fase1.stop()
-
-                    if pygame.mixer.get_busy() and assets.som_grave1_fase1.get_num_channels() > 0:
-                        assets.som_grave1_fase1.stop()
-                    else:
-                        assets.som_grave1_fase1.play()
+                    if tocar_som_se_livre(assets.som_grave1_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase1_1":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -178,33 +165,20 @@ while rodando:
                         trocar_modo("fase1_2")
 
             elif assets.mode == "fase1_2":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_2")
                     assets.som_grave2_fase1.stop()
                     assets.som_agudo2_fase1.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.som_grave2_fase1.stop()
-
-                    if pygame.mixer.get_busy() and assets.som_agudo2_fase1.get_num_channels() > 0:
-                        assets.som_agudo2_fase1.stop()
-                    else:
-                        assets.som_agudo2_fase1.play()
+                    if tocar_som_se_livre(assets.som_agudo2_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.som_agudo2_fase1.stop()
-                    
-                    if pygame.mixer.get_busy() and assets.som_grave2_fase1.get_num_channels() > 0:
-                        assets.som_grave2_fase1.stop()
-                    else:
-                        assets.som_grave2_fase1.play()
+                    if tocar_som_se_livre(assets.som_grave2_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase1_2":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -225,33 +199,20 @@ while rodando:
                         trocar_modo("fase1_3")
 
             elif assets.mode == "fase1_3":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase1_3")
                     assets.som_grave3_fase1.stop()
                     assets.som_agudo3_fase1.stop()
-
+                
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.som_grave3_fase1.stop()
-
-                    if pygame.mixer.get_busy() and assets.som_agudo3_fase1.get_num_channels() > 0:
-                        assets.som_agudo3_fase1.stop()
-                    else:
-                        assets.som_agudo3_fase1.play()
+                    if tocar_som_se_livre(assets.som_agudo3_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.som_agudo3_fase1.stop()
-
-                    if pygame.mixer.get_busy() and assets.som_grave3_fase1.get_num_channels() > 0:
-                        assets.som_grave3_fase1.stop()
-                    else:
-                        assets.som_grave3_fase1.play()
+                    if tocar_som_se_livre(assets.som_grave3_fase1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase1_3":
                 if assets.botao1_resposta1_rect.collidepoint(event.pos):
@@ -277,27 +238,27 @@ while rodando:
                 if assets.botao_voltar_rect.collidepoint(event.pos):
                     trocar_modo("menu")
 
+                elif assets.botao_fase1_rect.collidepoint(event.pos):
+                    assets.som_nuvem.play()
+                    trocar_modo("introducao_fase1")
+                    inicio_modo = pygame.time.get_ticks()
+
                 elif assets.botao_nuvem2_rect.collidepoint(event.pos):
                     assets.som_nuvem.play()
                     trocar_modo("introducao_fase2")
                     inicio_modo = pygame.time.get_ticks()
 
             elif assets.mode == "fase2_1":
-
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_1")
                     assets.musica_fase2_1.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.musica_fase2_1.play()
+                    if tocar_som_se_livre(assets.musica_fase2_1):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase2_1":
-
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
                     assets.resposta_selecionada = "guitarra"
 
@@ -316,17 +277,14 @@ while rodando:
                         trocar_modo("fase2_2")
 
             elif assets.mode == "fase2_2":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_2")
                     assets.musica_fase2_2.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.musica_fase2_2.play()
+                    if tocar_som_se_livre(assets.musica_fase2_2):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase2_2":
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
@@ -347,17 +305,14 @@ while rodando:
                         trocar_modo("fase2_3")
 
             elif assets.mode == "fase2_3":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase1")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase2_3")
                     assets.musica_fase2_3.stop()
 
                 elif assets.som3_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.musica_fase2_3.play()
+                    if tocar_som_se_livre(assets.musica_fase2_3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase2_3":
                 if assets.botao1_resposta2_rect.collidepoint(event.pos):
@@ -378,33 +333,40 @@ while rodando:
                         trocar_modo("menu_fase3")
 
             # ================= FASE 3 =================
-
             elif assets.mode == "menu_fase3":
-                if assets.botao_nuvem3_rect.collidepoint(event.pos):
+                if assets.botao_fase1_rect.collidepoint(event.pos):
+                    assets.som_nuvem.play()
+                    trocar_modo("introducao_fase1")
+                    inicio_modo = pygame.time.get_ticks()
+
+                elif assets.botao_nuvem2_rect.collidepoint(event.pos):
+                    assets.som_nuvem.play()
+                    trocar_modo("introducao_fase2")
+                    inicio_modo = pygame.time.get_ticks()
+
+                elif assets.botao_nuvem3_rect.collidepoint(event.pos):
                     assets.som_nuvem.play()
                     trocar_modo("introducao_fase3")
                     inicio_modo = pygame.time.get_ticks()
 
-            elif assets.mode == "fase3_1":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase2")
+                elif assets.botao_voltar_rect.collidepoint(event.pos):
+                    trocar_modo("menu")
 
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+            elif assets.mode == "fase3_1":
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_1")
                     assets.melodia1_fase3.stop()
                     assets.melodia2_fase3.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia1_fase3.play()
-                    assets.melodia2_fase3.stop()
+                    if tocar_som_se_livre(assets.melodia1_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia1_fase3.stop()
-                    assets.melodia2_fase3.play()
+                    if tocar_som_se_livre(assets.som_melodia2_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase3_1":
                 if assets.botao1_resposta3_rect.collidepoint(event.pos):
@@ -424,27 +386,21 @@ while rodando:
                         assets.resposta_selecionada = None
                         trocar_modo("fase3_2")
 
-
             elif assets.mode == "fase3_2":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase2")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_2")
                     assets.melodia3_fase3.stop()
                     assets.melodia4_fase3.stop()
 
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia3_fase3.play()
-                    assets.melodia4_fase3.stop()
+                    if tocar_som_se_livre(assets.melodia3_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia3_fase3.stop()
-                    assets.melodia4_fase3.play()
+                    if tocar_som_se_livre(assets.som_melodia4_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase3_2":
                 if assets.botao1_resposta3_rect.collidepoint(event.pos):
@@ -465,25 +421,20 @@ while rodando:
                         trocar_modo("fase3_3")
 
             elif assets.mode == "fase3_3":
-                if assets.botao_voltar_rect.collidepoint(event.pos):
-                    trocar_modo("menu_fase2")
-
-                elif assets.botao_avancar_rect.collidepoint(event.pos):
+                if assets.botao_avancar_rect.collidepoint(event.pos):
                     trocar_modo("pergunta_fase3_3")
                     assets.melodia5_fase3.stop()
                     assets.melodia6_fase3.stop()
-
+                
                 elif assets.som1_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia6_fase3.stop()
-                    assets.melodia5_fase3.play()
+                    if tocar_som_se_livre(assets.melodia5_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if inicio_tempo_resposta is None:
-                        inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
-                    assets.melodia5_fase3.stop()
-                    assets.melodia6_fase3.play()
+                    if tocar_som_se_livre(assets.som_melodia6_fase3):
+                        if inicio_tempo_resposta is None:
+                            inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
             elif assets.mode == "pergunta_fase3_3":
 

@@ -1,1 +1,107 @@
-[]
+[
+    {
+        "id_participante": "MUS-0002",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 11349.516
+            },
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 6615.2952923
+            },
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1918.381
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1769.696
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 2033.772
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [
+                2.554,
+                1.897
+            ],
+            "geracao_id_ms": 5130.958,
+            "contabilizacao_respostas_ms": [
+                6.21,
+                6.033,
+                6.41,
+                5.067,
+                5.084
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0010",
+        "usuario": "luisafgeif",
+        "idade": "16",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 7063.7815204
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 7066.0655636
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 7067.2618164
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 2550.164,
+            "contabilizacao_respostas_ms": [
+                5.03,
+                5.299,
+                5.262
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0011",
+        "usuario": "luiasds",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 10361.297,
+            "contabilizacao_respostas_ms": []
+        }
+    }
+]
