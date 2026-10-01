@@ -1,1 +1,102 @@
-[]
+[
+    {
+        "id_participante": "MUS-0004",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [
+                17.564,
+                13.225,
+                14.209,
+                13.738
+            ],
+            "geracao_id_ms": 4505.07,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0005",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 533822.2968679
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 533823.3531419
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 533824.460131
+            }
+        ],
+        "fase2": [
+            {
+                "pergunta": "fase2_1",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 1727.822
+            },
+            {
+                "pergunta": "fase2_2",
+                "resposta": "guitarra",
+                "correta": true,
+                "tempo_resposta": 1637.884
+            },
+            {
+                "pergunta": "fase2_3",
+                "resposta": "guitarra",
+                "correta": false,
+                "tempo_resposta": 1346.435
+            }
+        ],
+        "fase3": [
+            {
+                "pergunta": "fase3_1",
+                "resposta": "iguais",
+                "correta": false,
+                "tempo_resposta": 1532.423
+            },
+            {
+                "pergunta": "fase3_2",
+                "resposta": "iguais",
+                "correta": false,
+                "tempo_resposta": 533840.0139633
+            },
+            {
+                "pergunta": "fase3_3",
+                "resposta": "iguais",
+                "correta": true,
+                "tempo_resposta": 533840.8527665
+            }
+        ],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3131.579,
+            "contabilizacao_respostas_ms": [
+                9.08,
+                9.754,
+                10.199,
+                12.271,
+                10.632,
+                9.194,
+                11.3,
+                10.904,
+                13.939
+            ]
+        }
+    }
+]

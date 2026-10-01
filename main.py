@@ -65,16 +65,18 @@ while rodando:
 
                 elif assets.usuario.collidepoint(event.pos):
                     assets.active_field = "usuario"
+                    assets.dropdown_aberto = False
 
                 elif assets.idade_rect.collidepoint(event.pos):
                     assets.active_field = "idade"
+                    assets.dropdown_aberto = False
 
                 elif assets.serie_rect.collidepoint(event.pos):
                     assets.active_field = None
                     assets.dropdown_aberto = not assets.dropdown_aberto
 
                 elif assets.dropdown_aberto:
-                    for i, opcao in enumerate(assets.opcoes_serie):
+                    for i, opcao in enumerate(assets.opcoes_serie_traduzidas()):
                         opt_rect = pygame.Rect(
                             assets.serie_rect.x,
                             assets.serie_rect.y + (i+1)*40,

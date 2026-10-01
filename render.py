@@ -81,7 +81,7 @@ def desenhar():
         desenhar_campo(tela, assets.FONT, assets.CORES, assets.texto_campo("serie"), assets.serie_rect, assets.player_serie)
 
         if assets.dropdown_aberto:
-            for i, opcao in enumerate(assets.opcoes_serie):
+            for i, opcao in enumerate(assets.opcoes_serie_traduzidas()):
                 rect = pygame.Rect(
                     assets.serie_rect.x,
                     assets.serie_rect.y + (i+1)*40,

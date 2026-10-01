@@ -67,6 +67,9 @@ fonte_relatorio = pygame.font.SysFont("Arial", s(30))
 idioma = "pt"
 TEXTOS = {
     "pt": {
+        "titulo_menu": "MUSICALIZANDO\nNO CÉU",
+        "titulo_dados": "INSIRA SEUS DADOS",
+        "selecione_serie": "Selecione seu ano escolar",
         "sair": "Sair", "ajuda": "Ajuda", "jogar": "Jogar",
         "comecar": "Começar", "voltar": "Voltar", "avancar": "Avançar",
         "usuario": "Usuário:", "idade": "Idade:", "serie": "Série:",
@@ -92,6 +95,9 @@ TEXTOS = {
         "id_erro": "Não foi possível gerar o ID."
     },
     "es": {
+        "titulo_menu": "MUSICALIZANDO\nEN EL CIELO",
+        "titulo_dados": "INGRESA TUS DATOS",
+        "selecione_serie": "Selecciona tu curso escolar",
         "sair": "Salir", "ajuda": "Ayuda", "jogar": "Jugar",
         "comecar": "Comenzar", "voltar": "Volver", "avancar": "Avanzar",
         "usuario": "Usuario:", "idade": "Edad:", "serie": "Curso:",
@@ -123,9 +129,7 @@ def t(chave):
 
 #=== IMAGENS ===
 background = pygame.transform.scale(pygame.image.load("images/fundo_menu.png"),(largura_tela, altura_tela))
-quadro_menu = criar_quadro_menu(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50))
 background_fase0 = pygame.transform.scale(pygame.image.load("images/fundo.png"),(largura_tela, altura_tela))
-quadro_fase0 = criar_quadro_fase0(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50))
 fundo_fases = pygame.transform.scale(pygame.image.load("images/fundo_fases.png"), (largura_tela, altura_tela))
 nuvem = pygame.transform.scale(pygame.image.load("images/nuvem.png"), (s(300), s(110)))
 cadeado = pygame.transform.scale(pygame.image.load("images/cadeado.png"),(s(50), s(75)))
@@ -136,6 +140,9 @@ bandeira = pygame.transform.scale(pygame.image.load("images/bandeira.png"), (s(1
 bandeira_brasil = pygame.transform.scale(pygame.image.load("images/bandeira-brasil.png"), (s(42), s(28)))
 bandeira_espanha = pygame.transform.scale(pygame.image.load("images/bandeira-espanha.png"), (s(42), s(28)))
 som = pygame.transform.scale(pygame.image.load("images/som.png"), (s(300), s(300)))
+
+quadro_menu = criar_quadro_menu(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50), t("titulo_menu"))
+quadro_fase0 = criar_quadro_fase0(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50), t("titulo_dados"))
 
 #=== BOTÕES DO MENU ===
 largura_botoes_menu = s(400)
@@ -226,6 +233,23 @@ idade_rect = pygame.Rect(x_campos, sy(BASE_ALTURA // 2 + 60), largura_campos, s(
 serie_rect = pygame.Rect(x_campos, sy(BASE_ALTURA // 2 + 150), largura_campos, s(50))
 opcoes_serie = ["1º ano","2º ano","3º ano", "4º ano"]
 
+
+def opcoes_serie_traduzidas():
+    if idioma == "es":
+        return [
+            "1.º año",
+            "2.º año",
+            "3.º año",
+            "4.º año"
+        ]
+
+    return [
+        "1º ano",
+        "2º ano",
+        "3º ano",
+        "4º ano"
+    ]
+
 # == ESTADOS === 
 dropdown_aberto = False
 active_field = None
@@ -311,7 +335,7 @@ texto_ajuda = (
     "Instituição: Instituto Federal de Santa Catarina - Câmpus Garopaba")
 
 linhas_texto_ajuda = texto_ajuda.split('\n')
-superficies_texto_ajuda = [FONT.render(linha, True, CORES["ciano"]) for linha in linhas_texto_ajuda]
+superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul_oceano"]) for linha in linhas_texto_ajuda]
 velocidade_rolagem_ajuda = 1.2
 posicao_y = altura_tela
 
@@ -330,6 +354,7 @@ espanha_rect = pygame.Rect(
 
 def definir_idioma(novo_idioma):
     global idioma, superficies_texto_ajuda
+    global quadro_menu, quadro_fase0
     global surf_sair, txt_sair, txt_sair_rect
     global surf_ajuda, txt_ajuda, txt_ajuda_rect
     global surf_jogar, txt_jogar, txt_jogar_rect
@@ -355,6 +380,9 @@ def definir_idioma(novo_idioma):
     global texto_relatorio_surf, texto_relatorio_rect
 
     idioma = novo_idioma if novo_idioma in TEXTOS else "pt"
+
+    quadro_menu = criar_quadro_menu(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50), t("titulo_menu"))
+    quadro_fase0 = criar_quadro_fase0(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50), t("titulo_dados"))
 
     botao_sair_rect, surf_sair, txt_sair, txt_sair_rect = criar_botao(t("sair"), x_botoes_menu, sy(550), largura_botoes_menu, s(60))
     botao_ajuda_rect, surf_ajuda, txt_ajuda, txt_ajuda_rect = criar_botao(t("ajuda"), x_botoes_menu, sy(450), largura_botoes_menu, s(60))
@@ -403,7 +431,7 @@ def definir_idioma(novo_idioma):
     texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela // 2, sy(100)))
 
     linhas_ajuda = [t("bem_vindos"), "", t("hoje"), "", t("constituido"), "", t("aproveite"), "", "", "", t("criador"), t("projeto"), t("professor"), t("instituicao")]
-    superficies_texto_ajuda = [FONT.render(linha, True, CORES["ciano"]) for linha in linhas_ajuda]
+    superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul_oceano"]) for linha in linhas_ajuda]
 
 def desenhar_bandeiras(tela):
     tela.blit(bandeira_espanha, espanha_rect)

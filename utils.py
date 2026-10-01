@@ -42,7 +42,7 @@ fonte_intro = pygame.font.SysFont(None, s(192))
 
 
 def _fonte_titulo_quadro(tamanho):
-    fonte = pygame.font.match_font("Arial Rounded MT Bold", "Arial Rounded", "DejaVu Sans")
+    fonte = pygame.font.match_font("segoeuiblack")
     return pygame.font.Font(fonte, tamanho)
 
 def _desenhar_texto_colorido(superficie, texto, fonte, y, cor_inicial, cor_segunda, espessura_contorno=2):
@@ -83,20 +83,20 @@ def _criar_quadro_base(largura, altura):
     pygame.draw.rect(superficie, (0, 0, 0), (2, 2, largura - 4, altura - 4), width=max(3, int(min(largura, altura) * 0.012)), border_radius=int(min(largura, altura) * 0.07))
     return superficie
 
-def criar_quadro_menu(largura, altura):
+def criar_quadro_menu(largura, altura, titulo):
     import assets
     quadro = _criar_quadro_base(largura, altura)
-    fonte = _fonte_titulo_quadro(max(assets.s(80), int(altura * 0.105)))
+    fonte = _fonte_titulo_quadro(max(assets.s(50), int(altura * 0.105)))
 
-    _desenhar_texto_colorido(quadro, "MUSICALIZANDO", fonte, int(altura * 0.075), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
-    _desenhar_texto_colorido(quadro, "NO CÉU", fonte, int(altura * 0.225), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
+    partes = titulo.split("\n")
+    for i, parte in enumerate(partes):_desenhar_texto_colorido( quadro, parte, fonte, int(altura * 0.075) + i * int(altura * 0.15), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
     return quadro
 
-def criar_quadro_fase0(largura, altura):
+def criar_quadro_fase0(largura, altura, titulo):
     import assets
     quadro = _criar_quadro_base(largura, altura)
-    fonte = _fonte_titulo_quadro(max(assets.s(70), int(altura * 0.105)))
-    _desenhar_texto_colorido(quadro, "INSIRA SEUS DADOS", fonte, int(altura * 0.09), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
+    fonte = _fonte_titulo_quadro(max(assets.s(40), int(altura * 0.105)))
+    _desenhar_texto_colorido(quadro, titulo, fonte, int(altura * 0.09), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
     return quadro
 
 
