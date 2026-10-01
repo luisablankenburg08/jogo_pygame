@@ -14,9 +14,10 @@ CORES = {
     "vermelho": (255, 0, 0),
     "verde": (0, 255, 0),
     "azul": (0, 0, 255),
-    "amarelo": (255, 255, 0),
-    "ciano": (0, 255, 255),
-    "magenta": (255, 0, 255)
+    "amarelo": (204, 153, 0),
+    "ciano": (135, 206, 250),
+    "magenta": (255, 0, 255),
+    "azul_oceano": (0, 105, 148)
 }
 
 
@@ -38,6 +39,168 @@ def s(valor):
 FONT = pygame.font.SysFont("Arial", s(28))
 fonte_menu = pygame.font.SysFont(None, s(48))
 fonte_intro = pygame.font.SysFont(None, s(192))
+
+
+import pygame
+
+
+def _fonte_titulo_quadro(tamanho):
+    """
+    Tenta utilizar uma fonte arredondada semelhante à utilizada
+    nas artes originais.
+    """
+    fonte = pygame.font.match_font(
+        "Arial Rounded MT Bold",
+        "Arial Rounded",
+        "DejaVu Sans"
+    )
+
+    return pygame.font.Font(fonte, tamanho)
+
+
+def _desenhar_texto_colorido(
+    superficie,
+    texto,
+    fonte,
+    y,
+    cor_inicial,
+    cor_segunda,
+    espessura_contorno=2
+):
+    """
+    Desenha um texto centralizado horizontalmente, alternando
+    as cores das letras e adicionando um contorno preto.
+    """
+
+    # Calcula a largura total do texto
+    larguras = []
+
+    for caractere in texto:
+        largura, _ = fonte.size(caractere)
+        larguras.append(largura)
+
+    largura_total = sum(larguras)
+
+    x = (superficie.get_width() - largura_total) // 2
+
+    indice_cor = 0
+
+    for caractere, largura in zip(texto, larguras):
+
+        # Mantém os espaços sem alterar a alternância
+        if caractere == " ":
+            x += largura
+            continue
+
+        cor = (
+            cor_inicial
+            if indice_cor % 2 == 0
+            else cor_segunda
+        )
+
+        texto_surface = fonte.render(
+            caractere,
+            True,
+            cor
+        )
+
+        # Contorno preto
+        for dx in range(-espessura_contorno, espessura_contorno + 1):
+            for dy in range(-espessura_contorno, espessura_contorno + 1):
+
+                if dx == 0 and dy == 0:
+                    continue
+
+                contorno = fonte.render(
+                    caractere,
+                    True,
+                    (0, 0, 0)
+                )
+
+                superficie.blit(
+                    contorno,
+                    (
+                        x + dx + (largura - texto_surface.get_width()) // 2,
+                        y + dy
+                    )
+                )
+
+        # Letra propriamente dita
+        superficie.blit(
+            texto_surface,
+            (
+                x + (largura - texto_surface.get_width()) // 2,
+                y
+            )
+        )
+
+        indice_cor += 1
+        x += largura
+
+
+def _criar_quadro_base(largura, altura):
+
+    superficie = pygame.Surface((largura, altura),pygame.SRCALPHA)
+    pygame.draw.rect(superficie, (187, 235, 245), (0, 0, largura, altura), border_radius=int(min(largura, altura) * 0.07))
+    pygame.draw.rect(superficie, (0, 0, 0), (2, 2, largura - 4, altura - 4), width=max(3, int(min(largura, altura) * 0.012)), border_radius=int(min(largura, altura) * 0.07))
+    return superficie
+
+
+def criar_quadro_menu(largura, altura):
+    """
+    Cria o quadro principal do menu.
+    """
+
+    quadro = _criar_quadro_base(largura, altura)
+
+    fonte = _fonte_titulo_quadro(
+        max(100, int(altura * 0.105))
+    )
+
+    # Primeira linha
+    _desenhar_texto_colorido(
+        quadro,
+        "MUSICALIZANDO",
+        fonte,
+        int(altura * 0.075),
+        (135, 206, 250),
+        (204, 153, 0),
+        espessura_contorno=2
+    )
+
+    # Segunda linha
+    _desenhar_texto_colorido(
+        quadro,
+        "NO CÉU",
+        fonte,
+        int(altura * 0.225),
+        (135, 206, 250),
+        (204, 153, 0),
+        espessura_contorno=2
+    )
+
+    return quadro
+
+
+def criar_quadro_fase0(largura, altura):
+
+    quadro = _criar_quadro_base(largura, altura)
+    fonte = _fonte_titulo_quadro(max(80, int(altura * 0.105)))
+
+    _desenhar_texto_colorido(
+        quadro,
+        "INSIRA SEUS DADOS",
+        fonte,
+        int(altura * 0.09),
+        (135, 206, 250),
+        (204, 153, 0),
+        espessura_contorno=2
+    )
+
+    return quadro
+
+
+
 
 # === GOOGLE SHEETS ===
 # URL do Web App publicado no Google Apps Script.
@@ -382,7 +545,7 @@ def desenhar_campo(tela, FONT, CORES, label, rect, valor, ativo=False):
     )
     tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x + 5, rect.y + 10))
 
-def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["preto"]):
+def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["azul_oceano"]):
     rect = pygame.Rect(x, y, w, h)
     surf = pygame.Surface((w, h))
     surf.fill(cor)

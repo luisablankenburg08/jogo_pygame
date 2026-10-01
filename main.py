@@ -17,7 +17,7 @@ inicio_tempo_resposta = None
 def mostrar_carregando():
     tela = assets.tela
     tela.blit(assets.fundo_fases, (0, 0))
-    texto = assets.fonte_intro.render(assets.t("carregando"),True,assets.CORES["preto"])
+    texto = assets.fonte_intro.render(assets.t("carregando"),True,assets.CORES["azul_oceano"])
     texto_rect = texto.get_rect(center=( assets.largura_tela // 2, assets.altura_tela // 2))
     tela.blit(texto, texto_rect)
     pygame.display.flip()

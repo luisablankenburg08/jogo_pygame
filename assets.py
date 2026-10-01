@@ -1,5 +1,5 @@
 import pygame
-from utils import criar_nuvem, quadro_explicativo, criar_botao
+from utils import criar_nuvem, quadro_explicativo, criar_botao,criar_quadro_menu,criar_quadro_fase0
 import sys
 import time
 
@@ -13,11 +13,13 @@ CORES = {
     "vermelho": (255, 0, 0),
     "verde": (0, 255, 0),
     "azul": (0, 0, 255),
-    "amarelo": (255, 255, 0),
-    "ciano": (0, 255, 255),
+    "amarelo": (204, 153, 0),
+    "ciano": (135, 206, 250),
     "magenta": (255, 0, 255),
     "ciano_opaco": (0, 180, 180),
-    "magenta_opaco": (180, 0, 180)
+    "ciano_claro": (0, 255, 255),
+    "magenta_opaco": (180, 0, 180),
+    "azul_oceano": (0, 105, 148)
 }
 
 # RESOLUÇÃO BASE
@@ -121,9 +123,9 @@ def t(chave):
 
 #=== IMAGENS ===
 background = pygame.transform.scale(pygame.image.load("images/fundo_menu.png"),(largura_tela, altura_tela))
-quadro_menu = pygame.transform.scale(pygame.image.load("images/quadro_menu.png"),(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50)))
+quadro_menu = criar_quadro_menu(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50))
 background_fase0 = pygame.transform.scale(pygame.image.load("images/fundo.png"),(largura_tela, altura_tela))
-quadro_fase0 = pygame.transform.scale(pygame.image.load("images/quadro_fase0.png"), (sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50)))
+quadro_fase0 = criar_quadro_fase0(sx(BASE_LARGURA // 3), sy(BASE_ALTURA // 2 + 50))
 fundo_fases = pygame.transform.scale(pygame.image.load("images/fundo_fases.png"), (largura_tela, altura_tela))
 nuvem = pygame.transform.scale(pygame.image.load("images/nuvem.png"), (s(300), s(110)))
 cadeado = pygame.transform.scale(pygame.image.load("images/cadeado.png"),(s(50), s(75)))
@@ -252,14 +254,14 @@ texto_som2_rect = texto_som2_surface.get_rect(center=(som2_rect.centerx, som2_re
 texto_som3_surface = FONT.render("MÚSICA", True, CORES["preto"])
 texto_som3_rect = texto_som3_surface.get_rect(center=(som3_rect.centerx, som3_rect.top + s(40)))
 
-texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["preto"])
+texto_intro1_surf = fonte_intro.render("FASE 1", True, CORES["azul_oceano"])
 texto_intro1_rect = texto_intro1_surf.get_rect( center=(sx(BASE_LARGURA // 2), sy(BASE_ALTURA // 2)))
-texto_intro2_surf = fonte_intro.render("FASE 2",True, CORES["preto"])
+texto_intro2_surf = fonte_intro.render("FASE 2",True, CORES["azul_oceano"])
 texto_intro2_rect = texto_intro2_surf.get_rect(center=(sx(BASE_LARGURA // 2), sy(BASE_ALTURA // 2)))
-texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["preto"])
+texto_intro3_surf = fonte_intro.render("FASE 3", True, CORES["azul_oceano"])
 texto_intro3_rect = texto_intro3_surf.get_rect(center=(sx(BASE_LARGURA // 2), sy(BASE_ALTURA // 2)))
 
-texto_relatorio_surf = fonte_relatorio_titulo.render("Relatório Final",True,CORES["preto"])
+texto_relatorio_surf = fonte_relatorio_titulo.render("Relatório Final",True,CORES["azul_oceano"])
 texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela // 2, sy(100)))
 
 # === SONS ===
@@ -309,7 +311,7 @@ texto_ajuda = (
     "Instituição: Instituto Federal de Santa Catarina - Câmpus Garopaba")
 
 linhas_texto_ajuda = texto_ajuda.split('\n')
-superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in linhas_texto_ajuda]
+superficies_texto_ajuda = [FONT.render(linha, True, CORES["ciano"]) for linha in linhas_texto_ajuda]
 velocidade_rolagem_ajuda = 1.2
 posicao_y = altura_tela
 
@@ -392,16 +394,16 @@ def definir_idioma(novo_idioma):
     texto_som2_rect = texto_som2_surface.get_rect(center=(som2_rect.centerx, som2_rect.top + s(40)))
     texto_som3_surface = FONT.render(t("musica"), True, CORES["preto"])
     texto_som3_rect = texto_som3_surface.get_rect(center=(som3_rect.centerx, som3_rect.top + s(40)))
-    texto_intro1_surf = fonte_intro.render(f"{t('fase')} 1", True, CORES["preto"])
-    texto_intro2_surf = fonte_intro.render(f"{t('fase')} 2", True, CORES["preto"])
-    texto_intro3_surf = fonte_intro.render(f"{t('fase')} 3", True, CORES["preto"])
+    texto_intro1_surf = fonte_intro.render(f"{t('fase')} 1", True, CORES["azul_oceano"])
+    texto_intro2_surf = fonte_intro.render(f"{t('fase')} 2", True, CORES["azul_oceano"])
+    texto_intro3_surf = fonte_intro.render(f"{t('fase')} 3", True, CORES["azul_oceano"])
     for indice, superficie in enumerate((texto_intro1_surf, texto_intro2_surf, texto_intro3_surf), 1):
         globals()[f"texto_intro{indice}_rect"] = superficie.get_rect(center=(sx(BASE_LARGURA // 2), sy(BASE_ALTURA // 2)))
-    texto_relatorio_surf = fonte_relatorio_titulo.render(t("relatorio"), True, CORES["preto"])
+    texto_relatorio_surf = fonte_relatorio_titulo.render(t("relatorio"), True, CORES["azul_oceano"])
     texto_relatorio_rect = texto_relatorio_surf.get_rect(center=(largura_tela // 2, sy(100)))
 
     linhas_ajuda = [t("bem_vindos"), "", t("hoje"), "", t("constituido"), "", t("aproveite"), "", "", "", t("criador"), t("projeto"), t("professor"), t("instituicao")]
-    superficies_texto_ajuda = [FONT.render(linha, True, CORES["azul"]) for linha in linhas_ajuda]
+    superficies_texto_ajuda = [FONT.render(linha, True, CORES["ciano"]) for linha in linhas_ajuda]
 
 def desenhar_bandeiras(tela):
     tela.blit(bandeira_espanha, espanha_rect)

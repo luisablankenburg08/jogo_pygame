@@ -11,7 +11,7 @@ pygame.init()
 def desenhar():
     tela = assets.tela
     cor_botao1 = assets.CORES["magenta"]
-    cor_botao2 = assets.CORES["ciano"]
+    cor_botao2 = assets.CORES["ciano_claro"]
 
     if assets.resposta_selecionada == "som1" or assets.resposta_selecionada == "guitarra" or assets.resposta_selecionada == "iguais":
         cor_botao1 = assets.CORES["magenta_opaco"]

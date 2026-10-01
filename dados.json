@@ -103,5 +103,237 @@
             "geracao_id_ms": 10361.297,
             "contabilizacao_respostas_ms": []
         }
+    },
+    {
+        "id_participante": "MUS-0002",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 36128.998
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 4044.466,
+            "contabilizacao_respostas_ms": [
+                0.446
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0004",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3615.246,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0005",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1120.355574223
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1122.822871345
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1123.645767461
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 10303.324,
+            "contabilizacao_respostas_ms": [
+                0.445,
+                0.396,
+                0.446
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0006",
+        "usuario": "luisaaa",
+        "idade": "12",
+        "serie": "4º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 4357.997,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0007",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 2168.711172071
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1116.46
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 1102.034
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3727.886,
+            "contabilizacao_respostas_ms": [
+                0.434,
+                0.436,
+                0.441
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0008",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 2889.057,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0009",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3673.741,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0010",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3928.085,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0011",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "3º ano",
+        "fase1": [
+            {
+                "pergunta": "fase1_1",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 2432.114702275
+            },
+            {
+                "pergunta": "fase1_2",
+                "resposta": "som1",
+                "correta": true,
+                "tempo_resposta": 1306.47
+            },
+            {
+                "pergunta": "fase1_3",
+                "resposta": "som2",
+                "correta": false,
+                "tempo_resposta": 2434.62725034
+            }
+        ],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 4341.203,
+            "contabilizacao_respostas_ms": [
+                0.525,
+                1.597,
+                0.568
+            ]
+        }
+    },
+    {
+        "id_participante": "MUS-0012",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "4º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 4916.16,
+            "contabilizacao_respostas_ms": []
+        }
+    },
+    {
+        "id_participante": "MUS-0013",
+        "usuario": "luisa",
+        "idade": "12",
+        "serie": "2º ano",
+        "fase1": [],
+        "fase2": [],
+        "fase3": [],
+        "metricas_experimentais": {
+            "troca_idioma_ms": [],
+            "geracao_id_ms": 3719.34,
+            "contabilizacao_respostas_ms": []
+        }
     }
 ]
