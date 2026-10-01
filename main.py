@@ -364,7 +364,7 @@ while rodando:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if tocar_som_se_livre(assets.som_melodia2_fase3):
+                    if tocar_som_se_livre(assets.melodia2_fase3):
                         if inicio_tempo_resposta is None:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
@@ -398,7 +398,7 @@ while rodando:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if tocar_som_se_livre(assets.som_melodia4_fase3):
+                    if tocar_som_se_livre(assets.melodia4_fase3):
                         if inicio_tempo_resposta is None:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
@@ -432,7 +432,7 @@ while rodando:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 
                 elif assets.som2_rect.collidepoint(event.pos):
-                    if tocar_som_se_livre(assets.som_melodia6_fase3):
+                    if tocar_som_se_livre(assets.melodia6_fase3):
                         if inicio_tempo_resposta is None:
                             inicio_tempo_resposta = verificarRelogio(inicio_tempo_resposta)
 

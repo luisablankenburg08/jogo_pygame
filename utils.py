@@ -41,38 +41,11 @@ fonte_menu = pygame.font.SysFont(None, s(48))
 fonte_intro = pygame.font.SysFont(None, s(192))
 
 
-import pygame
-
-
 def _fonte_titulo_quadro(tamanho):
-    """
-    Tenta utilizar uma fonte arredondada semelhante à utilizada
-    nas artes originais.
-    """
-    fonte = pygame.font.match_font(
-        "Arial Rounded MT Bold",
-        "Arial Rounded",
-        "DejaVu Sans"
-    )
-
+    fonte = pygame.font.match_font("Arial Rounded MT Bold", "Arial Rounded", "DejaVu Sans")
     return pygame.font.Font(fonte, tamanho)
 
-
-def _desenhar_texto_colorido(
-    superficie,
-    texto,
-    fonte,
-    y,
-    cor_inicial,
-    cor_segunda,
-    espessura_contorno=2
-):
-    """
-    Desenha um texto centralizado horizontalmente, alternando
-    as cores das letras e adicionando um contorno preto.
-    """
-
-    # Calcula a largura total do texto
+def _desenhar_texto_colorido(superficie, texto, fonte, y, cor_inicial, cor_segunda, espessura_contorno=2):
     larguras = []
 
     for caractere in texto:
@@ -80,126 +53,51 @@ def _desenhar_texto_colorido(
         larguras.append(largura)
 
     largura_total = sum(larguras)
-
     x = (superficie.get_width() - largura_total) // 2
-
     indice_cor = 0
 
     for caractere, largura in zip(texto, larguras):
 
-        # Mantém os espaços sem alterar a alternância
         if caractere == " ":
             x += largura
             continue
 
-        cor = (
-            cor_inicial
-            if indice_cor % 2 == 0
-            else cor_segunda
-        )
+        cor = (cor_inicial if indice_cor % 2 == 0 else cor_segunda)
+        texto_surface = fonte.render(caractere, True, cor)
 
-        texto_surface = fonte.render(
-            caractere,
-            True,
-            cor
-        )
-
-        # Contorno preto
         for dx in range(-espessura_contorno, espessura_contorno + 1):
             for dy in range(-espessura_contorno, espessura_contorno + 1):
-
                 if dx == 0 and dy == 0:
                     continue
 
-                contorno = fonte.render(
-                    caractere,
-                    True,
-                    (0, 0, 0)
-                )
+                contorno = fonte.render(caractere, True, (0, 0, 0))
+                superficie.blit(contorno, (x + dx + (largura - texto_surface.get_width()) // 2, y + dy))
 
-                superficie.blit(
-                    contorno,
-                    (
-                        x + dx + (largura - texto_surface.get_width()) // 2,
-                        y + dy
-                    )
-                )
-
-        # Letra propriamente dita
-        superficie.blit(
-            texto_surface,
-            (
-                x + (largura - texto_surface.get_width()) // 2,
-                y
-            )
-        )
-
+        superficie.blit(texto_surface, (x + (largura - texto_surface.get_width()) // 2, y))
         indice_cor += 1
         x += largura
 
-
 def _criar_quadro_base(largura, altura):
-
     superficie = pygame.Surface((largura, altura),pygame.SRCALPHA)
     pygame.draw.rect(superficie, (187, 235, 245), (0, 0, largura, altura), border_radius=int(min(largura, altura) * 0.07))
     pygame.draw.rect(superficie, (0, 0, 0), (2, 2, largura - 4, altura - 4), width=max(3, int(min(largura, altura) * 0.012)), border_radius=int(min(largura, altura) * 0.07))
     return superficie
 
-
 def criar_quadro_menu(largura, altura):
-    """
-    Cria o quadro principal do menu.
-    """
-
+    import assets
     quadro = _criar_quadro_base(largura, altura)
+    fonte = _fonte_titulo_quadro(max(assets.s(80), int(altura * 0.105)))
 
-    fonte = _fonte_titulo_quadro(
-        max(100, int(altura * 0.105))
-    )
-
-    # Primeira linha
-    _desenhar_texto_colorido(
-        quadro,
-        "MUSICALIZANDO",
-        fonte,
-        int(altura * 0.075),
-        (135, 206, 250),
-        (204, 153, 0),
-        espessura_contorno=2
-    )
-
-    # Segunda linha
-    _desenhar_texto_colorido(
-        quadro,
-        "NO CÉU",
-        fonte,
-        int(altura * 0.225),
-        (135, 206, 250),
-        (204, 153, 0),
-        espessura_contorno=2
-    )
-
+    _desenhar_texto_colorido(quadro, "MUSICALIZANDO", fonte, int(altura * 0.075), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
+    _desenhar_texto_colorido(quadro, "NO CÉU", fonte, int(altura * 0.225), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
     return quadro
-
 
 def criar_quadro_fase0(largura, altura):
-
+    import assets
     quadro = _criar_quadro_base(largura, altura)
-    fonte = _fonte_titulo_quadro(max(80, int(altura * 0.105)))
-
-    _desenhar_texto_colorido(
-        quadro,
-        "INSIRA SEUS DADOS",
-        fonte,
-        int(altura * 0.09),
-        (135, 206, 250),
-        (204, 153, 0),
-        espessura_contorno=2
-    )
-
+    fonte = _fonte_titulo_quadro(max(assets.s(70), int(altura * 0.105)))
+    _desenhar_texto_colorido(quadro, "INSIRA SEUS DADOS", fonte, int(altura * 0.09), (135, 206, 250), (204, 153, 0), espessura_contorno=2)
     return quadro
-
-
 
 
 # === GOOGLE SHEETS ===
@@ -212,7 +110,6 @@ API_TOKEN = "MUSICALIZANDO_2026"
 
 
 def _requisicao_get(parametros, timeout=10):
-    """Faz uma requisição GET ao Web App e devolve o JSON."""
     parametros = dict(parametros)
     parametros["token"] = API_TOKEN
 
@@ -223,14 +120,6 @@ def _requisicao_get(parametros, timeout=10):
         return json.loads(resposta.read().decode("utf-8"))
 
 def gerar_id_participante():
-    """
-    Solicita um novo ID ao Google Sheets.
-
-    Retorna:
-        (id_participante, coluna)
-    ou:
-        (None, None) em caso de erro.
-    """
     inicio = time.perf_counter()
     try:
         dados = _requisicao_get({"acao": "novo_id"})
@@ -251,13 +140,7 @@ def gerar_id_participante():
         print(f"Tempo para gerar ID: {duracao_ms} ms")
 
 def salvar_dados(id_participante, usuario, idade, serie):
-    """
-    Salva os dados iniciais do participante somente no dados.json.
 
-    A comunicação com o Google Sheets não acontece aqui para evitar
-    que a conexão de rede deixe o jogo lento durante a execução.
-    A sincronização completa ocorre uma única vez no final.
-    """
     import assets
 
     dados_novos = {
@@ -303,7 +186,6 @@ respostas_fase2 = []
 respostas_fase3 = []
 
 def _obter_jogador_atual():
-    """Obtém o participante correspondente ao ID guardado em assets."""
     import assets
 
     try:
@@ -326,13 +208,6 @@ def _obter_jogador_atual():
     return None
 
 def registrar_resposta(fase,pergunta,resposta,correta,tempo_resposta=None):
-    """
-    Salva a resposta somente no dados.json.
-
-    Nenhuma requisição de rede é feita aqui. Isso evita travamentos
-    durante as atividades caso o Google Sheets esteja lento ou
-    temporariamente indisponível.
-    """
     inicio_contabilizacao = time.perf_counter()
     try:
         import assets
@@ -389,13 +264,6 @@ def registrar_resposta(fase,pergunta,resposta,correta,tempo_resposta=None):
         print("Erro ao registrar resposta:", e)
 
 def sincronizar_participante():
-    """
-    Envia todos os dados do participante atual para o Google Sheets.
-
-    Esta é a única sincronização feita durante a partida depois da
-    geração do ID. As respostas já estão preservadas localmente no
-    dados.json, então uma falha de rede não apaga os dados coletados.
-    """
     jogador = _obter_jogador_atual()
 
     if jogador is None:
@@ -538,12 +406,20 @@ def desenhar_borda(tela, rect, raio=6, espessura=2):
 def desenhar_campo(tela, FONT, CORES, label, rect, valor, ativo=False):
     texto_label = FONT.render(label, True, CORES["preto"])
     tela.blit(texto_label, texto_label.get_rect(midbottom=(rect.centerx, rect.top - 8)))
-    pygame.draw.rect(
-        tela,
-        CORES["amarelo"] if ativo else CORES["ciano"],
-        rect
-    )
-    tela.blit(FONT.render(valor, True, CORES["preto"]), (rect.x + 5, rect.y + 10))
+    pygame.draw.rect(tela, CORES["ciano"], rect)
+
+    if ativo:
+        pygame.draw.rect(tela, CORES["amarelo"], rect, width=4, border_radius=5)
+
+    texto = FONT.render(valor, True, CORES["preto"])
+    tela.blit(texto,(rect.x + 5, rect.y + 10))
+
+    if ativo:
+        tempo = pygame.time.get_ticks()
+        if (tempo // 500) % 2 == 0:
+            cursor = FONT.render("|", True, CORES["preto"])
+            cursor_x = rect.x + 5 + texto.get_width()
+            tela.blit(cursor, (cursor_x, rect.y + 10))
 
 def criar_nuvem(texto, x, y, w=200, h=20, cor=CORES["branco"], cor_texto=CORES["azul_oceano"]):
     rect = pygame.Rect(x, y, w, h)
